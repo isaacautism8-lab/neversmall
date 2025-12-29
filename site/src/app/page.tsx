@@ -74,7 +74,7 @@ const workItems: WorkItem[] = [
     category: 'event coverage',
     year: '2024',
     gradient: 'from-violet-900/60 to-violet-700/30',
-    image: '/assets/work-tang-events.jpg',
+    image: '/assets/tang.png',
     description: 'melbourne club nights and festivals. big moments captured and amplified for socials.',
   },
   {
@@ -82,7 +82,7 @@ const workItems: WorkItem[] = [
     category: 'brand content',
     year: '2024',
     gradient: 'from-slate-800/60 to-slate-600/30',
-    image: '/assets/work-intelliprop.jpg',
+    image: '/assets/intelliprop.png',
     description: 'professional interview series. compelling narratives that connect.',
   },
   {
@@ -90,7 +90,7 @@ const workItems: WorkItem[] = [
     category: 'lifestyle',
     year: '2024',
     gradient: 'from-rose-900/60 to-rose-700/30',
-    image: '/assets/work-pretty-privilege.jpg',
+    image: '/assets/pretty_privilege.png',
     description: 'rooftop events and golden hour moments. lifestyle content that stands out.',
   },
   {
@@ -98,7 +98,7 @@ const workItems: WorkItem[] = [
     category: 'food & beverage',
     year: '2023',
     gradient: 'from-amber-900/60 to-amber-700/30',
-    image: '/assets/work-golden-wok.jpg',
+    image: '/assets/golden_wok.png',
     description: 'strategy, styling, shoot. visuals as punchy as the products.',
   },
   {
@@ -106,7 +106,7 @@ const workItems: WorkItem[] = [
     category: 'brand content',
     year: '2024',
     gradient: 'from-teal-900/60 to-teal-700/30',
-    image: '/assets/work-naught-gin.jpg',
+    image: '/assets/naught_gin.png',
     description: 'bar culture and brand storytelling. authentic moments.',
   },
 ]
