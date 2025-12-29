@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // Removed 'output: export' for Cloudflare Pages compatibility
+  // @cloudflare/next-on-pages handles the build output
   images: {
     unoptimized: true,
   },
