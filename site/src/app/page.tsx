@@ -61,22 +61,30 @@ const serviceCategories = [
 
 const workItems = [
   {
-    title: 'Tang Events',
+    title: 'tang events',
+    subtitle: 'melbourne club nights and festivals',
+    description: 'big moments captured and amplified for socials',
     category: 'Event Coverage',
     year: '2024',
   },
   {
-    title: 'Naught Gin',
+    title: 'naught gin',
+    subtitle: 'premium spirits brand',
+    description: 'lifestyle content that elevates the pour',
     category: 'Brand Content',
     year: '2024',
   },
   {
-    title: 'Golden Wok',
+    title: 'golden wok',
+    subtitle: 'modern asian cuisine',
+    description: 'food photography that makes you hungry',
     category: 'Food & Beverage',
     year: '2023',
   },
   {
-    title: 'Dibo Bodi Sessions',
+    title: 'dibo bodi sessions',
+    subtitle: 'underground music collective',
+    description: 'raw energy, captured authentically',
     category: 'Music & Lifestyle',
     year: '2023',
   },
@@ -134,13 +142,14 @@ export default function Home() {
   const servicesSection = useIntersectionObserver()
   const aboutSection = useIntersectionObserver()
   const contactSection = useIntersectionObserver()
+  const sloganSection = useIntersectionObserver()
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100)
     return () => clearTimeout(timer)
   }, [])
 
-  // Close mobile menu on scroll
+  // Body scroll lock for mobile menu
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden'
@@ -249,6 +258,10 @@ export default function Home() {
             >
               Get in Touch
             </a>
+            {/* Slogan in mobile menu */}
+            <p className="slogan slogan-small text-center mt-8 opacity-60">
+              don't sell yourself short.
+            </p>
           </div>
         </div>
       </nav>
@@ -259,14 +272,14 @@ export default function Home() {
         <div className="hero-gradient" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[1000px] h-[400px] md:h-[600px] bg-gradient-radial opacity-30 pointer-events-none" />
         
-        {/* Decorative lines - hidden on mobile */}
+        {/* Decorative lines */}
         <div className="hidden md:block absolute left-[15%] top-0 hero-line opacity-20" />
         <div className="hidden md:block absolute right-[15%] top-0 hero-line opacity-20" style={{ height: '150px' }} />
         
         <div className="max-w-5xl mx-auto text-center relative z-10 pt-16 sm:pt-20">
           {/* Logo reveal */}
           <div 
-            className={`mb-8 sm:mb-12 transition-all duration-1000 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}
+            className={`mb-6 sm:mb-8 transition-all duration-1000 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}
           >
             <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-full overflow-hidden logo-glow-strong animate-glow">
               <Image 
@@ -280,22 +293,15 @@ export default function Home() {
             </div>
           </div>
           
-          {/* Tagline */}
-          <p 
-            className={`text-xs sm:text-sm md:text-base font-semibold tracking-[0.15em] sm:tracking-[0.2em] uppercase text-gray-500 mb-4 sm:mb-6 transition-all duration-700 delay-200 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-          >
-            Don't sell yourself short.
-          </p>
-          
           {/* Headline with staggered reveal */}
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] font-bold tracking-tight px-2">
             <span 
-              className={`block text-white transition-all duration-700 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              className={`block text-white transition-all duration-700 delay-200 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
             >
               Full-service creative
             </span>
             <span 
-              className={`block text-gradient-warm mt-1 sm:mt-2 transition-all duration-700 delay-450 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              className={`block text-gradient-warm mt-1 sm:mt-2 transition-all duration-700 delay-350 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
             >
               all in one place
             </span>
@@ -303,14 +309,21 @@ export default function Home() {
           
           {/* Subheadline */}
           <p 
-            className={`text-gray-400 text-base sm:text-lg md:text-xl max-w-xl sm:max-w-2xl mx-auto mt-6 sm:mt-8 mb-8 sm:mb-12 leading-relaxed px-2 transition-all duration-700 delay-600 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+            className={`text-gray-400 text-base sm:text-lg md:text-xl max-w-xl sm:max-w-2xl mx-auto mt-6 sm:mt-8 mb-6 sm:mb-8 leading-relaxed px-2 transition-all duration-700 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
           >
             We're a team of creatives, storytellers, and marketers delivering full-service support: content, production, and strategy.
+          </p>
+
+          {/* SLOGAN - Signature Element */}
+          <p 
+            className={`slogan slogan-large mb-10 sm:mb-14 transition-all duration-1000 delay-650 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+          >
+            don't sell yourself short.
           </p>
           
           {/* CTAs */}
           <div 
-            className={`flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 transition-all duration-700 delay-750 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+            className={`flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 transition-all duration-700 delay-800 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
           >
             <a href="#work" className="btn-primary w-full sm:w-auto">
               View Our Work
@@ -322,7 +335,7 @@ export default function Home() {
           </div>
         </div>
         
-        {/* Scroll indicator - hidden on small mobile */}
+        {/* Scroll indicator */}
         <div 
           className={`hidden sm:flex absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 scroll-indicator transition-all duration-700 delay-1050 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
         >
@@ -369,7 +382,7 @@ export default function Home() {
             </p>
           </div>
           
-          {/* Work Grid */}
+          {/* Work Grid - Enhanced Cards */}
           <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
             {workItems.map((item, index) => (
               <div 
@@ -377,32 +390,47 @@ export default function Home() {
                 className={`project-card group aspect-[16/10] cursor-pointer transition-all duration-700 ${workSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                 style={{ transitionDelay: `${300 + index * 100}ms` }}
               >
-                {/* Background with subtle pattern */}
+                {/* Background */}
                 <div className="absolute inset-0 project-card-inner bg-gradient-to-br from-gray-900 via-gray-900 to-gray-950">
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="btn-icon w-12 h-12 sm:w-14 sm:h-14 opacity-50 group-hover:opacity-80 transition-all duration-500 group-hover:scale-110">
+                    <div className="btn-icon w-12 h-12 sm:w-14 sm:h-14 opacity-40 group-hover:opacity-70 transition-all duration-500 group-hover:scale-110">
                       <Play size={18} className="ml-0.5" />
                     </div>
                   </div>
                 </div>
                 
-                {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 lg:p-8 z-10">
-                  <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                {/* Content - Agency style overlay */}
+                <div className="absolute inset-0 p-5 sm:p-6 lg:p-8 z-10 flex flex-col justify-between">
+                  {/* Top - Category */}
+                  <div className="flex items-center justify-between">
                     <span className="text-[10px] sm:text-xs font-semibold text-gray-500 tracking-wide uppercase">
                       {item.category}
                     </span>
-                    <span className="text-gray-700">·</span>
-                    <span className="text-[10px] sm:text-xs text-gray-600">{item.year}</span>
+                    <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+                      <ArrowUpRight size={16} className="text-gray-400" />
+                    </div>
                   </div>
-                  <h3 className="font-display text-xl sm:text-2xl md:text-3xl font-semibold text-white group-hover:text-cream transition-colors duration-300">
-                    {item.title}
-                  </h3>
+                  
+                  {/* Bottom - Title Block */}
+                  <div>
+                    {/* Client name - lowercase bold */}
+                    <h3 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white lowercase tracking-tight group-hover:text-cream transition-colors duration-300">
+                      {item.title}
+                    </h3>
+                    {/* Subtitle */}
+                    <p className="text-gray-500 text-xs sm:text-sm mt-1 sm:mt-2">
+                      {item.subtitle}
+                    </p>
+                    {/* Description - italic */}
+                    <p className="slogan text-xs sm:text-sm mt-3 sm:mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
-                
-                {/* Hover arrow */}
-                <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-10 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
-                  <ArrowUpRight size={18} className="text-gray-400" />
+
+                {/* Slogan watermark - bottom right */}
+                <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-10 opacity-30">
+                  <p className="slogan text-[10px] sm:text-xs">don't sell yourself short.</p>
                 </div>
               </div>
             ))}
@@ -425,8 +453,25 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Slogan Interstitial */}
+      <section ref={sloganSection.ref} className="py-20 sm:py-28 lg:py-36 bg-[#0a0a0a] relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-spotlight pointer-events-none opacity-50" />
+        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 relative z-10">
+          <p 
+            className={`slogan text-3xl sm:text-4xl md:text-5xl lg:text-6xl transition-all duration-1000 ${sloganSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          >
+            don't sell yourself short.
+          </p>
+          <div 
+            className={`mt-8 sm:mt-12 transition-all duration-700 delay-300 ${sloganSection.isVisible ? 'opacity-100' : 'opacity-0'}`}
+          >
+            <div className="w-16 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent mx-auto" />
+          </div>
+        </div>
+      </section>
+
       {/* Services Section - Menu Style */}
-      <section id="services" ref={servicesSection.ref} className="section-padding bg-[#0a0a0a]">
+      <section id="services" ref={servicesSection.ref} className="section-padding bg-[#050505]">
         <div className="container-wide px-4 sm:px-6">
           {/* Menu Header */}
           <div className="max-w-4xl mx-auto text-center mb-12 sm:mb-16 lg:mb-20">
@@ -436,9 +481,9 @@ export default function Home() {
               MENU
             </h2>
             <p 
-              className={`text-xs sm:text-sm md:text-base font-semibold tracking-[0.1em] sm:tracking-[0.15em] uppercase text-gray-500 mt-6 sm:mt-8 mb-3 sm:mb-4 transition-all duration-700 delay-100 ${servicesSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+              className={`slogan slogan-medium mt-6 sm:mt-8 mb-3 sm:mb-4 transition-all duration-700 delay-100 ${servicesSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
             >
-              Don't sell yourself short.
+              don't sell yourself short.
             </p>
             <p 
               className={`text-gray-400 text-sm sm:text-base md:text-lg max-w-xl sm:max-w-2xl mx-auto leading-relaxed transition-all duration-700 delay-200 ${servicesSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
@@ -447,7 +492,7 @@ export default function Home() {
             </p>
           </div>
           
-          {/* Services Grid - Menu Style */}
+          {/* Services Grid */}
           <div className="grid sm:grid-cols-2 gap-10 sm:gap-x-10 sm:gap-y-12 lg:gap-x-16 lg:gap-y-16 max-w-5xl mx-auto">
             {serviceCategories.map((category, index) => {
               const Icon = category.icon
@@ -481,7 +526,7 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" ref={aboutSection.ref} className="section-padding bg-[#050505]">
+      <section id="about" ref={aboutSection.ref} className="section-padding bg-[#0a0a0a]">
         <div className="container-wide px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 lg:gap-20 items-center">
             <div>
@@ -542,6 +587,9 @@ export default function Home() {
                   <p className="font-display text-xl sm:text-2xl font-semibold text-white tracking-tight">NeverSmall Studios</p>
                   <p className="text-gray-500 text-xs sm:text-sm mt-2">Melbourne, Australia</p>
                   
+                  {/* Slogan */}
+                  <p className="slogan slogan-small mt-6 sm:mt-8">don't sell yourself short.</p>
+                  
                   {/* Decorative line */}
                   <div className="divider mt-6 sm:mt-8 mb-4 sm:mb-6" />
                   
@@ -554,7 +602,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section id="contact" ref={contactSection.ref} className="section-padding bg-[#0a0a0a] relative overflow-hidden">
+      <section id="contact" ref={contactSection.ref} className="section-padding bg-[#050505] relative overflow-hidden">
         {/* Ambient background */}
         <div className="absolute inset-0 bg-gradient-spotlight pointer-events-none" />
         
@@ -603,40 +651,47 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="py-8 sm:py-10 px-4 sm:px-6 border-t border-gray-900/50 bg-[#050505]">
-        <div className="max-w-6xl mx-auto flex flex-col items-center gap-6 sm:gap-8 md:flex-row md:justify-between">
-          <div className="flex items-center gap-3 sm:gap-4">
-            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden flex-shrink-0">
-              <Image 
-                src="/assets/NSS Logo.jpg" 
-                alt="NeverSmall Studios" 
-                width={36} 
-                height={36}
-                className="w-full h-full object-cover"
-              />
+        <div className="max-w-6xl mx-auto">
+          {/* Top row */}
+          <div className="flex flex-col items-center gap-6 sm:gap-8 md:flex-row md:justify-between mb-8">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden flex-shrink-0">
+                <Image 
+                  src="/assets/NSS Logo.jpg" 
+                  alt="NeverSmall Studios" 
+                  width={36} 
+                  height={36}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <span className="text-sm text-gray-500 font-medium">NeverSmall Studios</span>
             </div>
-            <span className="text-sm text-gray-500 font-medium">NeverSmall Studios</span>
+            
+            <div className="flex items-center gap-6 sm:gap-8 text-sm text-gray-600">
+              <a 
+                href="https://instagram.com/neversmall.studios" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors min-h-[44px] flex items-center"
+              >
+                Instagram
+              </a>
+              <a 
+                href="mailto:hello@neversmall.com.au"
+                className="hover:text-white transition-colors min-h-[44px] flex items-center"
+              >
+                Email
+              </a>
+            </div>
           </div>
-          
-          <div className="flex items-center gap-6 sm:gap-8 text-sm text-gray-600">
-            <a 
-              href="https://instagram.com/neversmall.studios" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="hover:text-white transition-colors min-h-[44px] flex items-center"
-            >
-              Instagram
-            </a>
-            <a 
-              href="mailto:hello@neversmall.com.au"
-              className="hover:text-white transition-colors min-h-[44px] flex items-center"
-            >
-              Email
-            </a>
+
+          {/* Bottom row - Slogan signature */}
+          <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-between pt-6 border-t border-gray-900/30">
+            <p className="slogan slogan-small opacity-50">don't sell yourself short.</p>
+            <p className="text-gray-600 text-xs sm:text-sm text-center">
+              © {new Date().getFullYear()} NeverSmall Studios. Melbourne, Australia.
+            </p>
           </div>
-          
-          <p className="text-gray-600 text-xs sm:text-sm text-center md:text-right">
-            © {new Date().getFullYear()} NeverSmall Studios. Melbourne, Australia.
-          </p>
         </div>
       </footer>
     </main>
