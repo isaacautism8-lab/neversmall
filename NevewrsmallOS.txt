@@ -1,0 +1,2251 @@
+{
+  "meta": {
+    "schema_name": "NeverSmallOS",
+    "schema_version": "1.0.0",
+    "generated_at": "2025-12-29T11:41:42Z",
+    "timezone": "Australia/Melbourne",
+    "purpose": [
+      "Single, reusable operating system schema to guide NeverSmall / Jerita business execution",
+      "Attachable core OS alongside every client project OS",
+      "Merge-friendly with other project JSON modules",
+      "AI-native stack foundation: alignment, cognition loop, workflows, templates, and client modules"
+    ],
+    "layering_model": {
+      "L0_neversmall_core_os": "Stable identity, principles, workflows, templates (shared across all clients)",
+      "L1_client_os_modules": "Per-client alignment + brand + production rules + calendars",
+      "L2_project_overrides": "Per-project timelines, deliverables, scope, assets",
+      "L3_session_overrides": "Today’s priorities, constraints, context"
+    },
+    "source_files": [
+      {
+        "key": "baseline_context_json",
+        "path": "/mnt/data/Jerita_NeverSmall_OS_Context.json"
+      },
+      {
+        "key": "jirita_os_json",
+        "path": "/mnt/data/JiritaOS.json"
+      },
+      {
+        "key": "intelliprop_alignment_json",
+        "path": "/mnt/data/NeverSmall_Intelliprop_AlignmentOS.json"
+      },
+      {
+        "key": "intelliprop_alignment_md",
+        "path": "/mnt/data/NeverSmall_Intelliprop_AlignmentOS.md"
+      }
+    ],
+    "merge_policy": {
+      "preferred_override_order": [
+        "session_overrides",
+        "project_overrides",
+        "client_modules",
+        "core_os"
+      ],
+      "conflict_resolution": "last_write_wins_with_audit_log",
+      "audit_log_key": "merge_audit_log"
+    }
+  },
+  "core_os": {
+    "meta": {
+      "schema_name": "JiritaOS",
+      "schema_version": "2.0.0",
+      "generated_at": "2025-12-29T11:38:14Z",
+      "timezone": "Australia/Melbourne",
+      "intended_use": [
+        "Persistent operating system context for Jerita / NeverSmall",
+        "Reusable companion schema to attach to every client project",
+        "AI-native stack foundation (memory, style, workflows, decision loops)",
+        "Merge target with other project JSONs"
+      ],
+      "design_goals": [
+        "Close the cognitive loop (intake -> sensemaking -> decision -> execution -> review)",
+        "Truth-first alignment (accuracy, reality checks, constraints)",
+        "Reduce overwhelm (clear defaults, checklists, guardrails)",
+        "Preserve brand voice + aesthetic standards",
+        "Keep outputs ready-to-use (copy/paste deliverables)"
+      ],
+      "merge_policy": {
+        "idempotent_keys": [
+          "meta.schema_name",
+          "meta.schema_version"	
+        ],
+        "preferred_overrides": [
+          "client_overrides.*",
+          "project_overrides.*",
+          "session_overrides.*"
+        ],
+        "conflict_resolution": {
+          "strategy": "last_write_wins_with_audit",
+          "audit_log_key": "merge_audit_log"
+        }
+      },
+      "sources": {
+        "master_context_markdown_path": "/mnt/data/jerita_project_master_context.md",
+        "baseline_context_json_path": "/mnt/data/Jerita_NeverSmall_OS_Context.json"
+      }
+    },
+    "alignment": {
+      "north_star": {
+        "statement": "Scale NeverSmall without self-abandonment: clarity, taste, sustainable systems, community impact, and financial independence.",
+        "non_negotiables": [
+          "truth first (no comforting lies, no performative optimism)",
+          "protect health and capacity (burnout prevention)",
+          "brand image and taste level are sacred",
+          "deliverables must be usable (not theoretical)",
+          "respect relationships and boundaries (clients, contractors, family)"
+        ]
+      },
+      "principles": [
+        {
+          "id": "P001_truth_first",
+          "name": "Truth First",
+          "definition": "Prefer accurate reality to pleasing narratives. Validate assumptions. Name constraints. Avoid magical thinking.",
+          "behaviours": [
+            "state what is known vs unknown",
+            "call out contradictions gently but clearly",
+            "prefer concrete dates, costs, and scope",
+            "use checklists to prevent omission"
+          ],
+          "failure_modes": [
+            "vague advice",
+            "over-promising",
+            "ignoring constraints (time, energy, budget)"
+          ]
+        },
+        {
+          "id": "P002_clarity_over_complexity",
+          "name": "Clarity Over Complexity",
+          "definition": "Reduce cognitive load. Use defaults and structure. Create simple next actions.",
+          "behaviours": [
+            "bullet lists over long paragraphs",
+            "prioritise top 3 actions",
+            "give templates and plug-and-play text",
+            "separate strategy vs execution"
+          ]
+        },
+        {
+          "id": "P003_taste_is_strategy",
+          "name": "Taste Is Strategy",
+          "definition": "Aesthetic and cultural fluency are competitive advantages; protect them as a core asset.",
+          "behaviours": [
+            "editorial-first framing",
+            "platform-native execution",
+            "avoid generic corporate vibes",
+            "use strong hooks and creative tension"
+          ]
+        },
+        {
+          "id": "P004_systems_for_scale",
+          "name": "Systems For Scale",
+          "definition": "If it repeats, systemise it. If it grows, delegate it. If it drains, redesign it.",
+          "behaviours": [
+            "create SOPs for repeatable work",
+            "modular templates per client",
+            "clear handoffs for contractors",
+            "time-box and cap hours"
+          ]
+        },
+        {
+          "id": "P005_self_respect_is_a_boundary",
+          "name": "Self-Respect Is a Boundary",
+          "definition": "No work wins are worth chronic depletion. Boundaries are operational, not emotional.",
+          "behaviours": [
+            "set scope and revision limits",
+            "enforce lead times",
+            "charge for changes",
+            "say no to misaligned work"
+          ]
+        },
+        {
+          "id": "P006_compassion_with_teeth",
+          "name": "Compassion With Teeth",
+          "definition": "Kind, human communication without letting standards slip.",
+          "behaviours": [
+            "assume good intent first",
+            "still enforce policy",
+            "document decisions",
+            "offer alternatives instead of appeasing"
+          ]
+        }
+      ],
+      "decision_frameworks": {
+        "work_intake_filter": {
+          "name": "Fit / Profit / Energy Filter",
+          "scoring_scale": "0-5",
+          "dimensions": [
+            {
+              "key": "brand_fit",
+              "question": "Does this strengthen NeverSmall’s identity and portfolio?"
+            },
+            {
+              "key": "profitability",
+              "question": "Will this hit target margin and/or retainer potential?"
+            },
+            {
+              "key": "creative_value",
+              "question": "Does it build taste, craft, or a story worth telling?"
+            },
+            {
+              "key": "operational_load",
+              "question": "Can we deliver without chaos? (timeline, approvals, assets)"
+            },
+            {
+              "key": "energy_cost",
+              "question": "Will this drain Jerita/Toby or can it be delegated?"
+            }
+          ],
+          "rules": [
+            "If brand_fit <= 2 AND profitability <= 2 → default decline.",
+            "If operational_load <= 2 → require timeline reset or scope reduction.",
+            "If energy_cost <= 2 → must include delegation plan or no-go."
+          ]
+        },
+        "truth_check": {
+          "name": "Reality Check",
+          "prompts": [
+            "What is the actual deadline (date + time + timezone)?",
+            "What is the minimum viable deliverable?",
+            "What are the blockers and who owns them?",
+            "What will break if we do nothing for 24 hours?",
+            "What is the worst-case if we commit?"
+          ]
+        }
+      }
+    },
+    "cognitive_loop": {
+      "loop_name": "Close The Loop",
+      "goal": "Convert messy inputs into execution with feedback and memory updates.",
+      "stages": [
+        {
+          "stage": 1,
+          "name": "Intake",
+          "inputs": [
+            "message",
+            "assets",
+            "links",
+            "deadlines",
+            "constraints"
+          ],
+          "outputs": [
+            "problem_statement",
+            "success_criteria",
+            "assumptions_list"
+          ]
+        },
+        {
+          "stage": 2,
+          "name": "Context Retrieval",
+          "inputs": [
+            "JiritaOS",
+            "client_os",
+            "project_overrides"
+          ],
+          "outputs": [
+            "relevant_context_snippets",
+            "do_not_forget_list"
+          ]
+        },
+        {
+          "stage": 3,
+          "name": "Sensemaking",
+          "checks": [
+            "truth_check",
+            "fit_profit_energy",
+            "scope_integrity",
+            "risk_flags"
+          ],
+          "outputs": [
+            "recommended_path",
+            "options_with_tradeoffs"
+          ]
+        },
+        {
+          "stage": 4,
+          "name": "Decision",
+          "default": "present 1 recommended option + 2 alternates",
+          "outputs": [
+            "chosen_option",
+            "task_breakdown",
+            "timeline"
+          ]
+        },
+        {
+          "stage": 5,
+          "name": "Execution",
+          "outputs": [
+            "deliverable",
+            "templates",
+            "files"
+          ],
+          "quality_gates": [
+            "brand_voice_check",
+            "format_check (platform + aspect ratios)",
+            "scope_check",
+            "spelling_check (AU English)"
+          ]
+        },
+        {
+          "stage": 6,
+          "name": "Review",
+          "outputs": [
+            "what_worked",
+            "what_failed",
+            "next_time_rules"
+          ]
+        },
+        {
+          "stage": 7,
+          "name": "Update Memory",
+          "outputs": [
+            "os_update_patch",
+            "client_template_update",
+            "sop_update"
+          ]
+        }
+      ],
+      "default_output_format": {
+        "structure": [
+          "Top line answer",
+          "Options (if needed)",
+          "Next actions",
+          "Template / copy"
+        ],
+        "preferred": "lists and short paragraphs"
+      }
+    },
+    "identity": {
+      "baseline_snapshot": {
+        "legal_name": "Jerita Hean",
+        "preferred_name": "Jeri",
+        "location": "Melbourne, Australia",
+        "roles": [
+          "Business Owner",
+          "Creative Director",
+          "Co-Founder – NeverSmall Studios",
+          "Videographer / Photographer",
+          "Marketing Strategist"
+        ],
+        "personality": {
+          "MBTI": "ENTJ",
+          "traits": [
+            "vision-driven",
+            "detail-oriented",
+            "strategic",
+            "creative-led",
+            "community-focused"
+          ],
+          "preferences": {
+            "communication": "direct, structured, list-based",
+            "learning_style": [
+              "visual",
+              "listening",
+              "conceptual"
+            ],
+            "interaction_preference": "one-on-one"
+          }
+        },
+        "health_context": {
+          "ADHD": true,
+          "medication": [
+            "Vyvanse",
+            "Dexamphetamine"
+          ],
+          "considerations": [
+            "burnout risk",
+            "ADHD paralysis",
+            "sleep regulation",
+            "energy management"
+          ]
+        }
+      },
+      "expanded": {
+        "names": {
+          "full": "Jerita Hean",
+          "preferred": "Jeri",
+          "variants": [
+            "Jerita",
+            "Jeri"
+          ]
+        },
+        "location": {
+          "city": "Melbourne",
+          "country": "Australia"
+        },
+        "education": {
+          "degree": "Science & Commerce",
+          "majors": [
+            "Environmental Science",
+            "Marketing Science"
+          ],
+          "notes": "Graduated after 4 years with lockdowns, unpaid internships, and constant freelance work."
+        },
+        "workstyle": {
+          "strengths": [
+            "vision and taste",
+            "relationship-building",
+            "strategic thinking",
+            "creative leadership",
+            "fast ideation with iteration"
+          ],
+          "challenges": [
+            "overwhelm from wearing every hat",
+            "time blindness / planning friction",
+            "deadline stress",
+            "difficulty saying no",
+            "comparison spirals"
+          ],
+          "preferred_structures": [
+            "month-view wall calendar for time-blocking",
+            "weekly/daily planner",
+            "lists over paragraphs",
+            "simple defaults and checklists"
+          ]
+        },
+        "health_and_capacity": {
+          "neurodivergence": [
+            "ADHD",
+            "autistic traits (structure/sensory)"
+          ],
+          "mental_health": [
+            "mild anxiety",
+            "mild depression",
+            "burnout history"
+          ],
+          "meds": {
+            "stimulants": [
+              "Vyvanse",
+              "Dexamphetamine"
+            ],
+            "notes": [
+              "low dose can cause sleepiness/anxiety",
+              "sleep regulation is a recurring focus"
+            ]
+          },
+          "capacity_guardrails": {
+            "rules": [
+              "Avoid stacking high-stimulus days back-to-back (shoot + admin + social + editing).",
+              "If sleep < 6 hours for 2 nights → switch to 'stability mode'.",
+              "When overwhelmed: reduce scope, shorten timelines, delegate first."
+            ],
+            "signals": {
+              "red_flags": [
+                "skipping meals",
+                "all-nighters",
+                "irritability",
+                "avoidance / paralysis",
+                "sensory overload"
+              ],
+              "responses": [
+                "simplify to top 1-3 actions",
+                "time-box work blocks",
+                "convert to templates or delegated tasks"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "brands": {
+      "baseline_snapshot": {
+        "NeverSmall": {
+          "status": "active",
+          "founded": "2025-04",
+          "description": "Umbrella brand and creative ecosystem supporting multiple ventures.",
+          "aesthetic": [
+            "editorial",
+            "high-fashion",
+            "avant-garde",
+            "youth-driven",
+            "playful"
+          ],
+          "font": {
+            "primary": "Area Normal Semibold",
+            "tracking": -70,
+            "logo_rules": "Shape must never be altered"
+          },
+          "values": [
+            "Don't sell yourself short",
+            "Think bigger",
+            "Culture-aware creativity",
+            "Long-term brand building"
+          ]
+        },
+        "NeverSmall Studios": {
+          "status": "active",
+          "role": "Primary revenue-generating agency",
+          "services": [
+            "Photography",
+            "Videography",
+            "Social Media Management",
+            "Meta Ads",
+            "Creative Direction",
+            "Consultations"
+          ],
+          "positioning": "High-end, stylised, culturally-aware marketing agency",
+          "dream_clients": [
+            "fashion brands",
+            "real estate",
+            "tech startups",
+            "restaurants & bars",
+            "e-commerce"
+          ],
+          "pricing_notes": {
+            "ads_management": {
+              "rate_per_hour": 30,
+              "cap_hours": 30,
+              "monthly_fee": 900
+            },
+            "contractors": {
+              "social_media": 50,
+              "graphic_design": 40
+            }
+          }
+        },
+        "Cherie": {
+          "status": "legacy / rebrand-in-progress",
+          "focus": [
+            "videography",
+            "photography"
+          ],
+          "notes": "Gradually absorbed into NeverSmall Studios identity"
+        },
+        "Quarter Life Society": {
+          "status": "active",
+          "type": "community / events",
+          "themes": [
+            "intentional rest",
+            "reflection",
+            "growth",
+            "connection"
+          ]
+        }
+      },
+      "NeverSmall": {
+        "purpose": "Umbrella ecosystem enabling multiple ventures supporting Melbourne/Australian businesses and creatives.",
+        "values": [
+          "Don't sell yourself short",
+          "Think bigger",
+          "Authenticity",
+          "Cultural fluency",
+          "Long-term brand building",
+          "Community-building"
+        ],
+        "aesthetic": {
+          "keywords": [
+            "Editorial",
+            "High-Fashion",
+            "Avant-Garde",
+            "Youth-Driven",
+            "Playful"
+          ],
+          "references": [
+            "Dazed Magazine",
+            "indie zines",
+            "OFF-WHITE (energy)",
+            "NTS Radio (edge)"
+          ],
+          "design_rules": {
+            "font": {
+              "name": "Area Normal Semibold",
+              "tracking": -70
+            },
+            "logo": {
+              "rule": "Logo shape must never be altered"
+            },
+            "visual_language": [
+              "grid marks / rules / focus squares",
+              "digital design elements (measurement, overlays)",
+              "textured NSS treatments (chrome, concrete, old computer screen)"
+            ]
+          }
+        }
+      },
+      "NeverSmall_Studios": {
+        "positioning": "Social-media-first creative agency where culture + creativity + strategy meet.",
+        "services": [
+          "Photography",
+          "Videography",
+          "Social Media Management",
+          "Meta Ads Management",
+          "Creative Direction",
+          "Consultations"
+        ],
+        "why_clients_choose_us": [
+          "taste level and cultural fluency",
+          "ask deeper questions than competitors",
+          "high standard of execution",
+          "practical understanding of what performs"
+        ],
+        "strategy": {
+          "primary_engine": "Shareable content creation as credibility + inbound lead driver",
+          "conversion": "Retainer conversion via social management and ads once trust is built",
+          "model": "One-stop-shop for hands-off marketing with high-end output"
+        },
+        "dream_clients": {
+          "retainer_threshold_aud": 3000,
+          "industries": [
+            "real estate",
+            "tech startups",
+            "fashion",
+            "new restaurants/bars",
+            "e-commerce"
+          ]
+        }
+      },
+      "Cherie": {
+        "role_in_history": "Original business (July 2024) evolving into NeverSmall Studios.",
+        "notes": [
+          "Clients responded to personalised, trend-aware creative direction.",
+          "Scaling pressure drove need for stronger systems and a clearer brand umbrella."
+        ]
+      },
+      "Quarter_Life_Society": {
+        "purpose": "Community for young professionals/creatives navigating quarter-life transition.",
+        "tone": [
+          "thoughtful",
+          "grounded",
+          "anti-fluff",
+          "reflective"
+        ],
+        "formats": [
+          "vision board workshops",
+          "fireside chats",
+          "networking",
+          "zines",
+          "conversation cards"
+        ]
+      }
+    },
+    "people_and_relationships": {
+      "business": {
+        "partners": [
+          {
+            "name": "Toby Nghiem",
+            "aliases": [
+              "Toan",
+              "Toby"
+            ],
+            "role": "Co-Founder / Operations",
+            "notes": [
+              "Joined full time April 2025 (per context)."
+            ]
+          },
+          {
+            "name": "Kevin",
+            "role": "Co-Founder (Cherie) / Ops manager (legacy)",
+            "status": "turbulent relationship historically",
+            "notes": [
+              "Poor communication and power dynamic issues reported; document boundaries and roles."
+            ]
+          }
+        ],
+        "team_structure": {
+          "default_roles": [
+            "Creative Direction",
+            "Production (photo/video)",
+            "Editing/Post",
+            "Social/Ads",
+            "Ops/Finance"
+          ],
+          "delegation_preference": "Delegate repeatable, low-taste tasks first; keep creative direction centralized."
+        }
+      },
+      "personal": {
+        "interaction_preference": "one-on-one over large groups",
+        "family_context": {
+          "notes": [
+            "Emotionally volatile family dynamics have been present.",
+            "Boundary-setting and autonomy are important."
+          ],
+          "safety_note": "If safety concerns arise, prioritise immediate support resources and trusted contacts."
+        }
+      }
+    },
+    "tooling_stack": {
+      "core_tools": {
+        "project_management": [
+          {
+            "tool": "Notion",
+            "use": "central task + client portals, shared visibility"
+          },
+          {
+            "tool": "Monday",
+            "use": "optional structured boards for production pipelines"
+          }
+        ],
+        "finance": [
+          {
+            "tool": "Xero",
+            "use": "invoices, recurring billing, payment tracking"
+          }
+        ],
+        "storage": [
+          {
+            "tool": "Google Drive",
+            "use": "assets, client folders, deliverable exports"
+          }
+        ],
+        "distribution": [
+          {
+            "tool": "Meta Business Suite",
+            "use": "posting, ad cutdowns, scheduling"
+          },
+          {
+            "tool": "TikTok",
+            "use": "organic and promo series"
+          },
+          {
+            "tool": "LinkedIn",
+            "use": "B2B credibility + founder voice"
+          }
+        ],
+        "production": [
+          {
+            "tool": "Adobe Premiere Pro",
+            "use": "primary editing"
+          },
+          {
+            "tool": "CapCut",
+            "use": "fast edits and captions"
+          },
+          {
+            "tool": "DaVinci Resolve",
+            "use": "grading and advanced workflows"
+          }
+        ]
+      },
+      "asset_naming_and_structure": {
+        "principles": [
+          "predictable folder structure",
+          "consistent file names",
+          "single source of truth per deliverable"
+        ],
+        "suggested_drive_structure": {
+          "root": "NeverSmall_Studios/Clients/{CLIENT}/Projects/{PROJECT}/",
+          "subfolders": [
+            "00_Admin",
+            "01_Brief",
+            "02_Assets_Raw",
+            "03_Selects",
+            "04_Edits_WIP",
+            "05_Deliverables_Final",
+            "06_Thumbnails_Captions",
+            "07_Ads_Cutdowns",
+            "99_Archive"
+          ]
+        }
+      }
+    },
+    "communication_style_guide": {
+      "voice": {
+        "attributes": [
+          "professional but conversational",
+          "clear and direct",
+          "encouraging but not soft",
+          "smart friend energy",
+          "tasteful clever humour"
+        ],
+        "avoid": [
+          "press-release tone",
+          "generic buzzwords",
+          "overly corporate clichés",
+          "em dashes"
+        ],
+        "language": {
+          "dialect": "Australian English",
+          "punctuation": "clean and readable"
+        }
+      },
+      "preferred_output_patterns": [
+        {
+          "name": "Fast Answer + Next Steps",
+          "template": [
+            "Answer",
+            "Next 3 steps",
+            "Copy/paste text if relevant"
+          ]
+        },
+        {
+          "name": "Decision With Tradeoffs",
+          "template": [
+            "Recommendation",
+            "Why",
+            "Option B",
+            "Option C",
+            "Risks",
+            "Next step"
+          ]
+        },
+        {
+          "name": "Template Pack",
+          "template": [
+            "Short version",
+            "Standard version",
+            "Polished version"
+          ]
+        }
+      ],
+      "client_comms_rules": [
+        "Friendly, clear boundaries",
+        "Lead time policy stated early",
+        "Scope changes acknowledged + priced",
+        "No guilt language"
+      ]
+    },
+    "workflows": {
+      "default_production_pipeline": {
+        "stages": [
+          "Brief + success criteria",
+          "Shot list / run sheet",
+          "Shoot day execution",
+          "Ingest + selects",
+          "Edit v1",
+          "Review (2 rounds max)",
+          "Final export + delivery",
+          "Repurposing (cutdowns, captions)",
+          "Archive + lessons learned"
+        ],
+        "quality_controls": [
+          "Hook in first 1-2 seconds",
+          "Brand image consistent",
+          "Audio levels checked",
+          "Captions readable",
+          "Platform specs correct"
+        ]
+      },
+      "ads_management_monthly_cycle": {
+        "baseline": {
+          "rate_per_hour_aud": 30,
+          "cap_hours": 30,
+          "monthly_fee_aud": 900,
+          "ad_spend": "client pays via linked Meta card"
+        },
+        "cadence": [
+          "Week 1: audit + new tests",
+          "Week 2: iterate winners",
+          "Week 3: creative refresh",
+          "Week 4: report + next-month plan"
+        ],
+        "reporting": {
+          "include": [
+            "top creatives",
+            "CPM/CPC/CPA trends",
+            "learnings",
+            "next tests"
+          ]
+        }
+      },
+      "overwhelm_protocol": {
+        "name": "Stability Mode",
+        "trigger_conditions": [
+          "multiple overdue deliverables",
+          "sleep debt",
+          "ADHD paralysis lasting >24h",
+          "illness/asthma flare"
+        ],
+        "actions": [
+          "Define 1 MVP deliverable per client",
+          "Communicate timeline resets early",
+          "Delegate low-stakes edits",
+          "Use templates instead of custom writing",
+          "Block 60-90 min deep work, then stop"
+        ],
+        "communication_templates": {
+          "timeline_reset": "Quick update — I’m reshuffling production to protect quality. I can deliver {DELIVERABLE} by {DATE}. If you need it earlier, we can either reduce scope or prioritise it with an expedite fee."
+        }
+      }
+    },
+    "templates": {
+      "client_os_template": {
+        "client_meta": {
+          "client_name": "",
+          "industry": "",
+          "primary_contacts": [],
+          "time_zone": "Australia/Melbourne",
+          "preferred_channels": [
+            "email",
+            "sms",
+            "whatsapp"
+          ],
+          "contract_type": "",
+          "billing_cadence": ""
+        },
+        "brand": {
+          "positioning": "",
+          "voice_keywords": [],
+          "visual_keywords": [],
+          "do_not": [],
+          "references": []
+        },
+        "deliverables": {
+          "core_offers": [],
+          "platforms": [],
+          "formats": [],
+          "specs": {}
+        },
+        "approval_and_feedback": {
+          "approver": "",
+          "review_windows": {
+            "default_days": 5
+          },
+          "revision_policy": {
+            "included_rounds": 2,
+            "beyond_scope": "billable"
+          }
+        },
+        "growth_strategy": {
+          "top_funnel": "",
+          "mid_funnel": "",
+          "conversion": "",
+          "experiments": []
+        }
+      },
+      "sop_template": {
+        "name": "",
+        "purpose": "",
+        "when_to_use": "",
+        "inputs": [],
+        "steps": [],
+        "outputs": [],
+        "quality_checks": [],
+        "owner": "",
+        "last_updated": ""
+      },
+      "prompt_pack": {
+        "intake_prompt": "Capture the task, deadline, constraints, and desired outcome. Ask for missing assets only if critical.",
+        "deliverable_prompt": "Generate a ready-to-use deliverable in the required format; provide 2 alternates if tone-sensitive.",
+        "review_prompt": "Audit output for brand voice, clarity, constraints, and platform spec compliance."
+      }
+    },
+    "risks_and_guardrails": {
+      "common_risks": [
+        "scope creep",
+        "last-minute changes",
+        "overpromising under sleep debt",
+        "quality drop under volume",
+        "misalignment with brand image"
+      ],
+      "guardrails": {
+        "scope": [
+          "Two revision rounds max per deliverable unless agreed otherwise",
+          "Any new deliverable requires written confirmation"
+        ],
+        "time": [
+          "Lead time policy for booking contractors (ideally 1 week+)",
+          "Expedite fee option to protect contractor opportunity cost"
+        ],
+        "quality": [
+          "Do not ship if captions unreadable or audio inconsistent",
+          "Protect taste: avoid generic templates unless adapted"
+        ],
+        "health": [
+          "If overwhelmed, switch to Stability Mode",
+          "No all-nighters as a default strategy"
+        ]
+      }
+    },
+    "data_and_memory_rules": {
+      "memory_layers": {
+        "os_layer": "Stable principles, identity, preferences, systems",
+        "client_layer": "Client brand, constraints, deliverables, comms",
+        "project_layer": "Timeline, assets, current tasks, decisions",
+        "session_layer": "Ephemeral, today's focus and context"
+      },
+      "update_rules": [
+        "Only promote info upward if it's stable and repeatedly useful",
+        "Record decisions with dates",
+        "When preferences change, keep both with an effective_date"
+      ],
+      "privacy": {
+        "sensitive_notes": [
+          "Health and family context should be used cautiously; do not over-share in client contexts."
+        ]
+      }
+    },
+    "context_snapshots": {
+      "master_markdown_excerpt": {
+        "path": "/mnt/data/jerita_project_master_context.md",
+        "content": "# Master Project Context: Jerita Hean / Neversmall / Cherie\n\nThis document is a consolidated, high‑density summary of all known information across the project context, conversation history, and long‑term memory. It is designed to be used as a **single source of truth** and can be merged into other project contexts or LLM systems.\n\n---\n\n## 1. Identity & Personal Profile\n\n**Name:** Jerita Hean (often Jeri / Jerita)  \n**Age:** Early 20s (22–23 range)  \n**Location:** Melbourne, Australia  \n**Education:** Double degree in Science & Commerce  \n• Majors: Environmental Science + Marketing Science  \n• Graduated after 4 years including COVID lockdowns, unpaid internships, and freelance work  \n\n**Neurodivergence & Mental Health:**  \n• Diagnosed ADHD (mid‑2024)  \n• Experiences ADHD paralysis, overwhelm, time blindness  \n• Mild anxiety + mild depression  \n• History of burnout (multiple episodes)  \n• Autistic traits around structure, rest frameworks, sensory overload  \n\n**Medication:**  \n• Vyvanse + Dex (2 doses/day)  \n• Sensitive to dosage (low dose → sleepiness/anxiety)  \n• Past MDMA use causes sleepiness/anxiety at low dose  \n\n**Values:**  \n• Creativity  \n• Hard work  \n• Financial independence / wealth‑building  \n• Friendships & community  \n• Authenticity  \n• Leadership & self‑trust\n\n**Personal Motto:** *Don’t sell yourself short*\n\n---\n\n## 2. Core Businesses & Brand Ecosystem\n\n### 2.1 Cherie (Original Business)\n\n**Founded:** July 2024  \n**Role:** Co‑Founder & Creative Director  \n**Partner:** Kevin (Co‑Founder & Operations Manager)\n\n**Services:**  \n• Event photography  \n• Recap video production  \n• Short‑form content  \n• Creative direction for marketing campaigns\n\n**Brand Traits:**  \n• Visionary, abstract, culturally tuned  \n• Highly personalised client experience  \n• Strong creative direction + trend awareness  \n• Clients often return due to trust in people behind brand\n\n**Challenges:**  \n• Turbulent partnership with Kevin (poor communication)  \n• Over‑involvement in every stage of production  \n• Deadline stress  \n• Difficulty scaling without quality drop\n\n---\n\n### 2.2 NeverSmall Studios (Rebrand / Expansion)\n\n**Status:** Active rebrand + strategic evolution of Cherie  \n**Positioning:** Melbourne‑based, social‑media‑first creative agency\n\n**Services:**  \n• Social Media Management  \n• Meta Ads Management  \n• Photography & Videography  \n• Creative & Brand Consultations\n\n**Why Clients Choose NeverSmall:**  \n• Strong taste level and cultural fluency  \n• Ask deeper questions than competitors  \n• Fashion‑level, editorial execution  \n• Strategic + creative hybrid\n\n**Business Strategy:**  \n• Content as top‑of‑funnel credibility engine  \n• Shareable work → inbound leads  \n• Convert to retainers (ads + social)  \n• One‑stop‑shop for hands‑off marketing\n\n**Dream Clients:**  \n• Retainers $3K+/month  \n• Fashion brands  \n• Tech startups  \n• Real estate  \n• Hospitality with strong branding\n\n**Long‑Term Vision:**  \n• Studio space  \n• Pop‑ups & runway shows  \n• Digital marketplace for creatives  \n• Third‑place community hub  \n• YouTube channel  \n• Multiple revenue streams\n\n---\n\n## 3. Community & Side Projects\n\n### 3.1 Quarter Life Society (QLS)\n\n**Purpose:** Community for young professionals & creatives navigating quarter‑life transition\n\n**Themes:**  \n• Intentional rest  \n• Reflection & identity  \n• Career uncertainty  \n• Community over grind\n\n**Formats:**  \n• Vision board workshops  \n• Fireside chats  \n• Networking events  \n• Zines  \n• Conversation cards\n\n**Tone:**  \n• Thoughtful, grounded, anti‑hustle‑culture  \n• Reflective rather than motivational fluff\n\n---\n\n## 4. Client Work & Industries\n\n**Key Clients (Examples):**  \n• Pretty Privilege  \n• Intelliprop  \n• Yaki Jin  \n• Golden Wok  \n• Bittersweet Podcast  \n• Winz  \n• Crystalux Mirrors  \n• Tang Events / Scarlett Saturdays\n\n**Industries:**  \n• Hospitality  \n• Fashion  \n• Real estate & proptech  \n• Lifestyle brands  \n• Events\n\n**Working Style:**  \n• Founder‑led content  \n• Editorial + cinematic  \n• Strong hooks  \n• High volume short‑form  \n• Platform‑specific optimisation\n\n---\n\n## 5. Creative Direction & Aesthetic\n\n**Visual Aesthetic:**  \n• Editorial, high‑fashion  \n• Avant‑garde but playful  \n• Inspired by Dazed, indie zines  \n• Youth‑driven Gen‑Z energy\n\n**Brand Fonts & Rules:**  \n• Area Normal Semibold  \n• -70 tracking  \n• Logo shape never altered\n\n**Creative Preferences:**  \n• Bold hooks  \n• Clever humour  \n• Cultural references  \n• Avoid corporate clichés\n\n---\n\n## 6. Operations, Tools & Systems\n\n**Tools:**  \n• Notion (paid) for task + client management  \n• Xero for invoicing  \n• Google Drive (migrating to business account)  \n• Meta Business Suite  \n• Adobe Premiere Pro / CapCut / DaVinci Resolve\n\n**Financials:**  \n• ABN active  \n• Contractor rates: $40–$50/hr  \n• Ads management: $900/month cap (30 hrs)  \n• Tracks GST threshold  \n\n**Current Financial Snapshot:**  \n• ~$2,000 savings  \n• ~$5,000 in stocks\n\n---\n\n## 7. Work Patterns & Pain Points\n\n**Strengths:**  \n• Vision & taste  \n• Relationship‑building  \n• Strategic thinking  \n• Creative leadership\n\n**Struggles:**  \n• Overwhelm from wearing every hat  \n• Time management  \n• Saying no  \n• Guilt around rest  \n• Comparison to more experienced filmmakers\n\n**Preferred Structure:**  \n• Visual planners  \n• Month‑view wall calendar  \n• Weekly/daily planner  \n• Lists over paragraphs\n\n---\n\n## 8. Personal Life & Interests\n\n**Enjoys:**  \n• Nature & beach days  \n• Drawing & visual journaling  \n• Guitar  \n• Anime  \n• Fashion & food experiences\n\n**Health Notes:**  \n• Past alopecia linked to stress + weight loss  \n• Asthma flare‑ups during illness  \n• IUD impacts hormones + scalp oiliness\n\n---\n\n## 9. Relationship Dynamics (Relevant Context)\n\n• Prefers one‑on‑one interactions  \n• Sensitive to attachment dynamics  \n• Family environment can be emotionally volatile  \n• Strong need for autonomy + safety\n\n---\n\n## 10. Meta: How Jerita Uses LLMs\n\n• Treats AI as creative + ops partner  \n• Requests structured, reusable outputs  \n• Expects brand‑aligned tone  \n• Iterative refinement preferred  \n• Uses LLMs for thinking clarity as much as execution\n\n---\n\n## 11. North‑Star Direction\n\nJerita is building **more than a business**.\n\nShe is building:\n• A creative identity she trusts  \n• Financial independence without burnout  \n• A community‑centric ecosystem  \n• A long‑term body of work that feels meaningful\n\nThe through‑line is **clarity, self‑respect, and scale without self‑abandonment**.\n\n---\n\n*End of Master Context File*\n\n",
+        "truncated": false
+      },
+      "baseline_json": {
+        "meta": {
+          "name": "Jerita_NeverSmall_OS_Context",
+          "version": "1.0.0",
+          "generated_at": "2025-12-29T11:32:33.130561Z",
+          "purpose": "Unified long-term memory + operating system schema for Jerita / NeverSmall projects",
+          "notes": "Derived from full project context, memories, recent conversations, preferences, and business details."
+        },
+        "identity": {
+          "legal_name": "Jerita Hean",
+          "preferred_name": "Jeri",
+          "location": "Melbourne, Australia",
+          "roles": [
+            "Business Owner",
+            "Creative Director",
+            "Co-Founder – NeverSmall Studios",
+            "Videographer / Photographer",
+            "Marketing Strategist"
+          ],
+          "personality": {
+            "MBTI": "ENTJ",
+            "traits": [
+              "vision-driven",
+              "detail-oriented",
+              "strategic",
+              "creative-led",
+              "community-focused"
+            ],
+            "preferences": {
+              "communication": "direct, structured, list-based",
+              "learning_style": [
+                "visual",
+                "listening",
+                "conceptual"
+              ],
+              "interaction_preference": "one-on-one"
+            }
+          },
+          "health_context": {
+            "ADHD": true,
+            "medication": [
+              "Vyvanse",
+              "Dexamphetamine"
+            ],
+            "considerations": [
+              "burnout risk",
+              "ADHD paralysis",
+              "sleep regulation",
+              "energy management"
+            ]
+          }
+        },
+        "brands": {
+          "NeverSmall": {
+            "status": "active",
+            "founded": "2025-04",
+            "description": "Umbrella brand and creative ecosystem supporting multiple ventures.",
+            "aesthetic": [
+              "editorial",
+              "high-fashion",
+              "avant-garde",
+              "youth-driven",
+              "playful"
+            ],
+            "font": {
+              "primary": "Area Normal Semibold",
+              "tracking": -70,
+              "logo_rules": "Shape must never be altered"
+            },
+            "values": [
+              "Don't sell yourself short",
+              "Think bigger",
+              "Culture-aware creativity",
+              "Long-term brand building"
+            ]
+          },
+          "NeverSmall Studios": {
+            "status": "active",
+            "role": "Primary revenue-generating agency",
+            "services": [
+              "Photography",
+              "Videography",
+              "Social Media Management",
+              "Meta Ads",
+              "Creative Direction",
+              "Consultations"
+            ],
+            "positioning": "High-end, stylised, culturally-aware marketing agency",
+            "dream_clients": [
+              "fashion brands",
+              "real estate",
+              "tech startups",
+              "restaurants & bars",
+              "e-commerce"
+            ],
+            "pricing_notes": {
+              "ads_management": {
+                "rate_per_hour": 30,
+                "cap_hours": 30,
+                "monthly_fee": 900
+              },
+              "contractors": {
+                "social_media": 50,
+                "graphic_design": 40
+              }
+            }
+          },
+          "Cherie": {
+            "status": "legacy / rebrand-in-progress",
+            "focus": [
+              "videography",
+              "photography"
+            ],
+            "notes": "Gradually absorbed into NeverSmall Studios identity"
+          },
+          "Quarter Life Society": {
+            "status": "active",
+            "type": "community / events",
+            "themes": [
+              "intentional rest",
+              "reflection",
+              "growth",
+              "connection"
+            ]
+          }
+        },
+        "business_structure": {
+          "legal": {
+            "ABN": true,
+            "banking": "separate business accounts planned",
+            "invoicing": "Xero"
+          },
+          "partners": [
+            {
+              "name": "Toby Nghiem",
+              "role": "Co-Founder / Operations"
+            }
+          ],
+          "contractors": [
+            "videographers",
+            "editors",
+            "social media managers",
+            "graphic designers"
+          ],
+          "systems": {
+            "project_management": [
+              "Notion",
+              "Monday"
+            ],
+            "file_storage": [
+              "Google Drive"
+            ],
+            "editing": [
+              "Premiere Pro",
+              "CapCut",
+              "DaVinci Resolve"
+            ]
+          }
+        },
+        "creative_preferences": {
+          "tone": [
+            "bold",
+            "clever",
+            "editorial",
+            "gen-z aware",
+            "intelligent"
+          ],
+          "content_formats": [
+            "short-form video",
+            "talking heads",
+            "street interviews",
+            "behind-the-scenes",
+            "vlogs"
+          ],
+          "hooks": "strong, scroll-stopping, no fluff",
+          "dislikes": [
+            "buzzwords",
+            "press-release tone",
+            "overly corporate language"
+          ]
+        },
+        "clients_known": [
+          "Pretty Privilege",
+          "Intelliprop",
+          "Golden Wok",
+          "Yakijin",
+          "Bittersweet Podcast",
+          "Winz",
+          "Crystalux Mirrors"
+        ],
+        "events_and_projects": {
+          "launches": [
+            "NeverSmall Studios Launch Party"
+          ],
+          "ongoing_series": [
+            "founder-led content",
+            "street talk interviews",
+            "giveaway campaigns"
+          ]
+        },
+        "long_term_vision": {
+          "goals": [
+            "studio space",
+            "creative third place",
+            "digital marketplace",
+            "runway shows",
+            "pop-ups",
+            "YouTube channel"
+          ],
+          "financial": {
+            "focus": "retainers",
+            "target_clients": ">$3k/month"
+          }
+        },
+        "operating_principles": {
+          "work": [
+            "clarity over volume",
+            "brand image first",
+            "strategy informs creativity"
+          ],
+          "life": [
+            "avoid burnout",
+            "balance rest and ambition",
+            "build sustainable systems"
+          ]
+        }
+      }
+    }
+  },
+  "baseline_context": {
+    "meta": {
+      "name": "Jerita_NeverSmall_OS_Context",
+      "version": "1.0.0",
+      "generated_at": "2025-12-29T11:32:33.130561Z",
+      "purpose": "Unified long-term memory + operating system schema for Jerita / NeverSmall projects",
+      "notes": "Derived from full project context, memories, recent conversations, preferences, and business details."
+    },
+    "identity": {
+      "legal_name": "Jerita Hean",
+      "preferred_name": "Jeri",
+      "location": "Melbourne, Australia",
+      "roles": [
+        "Business Owner",
+        "Creative Director",
+        "Co-Founder – NeverSmall Studios",
+        "Videographer / Photographer",
+        "Marketing Strategist"
+      ],
+      "personality": {
+        "MBTI": "ENTJ",
+        "traits": [
+          "vision-driven",
+          "detail-oriented",
+          "strategic",
+          "creative-led",
+          "community-focused"
+        ],
+        "preferences": {
+          "communication": "direct, structured, list-based",
+          "learning_style": [
+            "visual",
+            "listening",
+            "conceptual"
+          ],
+          "interaction_preference": "one-on-one"
+        }
+      },
+      "health_context": {
+        "ADHD": true,
+        "medication": [
+          "Vyvanse",
+          "Dexamphetamine"
+        ],
+        "considerations": [
+          "burnout risk",
+          "ADHD paralysis",
+          "sleep regulation",
+          "energy management"
+        ]
+      }
+    },
+    "brands": {
+      "NeverSmall": {
+        "status": "active",
+        "founded": "2025-04",
+        "description": "Umbrella brand and creative ecosystem supporting multiple ventures.",
+        "aesthetic": [
+          "editorial",
+          "high-fashion",
+          "avant-garde",
+          "youth-driven",
+          "playful"
+        ],
+        "font": {
+          "primary": "Area Normal Semibold",
+          "tracking": -70,
+          "logo_rules": "Shape must never be altered"
+        },
+        "values": [
+          "Don't sell yourself short",
+          "Think bigger",
+          "Culture-aware creativity",
+          "Long-term brand building"
+        ]
+      },
+      "NeverSmall Studios": {
+        "status": "active",
+        "role": "Primary revenue-generating agency",
+        "services": [
+          "Photography",
+          "Videography",
+          "Social Media Management",
+          "Meta Ads",
+          "Creative Direction",
+          "Consultations"
+        ],
+        "positioning": "High-end, stylised, culturally-aware marketing agency",
+        "dream_clients": [
+          "fashion brands",
+          "real estate",
+          "tech startups",
+          "restaurants & bars",
+          "e-commerce"
+        ],
+        "pricing_notes": {
+          "ads_management": {
+            "rate_per_hour": 30,
+            "cap_hours": 30,
+            "monthly_fee": 900
+          },
+          "contractors": {
+            "social_media": 50,
+            "graphic_design": 40
+          }
+        }
+      },
+      "Cherie": {
+        "status": "legacy / rebrand-in-progress",
+        "focus": [
+          "videography",
+          "photography"
+        ],
+        "notes": "Gradually absorbed into NeverSmall Studios identity"
+      },
+      "Quarter Life Society": {
+        "status": "active",
+        "type": "community / events",
+        "themes": [
+          "intentional rest",
+          "reflection",
+          "growth",
+          "connection"
+        ]
+      }
+    },
+    "business_structure": {
+      "legal": {
+        "ABN": true,
+        "banking": "separate business accounts planned",
+        "invoicing": "Xero"
+      },
+      "partners": [
+        {
+          "name": "Toby Nghiem",
+          "role": "Co-Founder / Operations"
+        }
+      ],
+      "contractors": [
+        "videographers",
+        "editors",
+        "social media managers",
+        "graphic designers"
+      ],
+      "systems": {
+        "project_management": [
+          "Notion",
+          "Monday"
+        ],
+        "file_storage": [
+          "Google Drive"
+        ],
+        "editing": [
+          "Premiere Pro",
+          "CapCut",
+          "DaVinci Resolve"
+        ]
+      }
+    },
+    "creative_preferences": {
+      "tone": [
+        "bold",
+        "clever",
+        "editorial",
+        "gen-z aware",
+        "intelligent"
+      ],
+      "content_formats": [
+        "short-form video",
+        "talking heads",
+        "street interviews",
+        "behind-the-scenes",
+        "vlogs"
+      ],
+      "hooks": "strong, scroll-stopping, no fluff",
+      "dislikes": [
+        "buzzwords",
+        "press-release tone",
+        "overly corporate language"
+      ]
+    },
+    "clients_known": [
+      "Pretty Privilege",
+      "Intelliprop",
+      "Golden Wok",
+      "Yakijin",
+      "Bittersweet Podcast",
+      "Winz",
+      "Crystalux Mirrors"
+    ],
+    "events_and_projects": {
+      "launches": [
+        "NeverSmall Studios Launch Party"
+      ],
+      "ongoing_series": [
+        "founder-led content",
+        "street talk interviews",
+        "giveaway campaigns"
+      ]
+    },
+    "long_term_vision": {
+      "goals": [
+        "studio space",
+        "creative third place",
+        "digital marketplace",
+        "runway shows",
+        "pop-ups",
+        "YouTube channel"
+      ],
+      "financial": {
+        "focus": "retainers",
+        "target_clients": ">$3k/month"
+      }
+    },
+    "operating_principles": {
+      "work": [
+        "clarity over volume",
+        "brand image first",
+        "strategy informs creativity"
+      ],
+      "life": [
+        "avoid burnout",
+        "balance rest and ambition",
+        "build sustainable systems"
+      ]
+    }
+  },
+  "client_modules": {
+    "Intelliprop": {
+      "alignment_os": {
+        "meta": {
+          "name": "NeverSmall Alignment OS — Intelliprop Project Brain Dump",
+          "project": "Intelliprop x NeverSmall Studios (Founder Sprint)",
+          "generated_at_local": "2025-12-29T22:00:00",
+          "timezone": "Australia/Melbourne",
+          "sources": [
+            {
+              "path": "/mnt/data/Strategy Plan _ Intelliprop _ NOV2025.docx",
+              "basename": "Strategy Plan _ Intelliprop _ NOV2025.docx",
+              "char_count": 2750
+            },
+            {
+              "path": "/mnt/data/intelliprop - Our Story.docx",
+              "basename": "intelliprop - Our Story.docx",
+              "char_count": 6483
+            },
+            {
+              "path": "/mnt/data/Client Asset Request _ Intelliprop _ Nov 2025.docx",
+              "basename": "Client Asset Request _ Intelliprop _ Nov 2025.docx",
+              "char_count": 2830
+            },
+            {
+              "path": "/mnt/data/intelliprop - founder_led_content_pack_v3.docx",
+              "basename": "intelliprop - founder_led_content_pack_v3.docx",
+              "char_count": 9083
+            },
+            {
+              "path": "/mnt/data/NSS Meeting Bookings (Isaac Lee) – 2025_11_13 12_03 AEDT – Notes by Gemini.docx",
+              "basename": "NSS Meeting Bookings (Isaac Lee) – 2025_11_13 12_03 AEDT – Notes by Gemini.docx",
+              "char_count": 7051
+            },
+            {
+              "path": "/mnt/data/NSS Meeting Bookings (Isaac Lee) – 2025_11_20 12_01 AEDT – Notes by Gemini.docx",
+              "basename": "NSS Meeting Bookings (Isaac Lee) – 2025_11_20 12_01 AEDT – Notes by Gemini.docx",
+              "char_count": 7117
+            },
+            {
+              "path": "/mnt/data/Editing Notes _ NOV Shoot 1_2 _ Intelliprop (1).docx",
+              "basename": "Editing Notes _ NOV Shoot 1_2 _ Intelliprop (1).docx",
+              "char_count": 7234
+            }
+          ]
+        },
+        "client": {
+          "name": "Intelliprop",
+          "tagline": "Understand what you’re buying, before you buy.",
+          "mission": null,
+          "vision": null,
+          "values": [],
+          "positioning": [],
+          "audiences": [],
+          "brand": {
+            "colors": {
+              "primary_teal": "#00C4B3",
+              "deep_navy": "#0D1B2A",
+              "accent_gold_optional": "#FFB600"
+            },
+            "fonts": {
+              "primary": "Inter",
+              "secondary": "Poppins"
+            },
+            "visual_tone": "clean, modern, intelligent, minimal.",
+            "website": "intelliprop.com.au"
+          }
+        },
+        "engagement": {
+          "phases": [
+            {
+              "name": "Phase 1 Strategy Plan Commencement",
+              "timeline": [
+                "Nov 24–Dec 1 | Strategy Phase 1 (NSS)",
+                "Dec 2–Dec 14 | Shoot prep",
+                "Mid–December | First wave of content rollout",
+                "Late-December-Early Jan | Hard launch content"
+              ]
+            }
+          ],
+          "deliverables": [
+            "1. Creative direction deck",
+            "10 refined video outlines, including hook, emotional arc, and closing beat for each.",
+            "Suggested visual language and framing for Isaac, Aymeric and Josh (where applicable).",
+            "Clear mapping of which assets are best for ads, organic, and website hero use.",
+            "2. Brand motion pack",
+            "intelliscore / report animation sequences that can be reused across landing pages and ads.",
+            "Title card templates (for series name, episode title, and key messages).",
+            "Lower‑thirds and supers that match our brand without overpowering the footage.",
+            "3. Content calendar & hook library",
+            "6–8 week posting calendar covering reels, shorts, YouTube and LinkedIn.",
+            "Hook lines, first‑three‑seconds concepts and thumbnail copy suggestions.",
+            "Guidance on how to repurpose longer clips into multiple high‑impact cut‑downs.",
+            "4. Shot list & production map",
+            "Detailed shot list for founder interviews, over‑the‑shoulder product shots, report walk‑throughs and B‑roll (e.g. trams, cafes, laptops, property inspections).",
+            "Location suggestions that reflect our audience (inner‑city apartments, family homes, co‑working spaces).",
+            "Clear notes on where product UI/motion will be overlaid vs. captured in‑camera.",
+            "5. Audio kit & VO template",
+            "Music stems and/or track recommendations that can be reused across the series.",
+            "Sample pacing and tone guide for founder voiceover (including example scripts per video type).",
+            "Simple audio branding cue (e.g. a 1–2 second sonic logo or sting) that can close out each asset."
+          ],
+          "cadence": {},
+          "non_negotiables": [],
+          "constraints": [],
+          "assumptions": []
+        },
+        "content_system": {
+          "pillars": [],
+          "founder_led_series": [
+            {
+              "title": "The Problem We All Faced"
+            },
+            {
+              "title": "Why We Built intelliprop"
+            },
+            {
+              "title": "My First Purchase Story (Isaac)"
+            },
+            {
+              "title": "How Aymeric Made Data Talk"
+            },
+            {
+              "title": "Josh’s First Home Journey"
+            },
+            {
+              "title": "What We Wish We Knew"
+            },
+            {
+              "title": "Our Reports in under 1 minute"
+            },
+            {
+              "title": "Better Than a Buyer’s Agent?"
+            },
+            {
+              "title": "Your Property, Explained"
+            },
+            {
+              "title": "From Us to You – Why This Matters"
+            }
+          ],
+          "platform_strategy": {
+            "initial_focus": [
+              "Instagram",
+              "LinkedIn",
+              "Facebook (recommended)"
+            ],
+            "later": [
+              "YouTube",
+              "TikTok"
+            ],
+            "note": "Minimise heavy 'AI' language; lead with outcome (clarity) and pipeline/infrastructure."
+          },
+          "voice_and_tone": {},
+          "editing_rules": [
+            "MASTER RULES FOR ALL VIDEOS",
+            "Cut all coaching, resets, frustration, swearing, blocking",
+            "Remove repeated explanations",
+            "One idea per video",
+            "Each video:",
+            "owns a distinct chapter",
+            "runs long enough to feel intentional",
+            "Cut-downs can later be pulled from within these"
+          ],
+          "shoot_rules": [
+            "Format: Shoot portrait for reels/shorts. Each piece should stand alone but also feel like",
+            "part of a single series when watched in order.",
+            "Tone: authentic > polished. We prefer real founder energy, natural speech and honest moments over scripted perfection.",
+            "Visual language: teal/navy brand palette, clean white/neutral backgrounds where possible, and product shots of the intelliprop report on laptop and mobile. Show the reports being used, scrolled, zoomed – not just static screens.",
+            "Motion: subtle parallax and UI zooms around the intelliscore/report visuals. Light kinetic type for key phrases like   “clarity”, “strategy fit”, “your property, explained”.",
+            "Sound: soft electronic pulse building into a hopeful lift. Space for voiceover; no aggressive beats that compete with speech.",
+            "Structure: cold open hook (first 3 seconds), one core idea, one clear payoff. Remove anything that doesn’t serve the central feeling of ‘I finally understand my options’.",
+            "CTA: end every clip with lowercase logo + CTA: “generate your first report → intelliprop.com.au”. Keep this treatment visually consistent across all assets."
+          ],
+          "templates": {},
+          "hook_library_notes": []
+        },
+        "production_ops": {
+          "multicam_grouping": [
+            {
+              "group": 1,
+              "label": "Intro + Market Confusion (Take 1)",
+              "files": [
+                "Isaac00004140",
+                "Isaac00007176",
+                "Overview00706572"
+              ],
+              "notes": [
+                "Same content, different angles",
+                "Clean introductions",
+                "General problem framing",
+                "Safe as a single multicam sequence"
+              ]
+            },
+            {
+              "group": 2,
+              "label": "Market Confusion (Extended Take)",
+              "files": [
+                "Isaac00009672",
+                "Overview00703848",
+                "Overview00708816"
+              ],
+              "notes": [
+                "Continuation / alternate angles of same topic",
+                "“20 tabs / spreadsheets / confusion” theme",
+                "Can be cut together with Group 1 only if needed",
+                "Otherwise keep as its own multicam take"
+              ]
+            },
+            {
+              "group": 3,
+              "label": "Experience Didn’t Fix It",
+              "files": [
+                "Isaac00015384",
+                "Overview00710400",
+                "Isaac00041964"
+              ],
+              "notes": [
+                "Isaac-led reflection with Aymeric reinforcement",
+                "Finance broker perspective",
+                "“Even with experience” framing",
+                "Same conversation, different coverage"
+              ]
+            },
+            {
+              "group": 4,
+              "label": "Prototype Origins",
+              "files": [
+                "Isaac00011568",
+                "Overview00713484",
+                "Isaac00025452"
+              ],
+              "notes": [
+                "Early tool → insight",
+                "First mention of prototype",
+                "Origin framing",
+                "Some partial takes, but same discussion"
+              ]
+            },
+            {
+              "group": 5,
+              "label": "Data vs Structure",
+              "files": [
+                "Isaac00020952",
+                "Overview00718608",
+                "Aymeric01891824"
+              ],
+              "notes": [
+                "Aymeric-led systems explanation",
+                "“Not more data, but structure”",
+                "Technical philosophy, not product demo",
+                "Clean multicam group"
+              ]
+            },
+            {
+              "group": 6,
+              "label": "Product Framing / Reports (High Level)",
+              "files": [
+                "Isaac00028380",
+                "Overview00723624",
+                "Isaac00040812"
+              ],
+              "notes": [
+                "What the system is (not how it works)",
+                "“Not just a report generator”",
+                "Mental model explanation",
+                "Avoid mixing with mission footage"
+              ]
+            },
+            {
+              "group": 7,
+              "label": "Emotion & Decision Pressure",
+              "files": [
+                "Overview00727584",
+                "Isaac00032640",
+                "Aymeric01894632"
+              ],
+              "notes": [
+                "Calm, reflective tone",
+                "Emotion, pressure, calm decision-making",
+                "Mission-adjacent but still reflective",
+                "Use as one multicam block"
+              ]
+            },
+            {
+              "group": 8,
+              "label": "Outtakes / Non-Usable (Do NOT Multicam)",
+              "files": [
+                "Isaac00075888",
+                "Isaac00079992",
+                "Aymeric01903212"
+              ],
+              "notes": [
+                "Do not include in any sequence",
+                "Any clips with:",
+                "swearing",
+                "coaching",
+                "“sell the product”",
+                "resets / blocking",
+                "SUMMARY TABLE (FOR EDITOR)",
+                "EDITOR SETUP INSTRUCTION (IMPORTANT)",
+                "Create one multicam sequence per group",
+                "Label angles consistently (A / B / C)",
+                "Never pull a clip from another group “because it fits”",
+                "If dialogue overlaps conceptually, that’s intentional — takes still stay separate",
+                "If you want, I can next:",
+                "flag best A-cam per group",
+                "add confidence ratings (strong / partial / backup)",
+                "or format this as a Premiere Pro multicam checklist",
+                "#1 The Problem We All Faced",
+                "#1 The Problem We All Faced",
+                "(Founder-Led Pack Video #1)",
+                "Target Duration: 75–90s",
+                "Narrative Job: Relatability + emotional validation",
+                "Rule: No solutions, no product, no Intelliprop framing",
+                "Transcript Sections to KEEP (in this order)",
+                "Isaac — Isaac00004140",
+                "“As an ex-broker, I’ve seen hundreds of clients.”",
+                "“The main struggle is the confusion behind purchasing a property.”",
+                "“It’s often 20 tabs, countless spreadsheets, unlimited listings.”",
+                "“Late at night, after work, sifting through everything.”",
+                "Isaac — Isaac00009672",
+                "“Even as a professional, I was often left with more confusion than ever.”",
+                "Aymeric — Overview00703848",
+                "“There’s a lot of data out there. A lot of opinions.”",
+                "“Knowing what matters and how to process it is actually really difficult.”",
+                "“Especially if you don’t have experience in the space.”",
+                "Optional Isaac close",
+                "“That’s what most buyers are dealing with.”",
+                "Why this works",
+                "Fully matches the Pack’s intent: show the chaos buyers live in",
+                "Multi-voice pacing easily reaches 80–90s",
+                "Ends on tension, not resolution",
+                "#2 Why We Built Intelliprop",
+                "#2 Why We Built Intelliprop",
+                "(Founder-Led Pack Video #2, merged with #4 logic)",
+                "Target Duration: 75–90s",
+                "Narrative Job: The turning point — from frustration to insight",
+                "Rule: Still not a product demo",
+                "Transcript Sections to KEEP",
+                "Isaac — Isaac00011568",
+                "“I built an early prototype for myself.”",
+                "“It helped me and a few people around me make clearer decisions.”",
+                "“That’s when I realised the issue wasn’t effort — it was structure.”",
+                "Aymeric — Isaac00020952",
+                "“The real power isn’t more data.”",
+                "“It’s how the data comes together into a bigger picture.”",
+                "“It has to be holistic.”",
+                "Aymeric — Overview00718608",
+                "“We take publicly available information and condense it into a narrative.”",
+                "“Something people can read, understand, and make decisions from.”",
+                "Isaac — close",
+                "“That was the shift for us.”",
+                "Why this works",
+                "Directly follows the Pack’s why now logic",
+                "Clearly separates problem (Videos 1–2) from realisation",
+                "Strong two-founder balance",
+                "#3 My First Purchase Story (Isaac)",
+                "#3 My First Purchase Story (Isaac)",
+                "(Founder-Led Pack Video #3)",
+                "Target Duration: 70–85s",
+                "Narrative Job: Authority without ego",
+                "Rule: This is about limits of experience, not success",
+                "Transcript Sections to KEEP",
+                "Isaac — Isaac00015384",
+                "“As a finance broker and active property investor, I see how confusing the market is.”",
+                "“Even with experience, it’s overwhelming.”",
+                "“You’re still faced with multiple tabs, spreadsheets, and uncertainty.”",
+                "“I can only imagine how hard it is for everyday Australians.”",
+                "Aymeric — Overview00710400",
+                "“There are a lot of traps when people use data like this.”",
+                "“Without the right structure or guardrails, it’s very easy to fall into them.”",
+                "“And that happens all the time.”",
+                "Isaac — close",
+                "“That’s the part no one really talks about.”",
+                "Why this works",
+                "Cleanly isolates Isaac’s story (as per pack)",
+                "No overlap with Video 1 (this is about expert failure, not general confusion)",
+                "Long enough without padding",
+                "#10 From Us to You – Why This Matters",
+                "#10 From Us to You – Why This Matters",
+                "(Founder-Led Pack Video #10)",
+                "Target Duration: 75–90s",
+                "Narrative Job: Emotional resolution + mission",
+                "Rule: This is the only video with a clear mission statement",
+                "Transcript Sections to KEEP",
+                "Isaac — Overview00727584",
+                "“Buying property is emotional.”",
+                "“People are under pressure.”",
+                "“They’re making one of the biggest decisions of their life.”",
+                "Isaac — continued",
+                "“We wanted something that removes emotion from the decision.”",
+                "“So you can walk away knowing you made the right call.”",
+                "Isaac — Isaac00032640",
+                "“Technology should help people make better decisions.”",
+                "“Not confuse them.”",
+                "Final close",
+                "“Our goal is simple.”",
+                "“Help Australians understand what they’re buying, before they buy.”",
+                "Why this works",
+                "Matches the Pack’s closing vision exactly",
+                "No technical overlap with Video 3",
+                "Strong brand anchor for website, pinned posts, ads",
+                "Multicam Group | Raw Files (Use Together Only)",
+                "Group 1 | Isaac00004140 · Isaac00007176 · Overview00706572",
+                "Group 2 | Isaac00009672 · Overview00703848 · Overview00708816",
+                "Group 3 | Isaac00015384 · Overview00710400 · Isaac00041964",
+                "Group 4 | Isaac00011568 · Overview00713484 · Isaac00025452",
+                "Group 5 | Isaac00020952 · Overview00718608 · Aymeric01891824",
+                "Group 6 | Isaac00028380 · Overview00723624 · Isaac00040812",
+                "Group 7 | Overview00727584 · Isaac00032640 · Aymeric01894632",
+                "Group 8 | Outtakes — do not use"
+              ]
+            }
+          ],
+          "file_naming_patterns": [],
+          "post_production": {
+            "audio": {},
+            "motion": {},
+            "graphics": {}
+          }
+        },
+        "meeting_intelligence": {
+          "meetings": [
+            {
+              "date": "Nov 13, 2025",
+              "summary": null,
+              "notable_lines": [
+                "Marketing Strategy and Service Proposal Intelliprop is seeking assistance with a 'founder-led startup sprint' and content creation to capitalize on their personal following and industry connections. Toby Nghiem confirmed that while their company does not offer 'sprints' specifically, they provide marketing consultation that includes strategy and iterative plans based on data and AB testing (00:03:48) (00:22:38). Intelliprop's objective for their brand is to take over the buyers agent space and resolve market inefficiencies (00:21:09). Toby Nghiem confirmed that their company could handle content creation, especially since Intelliprop's founders mentioned they are not comfortable operating a camera (00:10:27) (00:36:18).",
+                "Next Steps and Service Packaging Toby Nghiem proposed to schedule a subsequent meeting to present a services package and a quote, which would include content creation, social media management, and strategy, with ads as a potential add-on. The package will be flexible to meet Intelliprop's needs (00:30:02) (00:36:18). The estimated rough benchmark for the full service is already above $2,000 (00:37:14). Intelliprop stressed their urgency due to a closing marketable window in the Australian property market, requiring a strategy change within a year to a year and a half (00:31:18)."
+              ]
+            },
+            {
+              "date": "Nov 20, 2025",
+              "summary": null,
+              "notable_lines": [
+                "Toby Nghiem commenced the meeting with Intelliprop to align on service packages, with Intelliprop updating Never Small on their beta product launch, hiring of an admin, and plans for a junior developer. Intelliprop requested to negotiate the Marketing Strategy Plan by excluding the Competitor and Market Analysis, as they had completed much of the groundwork and were familiar with posting cadence, but Toby Nghiem and Jerita Hean stressed that analysis is a non-negotiable, essential component for Never Small to provide effective management. Intelliprop announced a hard launch timeline change to mid-January to improve product quality and focus on B2C marketing, and they confirmed they were happy with the content creation component, excluding Meta Ads initially, with an agreement made for four videos per month, to potentially be achieved in one bulk shoot. Never Small agreed to rework the package and pricing to be more tailored, and Intelliprop committed to providing necessary working materials and billing information to Toby Nghiem for setting up invoices in Zero, while Eric stressed the importance of minimizing heavy AI focus in the marketing messaging.",
+                "Meeting Follow-up and Service Commencement Toby Nghiem opened the meeting to follow up on the previous session and a subsequent email, with the goal of reviewing packages, ensuring alignment, and commencing services. Intelliprop confirmed that they, along with Eric, had reviewed the services, budgeted for them, and centered their timeline around the offerings.",
+                "Marketing Strategy Plan Adjustments and Non-Negotiable Analysis Intelliprop proposed simplifying the Marketing Strategy Plan to focus on content creation, social media management, and weekly review meetings with Never Small to track progress, particularly in the initial phase. Toby Nghiem stressed that the analysis component is non-negotiable because it is essential for Never Small to look at Intelliprop's data and report back (00:06:06). Jerita Hean later agreed, highlighting that the social media management and marketing strategy plan are dependent on each other, and proper management requires analysis (00:16:47).",
+                "Timeline Adjustment and Focus on B2C Intelliprop announced a timeline change for their hard launch, pushing it to mid-January due to the need for more time to improve the product's quality, particularly API work and data pipeline, based on beta feedback. They confirmed their focus remains 100% B2C, with the entire budget designed for B2C marketing. The soft market around Christmas also influenced the decision for a January hard launch (00:08:54) (00:11:46).",
+                "Content Creation and Video Production Intelliprop confirmed they were happy with the content creation component but wished to exclude Meta Ads from the initial plan, focusing instead on brand image and profile building before the hard launch (00:07:55) (00:11:00). They suggested a per-video pricing model, starting with four videos to grow monthly. They specifically requested the videos suggested by Never Small, particularly those focusing on the founders' journey, Emer and themself, and the market gap (00:07:55) (00:12:41).",
+                "Video Quantity and Production Cadence Toby Nghiem noted that the previous meeting suggested 10 videos. Intelliprop countered, proposing four videos in the first month, essentially one per week, which would effectively double the timeline and halve the initial expense (00:13:46). The team agreed on four videos per month, with Jerita Hean suggesting that this could potentially be achieved in one bulk shoot session per month (00:24:57).",
+                "Next Steps and Billing Information The team agreed that Never Small would rework the package and pricing to be more tailored, given the changes in scope and timeline (00:14:48). Toby Nghiem requested that Intelliprop provide critical dates and working materials, including any existing branding assets, logos, and resources for the strategy plan, as well as billing information such as their ABN and billing address for setting up invoices in Zero (00:20:49) (00:22:42). Jerita Hean agreed to look through and potentially adjust the pricing for the social media management, acknowledging that Intelliprop had completed some of the groundwork (00:18:51). The standard payment plan involves monthly invoices sent through Zero (00:20:49)."
+              ]
+            }
+          ],
+          "decisions": [],
+          "open_questions": [],
+          "risks": []
+        },
+        "learned_principles_for_neversmall": {
+          "alignment_principles": [
+            {
+              "name": "Truth first",
+              "definition": "Lead with accurate, verifiable claims and lived-experience. Never inflate product capability; show proof through real UI/report outputs."
+            },
+            {
+              "name": "One idea per asset",
+              "definition": "Every video/post must own a single chapter with a distinct emotional job; avoid overlap."
+            },
+            {
+              "name": "Human > hype",
+              "definition": "Founder-led content should feel calm, honest, reflective; authenticity over pitch."
+            },
+            {
+              "name": "Outcome-led messaging",
+              "definition": "Sell clarity, confidence, decision infrastructure; downplay 'AI' unless specifically relevant."
+            },
+            {
+              "name": "Systems over spontaneity",
+              "definition": "Use repeatable templates, multicam grouping discipline, and explicit editing rules to reduce rework and keep quality consistent."
+            }
+          ],
+          "client_management_learnings": [
+            "Analysis components (market/competitor/audience) are integral to management; avoid line-item negotiation that removes the strategy backbone.",
+            "Time-gated founders prefer bulk production (one shoot can create a month of deliverables).",
+            "Align early on launch timelines (soft vs hard launch) and adjust content runway accordingly.",
+            "Secure client assets and billing info up front to prevent project stalls (logos, brand colors, access, ABN, addresses)."
+          ],
+          "process_improvements": [],
+          "anti_patterns": [
+            "Over-indexing on 'AI' in messaging when the buyer wants trust, not novelty.",
+            "Mixing takes across multicam groups because concepts overlap; causes sync chaos and continuity errors.",
+            "Including coaching/resets/swearing/blocked moments; kills premium trust signal.",
+            "Repeating explanations across videos; audience perceives it as fluff and inconsistency."
+          ],
+          "checklists": {}
+        }
+      },
+      "alignment_os_markdown": {
+        "path": "/mnt/data/NeverSmall_Intelliprop_AlignmentOS.md",
+        "content": "# NeverSmall Alignment OS — Intelliprop Project (TeleProp)\n\n_Generated: 29 Dec 2025 (Australia/Melbourne)_\n\n## Client Snapshot\n\n**Client:** Intelliprop\n\n**Tagline:** Understand what you’re buying, before you buy.\n\n**Mission:** None\n\n**Vision:** None\n\n**Values:**\n\n\n**Brand:**\n- Colors: {'primary_teal': '#00C4B3', 'deep_navy': '#0D1B2A', 'accent_gold_optional': '#FFB600'}\n- Fonts: {'primary': 'Inter', 'secondary': 'Poppins'}\n- Visual tone: clean, modern, intelligent, minimal.\n\n\n## Engagement Structure\n\n- Phase 1 Strategy Plan Commencement: Nov 24–Dec 1 | Strategy Phase 1 (NSS); Dec 2–Dec 14 | Shoot prep; Mid–December | First wave of content rollout; Late-December-Early Jan | Hard launch content\n\n## Founder-Led Video Series (Canonical)\n\n- The Problem We All Faced\n- Why We Built intelliprop\n- My First Purchase Story (Isaac)\n- How Aymeric Made Data Talk\n- Josh’s First Home Journey\n- What We Wish We Knew\n- Our Reports in under 1 minute\n- Better Than a Buyer’s Agent?\n- Your Property, Explained\n- From Us to You – Why This Matters\n\n## Production Tone & Rules (from Founder Pack)\n\n- Format: Shoot portrait for reels/shorts. Each piece should stand alone but also feel like\n- part of a single series when watched in order.\n- Tone: authentic > polished. We prefer real founder energy, natural speech and honest moments over scripted perfection.\n- Visual language: teal/navy brand palette, clean white/neutral backgrounds where possible, and product shots of the intelliprop report on laptop and mobile. Show the reports being used, scrolled, zoomed – not just static screens.\n- Motion: subtle parallax and UI zooms around the intelliscore/report visuals. Light kinetic type for key phrases like   “clarity”, “strategy fit”, “your property, explained”.\n- Sound: soft electronic pulse building into a hopeful lift. Space for voiceover; no aggressive beats that compete with speech.\n- Structure: cold open hook (first 3 seconds), one core idea, one clear payoff. Remove anything that doesn’t serve the central feeling of ‘I finally understand my options’.\n- CTA: end every clip with lowercase logo + CTA: “generate your first report → intelliprop.com.au”. Keep this treatment visually consistent across all assets.\n\n## Editing Rules (Non-Negotiables)\n\n- MASTER RULES FOR ALL VIDEOS\n- Cut all coaching, resets, frustration, swearing, blocking\n- Remove repeated explanations\n- One idea per video\n- Each video:\n- owns a distinct chapter\n- runs long enough to feel intentional\n- Cut-downs can later be pulled from within these\n\n## Raw Footage Multicam Grouping\n\n### Group 1 — Intro + Market Confusion (Take 1)\n\n**Files:** Isaac00004140, Isaac00007176, Overview00706572\n\n**Notes:** Same content, different angles Clean introductions General problem framing Safe as a single multicam sequence\n\n### Group 2 — Market Confusion (Extended Take)\n\n**Files:** Isaac00009672, Overview00703848, Overview00708816\n\n**Notes:** Continuation / alternate angles of same topic “20 tabs / spreadsheets / confusion” theme Can be cut together with Group 1 only if needed Otherwise keep as its own multicam take\n\n### Group 3 — Experience Didn’t Fix It\n\n**Files:** Isaac00015384, Overview00710400, Isaac00041964\n\n**Notes:** Isaac-led reflection with Aymeric reinforcement Finance broker perspective “Even with experience” framing Same conversation, different coverage\n\n### Group 4 — Prototype Origins\n\n**Files:** Isaac00011568, Overview00713484, Isaac00025452\n\n**Notes:** Early tool → insight First mention of prototype Origin framing Some partial takes, but same discussion\n\n### Group 5 — Data vs Structure\n\n**Files:** Isaac00020952, Overview00718608, Aymeric01891824\n\n**Notes:** Aymeric-led systems explanation “Not more data, but structure” Technical philosophy, not product demo Clean multicam group\n\n### Group 6 — Product Framing / Reports (High Level)\n\n**Files:** Isaac00028380, Overview00723624, Isaac00040812\n\n**Notes:** What the system is (not how it works) “Not just a report generator” Mental model explanation Avoid mixing with mission footage\n\n### Group 7 — Emotion & Decision Pressure\n\n**Files:** Overview00727584, Isaac00032640, Aymeric01894632\n\n**Notes:** Calm, reflective tone Emotion, pressure, calm decision-making Mission-adjacent but still reflective Use as one multicam block\n\n### Group 8 — Outtakes / Non-Usable (Do NOT Multicam)\n\n**Files:** Isaac00075888, Isaac00079992, Aymeric01903212\n\n**Notes:** Do not include in any sequence Any clips with: swearing coaching “sell the product” resets / blocking SUMMARY TABLE (FOR EDITOR) EDITOR SETUP INSTRUCTION (IMPORTANT) Create one multicam sequence per group Label angles consistently (A / B / C) Never pull a clip from another group “because it fits” If dialogue overlaps conceptually, that’s intentional — takes still stay separate If you want, I can next: flag best A-cam per group add confidence ratings (strong / partial / backup) or format this as a Premiere Pro multicam checklist #1 The Problem We All Faced #1 The Problem We All Faced (Founder-Led Pack Video #1) Target Duration: 75–90s Narrative Job: Relatability + emotional validation Rule: No solutions, no product, no Intelliprop framing Transcript Sections to KEEP (in this order) Isaac — Isaac00004140 “As an ex-broker, I’ve seen hundreds of clients.” “The main struggle is the confusion behind purchasing a property.” “It’s often 20 tabs, countless spreadsheets, unlimited listings.” “Late at night, after work, sifting through everything.” Isaac — Isaac00009672 “Even as a professional, I was often left with more confusion than ever.” Aymeric — Overview00703848 “There’s a lot of data out there. A lot of opinions.” “Knowing what matters and how to process it is actually really difficult.” “Especially if you don’t have experience in the space.” Optional Isaac close “That’s what most buyers are dealing with.” Why this works Fully matches the Pack’s intent: show the chaos buyers live in Multi-voice pacing easily reaches 80–90s Ends on tension, not resolution #2 Why We Built Intelliprop #2 Why We Built Intelliprop (Founder-Led Pack Video #2, merged with #4 logic) Target Duration: 75–90s Narrative Job: The turning point — from frustration to insight Rule: Still not a product demo Transcript Sections to KEEP Isaac — Isaac00011568 “I built an early prototype for myself.” “It helped me and a few people around me make clearer decisions.” “That’s when I realised the issue wasn’t effort — it was structure.” Aymeric — Isaac00020952 “The real power isn’t more data.” “It’s how the data comes together into a bigger picture.” “It has to be holistic.” Aymeric — Overview00718608 “We take publicly available information and condense it into a narrative.” “Something people can read, understand, and make decisions from.” Isaac — close “That was the shift for us.” Why this works Directly follows the Pack’s why now logic Clearly separates problem (Videos 1–2) from realisation Strong two-founder balance #3 My First Purchase Story (Isaac) #3 My First Purchase Story (Isaac) (Founder-Led Pack Video #3) Target Duration: 70–85s Narrative Job: Authority without ego Rule: This is about limits of experience, not success Transcript Sections to KEEP Isaac — Isaac00015384 “As a finance broker and active property investor, I see how confusing the market is.” “Even with experience, it’s overwhelming.” “You’re still faced with multiple tabs, spreadsheets, and uncertainty.” “I can only imagine how hard it is for everyday Australians.” Aymeric — Overview00710400 “There are a lot of traps when people use data like this.” “Without the right structure or guardrails, it’s very easy to fall into them.” “And that happens all the time.” Isaac — close “That’s the part no one really talks about.” Why this works Cleanly isolates Isaac’s story (as per pack) No overlap with Video 1 (this is about expert failure, not general confusion) Long enough without padding #10 From Us to You – Why This Matters #10 From Us to You – Why This Matters (Founder-Led Pack Video #10) Target Duration: 75–90s Narrative Job: Emotional resolution + mission Rule: This is the only video with a clear mission statement Transcript Sections to KEEP Isaac — Overview00727584 “Buying property is emotional.” “People are under pressure.” “They’re making one of the biggest decisions of their life.” Isaac — continued “We wanted something that removes emotion from the decision.” “So you can walk away knowing you made the right call.” Isaac — Isaac00032640 “Technology should help people make better decisions.” “Not confuse them.” Final close “Our goal is simple.” “Help Australians understand what they’re buying, before they buy.” Why this works Matches the Pack’s closing vision exactly No technical overlap with Video 3 Strong brand anchor for website, pinned posts, ads Multicam Group | Raw Files (Use Together Only) Group 1 | Isaac00004140 · Isaac00007176 · Overview00706572 Group 2 | Isaac00009672 · Overview00703848 · Overview00708816 Group 3 | Isaac00015384 · Overview00710400 · Isaac00041964 Group 4 | Isaac00011568 · Overview00713484 · Isaac00025452 Group 5 | Isaac00020952 · Overview00718608 · Aymeric01891824 Group 6 | Isaac00028380 · Overview00723624 · Isaac00040812 Group 7 | Overview00727584 · Isaac00032640 · Aymeric01894632 Group 8 | Outtakes — do not use\n\n## Platform Strategy\n\n- **Initial focus:** Instagram, LinkedIn, Facebook (recommended)\n- **Later:** YouTube, TikTok\n- **Messaging constraint:** Minimise heavy 'AI' language; lead with outcome (clarity) and pipeline/infrastructure.\n\n\n## Meeting Intelligence\n\n### Nov 13, 2025\n\n\n\n**Notable decisions / constraints:**\n- Marketing Strategy and Service Proposal Intelliprop is seeking assistance with a 'founder-led startup sprint' and content creation to capitalize on their personal following and industry connections. Toby Nghiem confirmed that while their company does not offer 'sprints' specifically, they provide marketing consultation that includes strategy and iterative plans based on data and AB testing (00:03:48) (00:22:38). Intelliprop's objective for their brand is to take over the buyers agent space and resolve market inefficiencies (00:21:09). Toby Nghiem confirmed that their company could handle content creation, especially since Intelliprop's founders mentioned they are not comfortable operating a camera (00:10:27) (00:36:18).\n- Next Steps and Service Packaging Toby Nghiem proposed to schedule a subsequent meeting to present a services package and a quote, which would include content creation, social media management, and strategy, with ads as a potential add-on. The package will be flexible to meet Intelliprop's needs (00:30:02) (00:36:18). The estimated rough benchmark for the full service is already above $2,000 (00:37:14). Intelliprop stressed their urgency due to a closing marketable window in the Australian property market, requiring a strategy change within a year to a year and a half (00:31:18).\n\n### Nov 20, 2025\n\n\n\n**Notable decisions / constraints:**\n- Toby Nghiem commenced the meeting with Intelliprop to align on service packages, with Intelliprop updating Never Small on their beta product launch, hiring of an admin, and plans for a junior developer. Intelliprop requested to negotiate the Marketing Strategy Plan by excluding the Competitor and Market Analysis, as they had completed much of the groundwork and were familiar with posting cadence, but Toby Nghiem and Jerita Hean stressed that analysis is a non-negotiable, essential component for Never Small to provide effective management. Intelliprop announced a hard launch timeline change to mid-January to improve product quality and focus on B2C marketing, and they confirmed they were happy with the content creation component, excluding Meta Ads initially, with an agreement made for four videos per month, to potentially be achieved in one bulk shoot. Never Small agreed to rework the package and pricing to be more tailored, and Intelliprop committed to providing necessary working materials and billing information to Toby Nghiem for setting up invoices in Zero, while Eric stressed the importance of minimizing heavy AI focus in the marketing messaging.\n- Meeting Follow-up and Service Commencement Toby Nghiem opened the meeting to follow up on the previous session and a subsequent email, with the goal of reviewing packages, ensuring alignment, and commencing services. Intelliprop confirmed that they, along with Eric, had reviewed the services, budgeted for them, and centered their timeline around the offerings.\n- Marketing Strategy Plan Adjustments and Non-Negotiable Analysis Intelliprop proposed simplifying the Marketing Strategy Plan to focus on content creation, social media management, and weekly review meetings with Never Small to track progress, particularly in the initial phase. Toby Nghiem stressed that the analysis component is non-negotiable because it is essential for Never Small to look at Intelliprop's data and report back (00:06:06). Jerita Hean later agreed, highlighting that the social media management and marketing strategy plan are dependent on each other, and proper management requires analysis (00:16:47).\n- Timeline Adjustment and Focus on B2C Intelliprop announced a timeline change for their hard launch, pushing it to mid-January due to the need for more time to improve the product's quality, particularly API work and data pipeline, based on beta feedback. They confirmed their focus remains 100% B2C, with the entire budget designed for B2C marketing. The soft market around Christmas also influenced the decision for a January hard launch (00:08:54) (00:11:46).\n- Content Creation and Video Production Intelliprop confirmed they were happy with the content creation component but wished to exclude Meta Ads from the initial plan, focusing instead on brand image and profile building before the hard launch (00:07:55) (00:11:00). They suggested a per-video pricing model, starting with four videos to grow monthly. They specifically requested the videos suggested by Never Small, particularly those focusing on the founders' journey, Emer and themself, and the market gap (00:07:55) (00:12:41).\n- Video Quantity and Production Cadence Toby Nghiem noted that the previous meeting suggested 10 videos. Intelliprop countered, proposing four videos in the first month, essentially one per week, which would effectively double the timeline and halve the initial expense (00:13:46). The team agreed on four videos per month, with Jerita Hean suggesting that this could potentially be achieved in one bulk shoot session per month (00:24:57).\n- Next Steps and Billing Information The team agreed that Never Small would rework the package and pricing to be more tailored, given the changes in scope and timeline (00:14:48). Toby Nghiem requested that Intelliprop provide critical dates and working materials, including any existing branding assets, logos, and resources for the strategy plan, as well as billing information such as their ABN and billing address for setting up invoices in Zero (00:20:49) (00:22:42). Jerita Hean agreed to look through and potentially adjust the pricing for the social media management, acknowledging that Intelliprop had completed some of the groundwork (00:18:51). The standard payment plan involves monthly invoices sent through Zero (00:20:49).\n\n## NeverSmall Learnings (Reusable)\n\n### Alignment Principles\n- **Truth first**: Lead with accurate, verifiable claims and lived-experience. Never inflate product capability; show proof through real UI/report outputs.\n- **One idea per asset**: Every video/post must own a single chapter with a distinct emotional job; avoid overlap.\n- **Human > hype**: Founder-led content should feel calm, honest, reflective; authenticity over pitch.\n- **Outcome-led messaging**: Sell clarity, confidence, decision infrastructure; downplay 'AI' unless specifically relevant.\n- **Systems over spontaneity**: Use repeatable templates, multicam grouping discipline, and explicit editing rules to reduce rework and keep quality consistent.\n\n### Client Management Learnings\n- Analysis components (market/competitor/audience) are integral to management; avoid line-item negotiation that removes the strategy backbone.\n- Time-gated founders prefer bulk production (one shoot can create a month of deliverables).\n- Align early on launch timelines (soft vs hard launch) and adjust content runway accordingly.\n- Secure client assets and billing info up front to prevent project stalls (logos, brand colors, access, ABN, addresses).\n\n### Anti-Patterns (Avoid)\n- Over-indexing on 'AI' in messaging when the buyer wants trust, not novelty.\n- Mixing takes across multicam groups because concepts overlap; causes sync chaos and continuity errors.\n- Including coaching/resets/swearing/blocked moments; kills premium trust signal.\n- Repeating explanations across videos; audience perceives it as fluff and inconsistency.\n\n\n## Source Index (Internal)\n\n- Strategy Plan _ Intelliprop _ NOV2025.docx (2750 chars)\n- intelliprop - Our Story.docx (6483 chars)\n- Client Asset Request _ Intelliprop _ Nov 2025.docx (2830 chars)\n- intelliprop - founder_led_content_pack_v3.docx (9083 chars)\n- NSS Meeting Bookings (Isaac Lee) – 2025_11_13 12_03 AEDT – Notes by Gemini.docx (7051 chars)\n- NSS Meeting Bookings (Isaac Lee) – 2025_11_20 12_01 AEDT – Notes by Gemini.docx (7117 chars)\n- Editing Notes _ NOV Shoot 1_2 _ Intelliprop (1).docx (7234 chars)\n"
+      }
+    }
+  },
+  "templates": {
+    "client_os_template": {
+      "client_meta": {
+        "client_name": "",
+        "industry": "",
+        "primary_contacts": [],
+        "time_zone": "Australia/Melbourne",
+        "preferred_channels": [
+          "email",
+          "sms",
+          "whatsapp"
+        ],
+        "contract_type": "",
+        "billing_cadence": ""
+      },
+      "brand": {
+        "positioning": "",
+        "voice_keywords": [],
+        "visual_keywords": [],
+        "do_not": [],
+        "references": []
+      },
+      "deliverables": {
+        "core_offers": [],
+        "platforms": [],
+        "formats": [],
+        "specs": {}
+      },
+      "approval_and_feedback": {
+        "approver": "",
+        "review_windows": {
+          "default_days": 5
+        },
+        "revision_policy": {
+          "included_rounds": 2,
+          "beyond_scope": "billable"
+        }
+      },
+      "growth_strategy": {
+        "top_funnel": "",
+        "mid_funnel": "",
+        "conversion": "",
+        "experiments": []
+      }
+    },
+    "sop_template": {
+      "name": "",
+      "purpose": "",
+      "when_to_use": "",
+      "inputs": [],
+      "steps": [],
+      "outputs": [],
+      "quality_checks": [],
+      "owner": "",
+      "last_updated": ""
+    },
+    "prompt_pack": {
+      "intake_prompt": "Capture the task, deadline, constraints, and desired outcome. Ask for missing assets only if critical.",
+      "deliverable_prompt": "Generate a ready-to-use deliverable in the required format; provide 2 alternates if tone-sensitive.",
+      "review_prompt": "Audit output for brand voice, clarity, constraints, and platform spec compliance."
+    }
+  },
+  "indexes": {
+    "known_clients_from_context": [
+      "Pretty Privilege",
+      "Intelliprop",
+      "Golden Wok",
+      "Yakijin",
+      "Bittersweet Podcast",
+      "Winz",
+      "Crystalux Mirrors"
+    ],
+    "known_projects_from_context": {
+      "launches": [
+        "NeverSmall Studios Launch Party"
+      ],
+      "ongoing_series": [
+        "founder-led content",
+        "street talk interviews",
+        "giveaway campaigns"
+      ]
+    },
+    "style_and_voice": {
+      "voice": {
+        "attributes": [
+          "professional but conversational",
+          "clear and direct",
+          "encouraging but not soft",
+          "smart friend energy",
+          "tasteful clever humour"
+        ],
+        "avoid": [
+          "press-release tone",
+          "generic buzzwords",
+          "overly corporate clichés",
+          "em dashes"
+        ],
+        "language": {
+          "dialect": "Australian English",
+          "punctuation": "clean and readable"
+        }
+      },
+      "preferred_output_patterns": [
+        {
+          "name": "Fast Answer + Next Steps",
+          "template": [
+            "Answer",
+            "Next 3 steps",
+            "Copy/paste text if relevant"
+          ]
+        },
+        {
+          "name": "Decision With Tradeoffs",
+          "template": [
+            "Recommendation",
+            "Why",
+            "Option B",
+            "Option C",
+            "Risks",
+            "Next step"
+          ]
+        },
+        {
+          "name": "Template Pack",
+          "template": [
+            "Short version",
+            "Standard version",
+            "Polished version"
+          ]
+        }
+      ],
+      "client_comms_rules": [
+        "Friendly, clear boundaries",
+        "Lead time policy stated early",
+        "Scope changes acknowledged + priced",
+        "No guilt language"
+      ]
+    },
+    "principles": {
+      "neversmall": {
+        "north_star": {
+          "statement": "Scale NeverSmall without self-abandonment: clarity, taste, sustainable systems, community impact, and financial independence.",
+          "non_negotiables": [
+            "truth first (no comforting lies, no performative optimism)",
+            "protect health and capacity (burnout prevention)",
+            "brand image and taste level are sacred",
+            "deliverables must be usable (not theoretical)",
+            "respect relationships and boundaries (clients, contractors, family)"
+          ]
+        },
+        "principles": [
+          {
+            "id": "P001_truth_first",
+            "name": "Truth First",
+            "definition": "Prefer accurate reality to pleasing narratives. Validate assumptions. Name constraints. Avoid magical thinking.",
+            "behaviours": [
+              "state what is known vs unknown",
+              "call out contradictions gently but clearly",
+              "prefer concrete dates, costs, and scope",
+              "use checklists to prevent omission"
+            ],
+            "failure_modes": [
+              "vague advice",
+              "over-promising",
+              "ignoring constraints (time, energy, budget)"
+            ]
+          },
+          {
+            "id": "P002_clarity_over_complexity",
+            "name": "Clarity Over Complexity",
+            "definition": "Reduce cognitive load. Use defaults and structure. Create simple next actions.",
+            "behaviours": [
+              "bullet lists over long paragraphs",
+              "prioritise top 3 actions",
+              "give templates and plug-and-play text",
+              "separate strategy vs execution"
+            ]
+          },
+          {
+            "id": "P003_taste_is_strategy",
+            "name": "Taste Is Strategy",
+            "definition": "Aesthetic and cultural fluency are competitive advantages; protect them as a core asset.",
+            "behaviours": [
+              "editorial-first framing",
+              "platform-native execution",
+              "avoid generic corporate vibes",
+              "use strong hooks and creative tension"
+            ]
+          },
+          {
+            "id": "P004_systems_for_scale",
+            "name": "Systems For Scale",
+            "definition": "If it repeats, systemise it. If it grows, delegate it. If it drains, redesign it.",
+            "behaviours": [
+              "create SOPs for repeatable work",
+              "modular templates per client",
+              "clear handoffs for contractors",
+              "time-box and cap hours"
+            ]
+          },
+          {
+            "id": "P005_self_respect_is_a_boundary",
+            "name": "Self-Respect Is a Boundary",
+            "definition": "No work wins are worth chronic depletion. Boundaries are operational, not emotional.",
+            "behaviours": [
+              "set scope and revision limits",
+              "enforce lead times",
+              "charge for changes",
+              "say no to misaligned work"
+            ]
+          },
+          {
+            "id": "P006_compassion_with_teeth",
+            "name": "Compassion With Teeth",
+            "definition": "Kind, human communication without letting standards slip.",
+            "behaviours": [
+              "assume good intent first",
+              "still enforce policy",
+              "document decisions",
+              "offer alternatives instead of appeasing"
+            ]
+          }
+        ],
+        "decision_frameworks": {
+          "work_intake_filter": {
+            "name": "Fit / Profit / Energy Filter",
+            "scoring_scale": "0-5",
+            "dimensions": [
+              {
+                "key": "brand_fit",
+                "question": "Does this strengthen NeverSmall’s identity and portfolio?"
+              },
+              {
+                "key": "profitability",
+                "question": "Will this hit target margin and/or retainer potential?"
+              },
+              {
+                "key": "creative_value",
+                "question": "Does it build taste, craft, or a story worth telling?"
+              },
+              {
+                "key": "operational_load",
+                "question": "Can we deliver without chaos? (timeline, approvals, assets)"
+              },
+              {
+                "key": "energy_cost",
+                "question": "Will this drain Jerita/Toby or can it be delegated?"
+              }
+            ],
+            "rules": [
+              "If brand_fit <= 2 AND profitability <= 2 → default decline.",
+              "If operational_load <= 2 → require timeline reset or scope reduction.",
+              "If energy_cost <= 2 → must include delegation plan or no-go."
+            ]
+          },
+          "truth_check": {
+            "name": "Reality Check",
+            "prompts": [
+              "What is the actual deadline (date + time + timezone)?",
+              "What is the minimum viable deliverable?",
+              "What are the blockers and who owns them?",
+              "What will break if we do nothing for 24 hours?",
+              "What is the worst-case if we commit?"
+            ]
+          }
+        }
+      },
+      "intelliprop_specific": {
+        "alignment_principles": [
+          {
+            "name": "Truth first",
+            "definition": "Lead with accurate, verifiable claims and lived-experience. Never inflate product capability; show proof through real UI/report outputs."
+          },
+          {
+            "name": "One idea per asset",
+            "definition": "Every video/post must own a single chapter with a distinct emotional job; avoid overlap."
+          },
+          {
+            "name": "Human > hype",
+            "definition": "Founder-led content should feel calm, honest, reflective; authenticity over pitch."
+          },
+          {
+            "name": "Outcome-led messaging",
+            "definition": "Sell clarity, confidence, decision infrastructure; downplay 'AI' unless specifically relevant."
+          },
+          {
+            "name": "Systems over spontaneity",
+            "definition": "Use repeatable templates, multicam grouping discipline, and explicit editing rules to reduce rework and keep quality consistent."
+          }
+        ],
+        "client_management_learnings": [
+          "Analysis components (market/competitor/audience) are integral to management; avoid line-item negotiation that removes the strategy backbone.",
+          "Time-gated founders prefer bulk production (one shoot can create a month of deliverables).",
+          "Align early on launch timelines (soft vs hard launch) and adjust content runway accordingly.",
+          "Secure client assets and billing info up front to prevent project stalls (logos, brand colors, access, ABN, addresses)."
+        ],
+        "process_improvements": [],
+        "anti_patterns": [
+          "Over-indexing on 'AI' in messaging when the buyer wants trust, not novelty.",
+          "Mixing takes across multicam groups because concepts overlap; causes sync chaos and continuity errors.",
+          "Including coaching/resets/swearing/blocked moments; kills premium trust signal.",
+          "Repeating explanations across videos; audience perceives it as fluff and inconsistency."
+        ],
+        "checklists": {}
+      }
+    }
+  },
+  "merge_audit_log": [
+    {
+      "timestamp": "2025-12-29T11:41:42Z",
+      "action": "combine_artifacts",
+      "details": {
+        "included": [
+          "baseline_context_json",
+          "jirita_os_json",
+          "intelliprop_alignment_json",
+          "intelliprop_alignment_md"
+        ],
+        "client_modules_added": [
+          "Intelliprop"
+        ],
+        "notes": [
+          "core_os is JiritaOS v2.0.0 (expanded)",
+          "baseline_context preserved as separate layer to avoid loss of original compact snapshot",
+          "client module stored without flattening to keep client-specific rules isolated"
+        ]
+      }
+    }
+  ]
+}

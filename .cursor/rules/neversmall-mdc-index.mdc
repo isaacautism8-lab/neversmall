@@ -1,0 +1,135 @@
+---
+description: NeverSmall MDC Index - Quick reference to all MDC files
+alwaysApply: false
+version: 1.0.0
+lastUpdated: 2025-12-30
+owner: neversmall
+---
+
+# NeverSmall MDC Index
+
+Quick reference to all MDC (Markdown Configuration) files in the NeverSmall workspace.
+
+---
+
+## MDC Configuration Strategy
+
+**Optimization Principle:** Apply Truth → Clarity → Taste → Systems → Self-Respect → Compassion hierarchy to MDC loading. Core guardrails always apply; domain-specific rules load intelligently via globs.
+
+---
+
+## Tier 1: Always Applied (Core Guardrails)
+
+These MDCs load on every query because violations could compromise Truth or Integrity.
+
+### `neversmall-os.mdc` – NeverSmall Operating System
+- **Lines:** ~400
+- **Status:** `alwaysApply: true`
+- **Version:** 1.0.0 (2025-12-30)
+- **Purpose:** Single source of truth for all operating standards, alignment principles, cognitive loop, communication style, and core identity.
+- **Justification:** SSOT for all rules - must always be available.
+
+### `neversmall-agent-guardrails.mdc` – Agent Guardrails
+- **Lines:** ~350
+- **Status:** `alwaysApply: true`
+- **Version:** 1.0.0 (2025-12-30)
+- **Purpose:** Core guardrails preventing Truth/Integrity violations: agent identity, prohibited behaviors, alignment checks, stop conditions, high-reasoning model constraints.
+- **Justification:** Prevents violations that could damage truth or integrity.
+
+---
+
+## Tier 2: Intelligently Applied (Domain-Specific)
+
+These MDCs load only when working on matching files, via `globs` patterns.
+
+### `neversmall-narrative-standards.mdc` – Narrative Standards
+- **Lines:** ~400
+- **Status:** `alwaysApply: false`
+- **Globs:** `**/*content*`, `**/*copy*`, `**/*narrative*`, `**/*.md`, `**/pages/**/*`, `**/components/**/*`
+- **Version:** 1.0.0 (2025-12-30)
+- **Purpose:** Voice, tone, and content guidelines. Core narrative principles, structural standards, numeric communication.
+
+### `neversmall-brand-standards.mdc` – Brand Standards
+- **Lines:** ~450
+- **Status:** `alwaysApply: false`
+- **Globs:** `**/styles/**/*`, `**/*.css`, `**/*.scss`, `**/components/**/*`, `**/pages/**/*`, `**/public/**/*`
+- **Version:** 1.0.0 (2025-12-30)
+- **Purpose:** Brand identity, visual language, color palette, typography, component standards.
+
+---
+
+## Tier 3: Reference Material
+
+### `neversmall-mdc-index.mdc` – This File
+- **Lines:** ~150
+- **Status:** `alwaysApply: false`
+- **Version:** 1.0.0 (2025-12-30)
+- **Purpose:** Reference index for all MDCs.
+
+---
+
+## Precedence Order
+
+When MDCs conflict:
+
+1. **NeverSmall OS** (`neversmall-os.mdc`) – Highest precedence
+2. **Agent Guardrails** (`neversmall-agent-guardrails.mdc`) – Safety rules
+3. **Narrative Standards** (`neversmall-narrative-standards.mdc`) – Content rules
+4. **Brand Standards** (`neversmall-brand-standards.mdc`) – Visual rules
+
+---
+
+## MDC vs Intelliprop MDCs
+
+This workspace contains two sets of MDC files:
+
+### NeverSmall MDCs (`.cursor/rules/`)
+- `neversmall-os.mdc` - Core operating system
+- `neversmall-agent-guardrails.mdc` - Agent behavior rules
+- `neversmall-narrative-standards.mdc` - Voice and tone
+- `neversmall-brand-standards.mdc` - Visual identity
+- `neversmall-mdc-index.mdc` - This index
+
+**Purpose:** Rules for NeverSmall brand, website, and content work.
+
+### Intelliprop MDCs (workspace root)
+- `intellipropos.md` - Intelliprop Dev OS
+- `intelliprop-*.md` - Various Intelliprop-specific rules
+
+**Purpose:** Reference material from Intelliprop project (separate business).
+
+**Note:** When working on NeverSmall website/content, use NeverSmall MDCs. Intelliprop MDCs are reference material only.
+
+---
+
+## Usage Notes
+
+### For Website Development
+Apply in order:
+1. `neversmall-os.mdc` (always)
+2. `neversmall-agent-guardrails.mdc` (always)
+3. `neversmall-brand-standards.mdc` (visual work)
+4. `neversmall-narrative-standards.mdc` (content work)
+
+### For Content Creation
+Apply in order:
+1. `neversmall-os.mdc` (always)
+2. `neversmall-agent-guardrails.mdc` (always)
+3. `neversmall-narrative-standards.mdc` (all content)
+
+### For General Work
+Apply:
+1. `neversmall-os.mdc` (always)
+2. `neversmall-agent-guardrails.mdc` (always)
+
+---
+
+## Source Document
+
+All NeverSmall MDCs are derived from the canonical `NeversmallOS.txt` file in the workspace root. This file contains the full operating system specification that these MDCs implement for Cursor.
+
+---
+
+## Change Log
+
+- **v1.0.0 (2025-12-30):** Initial MDC index creation

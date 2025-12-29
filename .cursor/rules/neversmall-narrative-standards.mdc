@@ -1,0 +1,378 @@
+---
+description: NeverSmall Narrative Standards - Voice, tone, and content guidelines
+alwaysApply: false
+globs:
+  - "**/*content*"
+  - "**/*copy*"
+  - "**/*narrative*"
+  - "**/*.md"
+  - "**/pages/**/*"
+  - "**/components/**/*"
+version: 1.0.0
+lastUpdated: 2025-12-30
+owner: neversmall
+---
+
+# NeverSmall Narrative Standards
+
+**Purpose:** Define the exact voice, tone, and narrative approach for all NeverSmall communications. This is a core defensibility asset—the NeverSmall "feel" is hard to replicate.
+
+---
+
+## 1. Core Narrative Principles
+
+### 1.1 Advisory, Not Authoritative
+
+NeverSmall content **advises**—it does not command.
+
+**Do:**
+- "Consider starting with..."
+- "This approach typically works well when..."
+- "Based on available information, it appears..."
+
+**Don't:**
+- "You should do this..."
+- "You must..."
+- "The best way is..."
+
+### 1.2 Calm, Not Hype
+
+NeverSmall maintains composure. No breathless urgency.
+
+**Do:**
+- "Worth considering for those in X situation"
+- "A thoughtful approach to Y"
+- "Evidence suggests this works well"
+
+**Don't:**
+- "You NEED to try this!"
+- "Don't miss out on..."
+- "This is a game-changer!"
+
+### 1.3 Reduces Confusion, Not Just Complexity
+
+The goal isn't to sound smart—it's to help people think clearly.
+
+**Do:**
+- Break down complex topics into digestible pieces
+- Use analogies that actually clarify
+- Acknowledge when things are genuinely complex
+
+**Don't:**
+- Use jargon without explanation
+- Oversimplify to the point of inaccuracy
+- Add complexity for its own sake
+
+### 1.4 Clarifies Trade-offs, Not Just Benefits
+
+Real advice acknowledges downsides and alternatives.
+
+**Do:**
+- "This works well for X, but may not suit Y"
+- "The trade-off is..."
+- "Consider this alternative if..."
+
+**Don't:**
+- Present only positives
+- Ignore limitations
+- Pretend solutions are perfect
+
+---
+
+## 2. Voice Characteristics
+
+### 2.1 Human, Not Robotic
+
+Write like a thoughtful person, not a marketing machine.
+
+**Characteristics:**
+- Conversational but professional
+- Warm without being overly familiar
+- Direct without being abrupt
+
+**Examples:**
+
+✅ **Good:** "Here's what I've found works well."
+❌ **Bad:** "Optimal outcomes are achieved through..."
+
+✅ **Good:** "This might not be for everyone, and that's okay."
+❌ **Bad:** "Results may vary based on individual circumstances."
+
+### 2.2 Service-Oriented
+
+The focus is on helping, not selling.
+
+**Characteristics:**
+- Prioritize reader value over self-promotion
+- Offer actionable guidance
+- Respect the reader's time and intelligence
+
+**Examples:**
+
+✅ **Good:** "Here's a quick way to check if this applies to you..."
+❌ **Bad:** "Contact us to learn how we can help..."
+
+### 2.3 Refined, Not Stuffy
+
+Quality without pretension.
+
+**Characteristics:**
+- Precise word choice
+- Clean, uncluttered prose
+- Confident but not arrogant
+
+**Examples:**
+
+✅ **Good:** "This approach works because..."
+❌ **Bad:** "It is hereby advised that the aforementioned methodology..."
+
+### 2.4 Zero Filler
+
+Every word earns its place.
+
+**Remove:**
+- Filler words: "just", "actually", "literally", "very", "really"
+- Weak qualifiers: "sort of", "kind of", "somewhat"
+- Redundant phrases: "in order to", "due to the fact that"
+- Generic transitions: "The next section will cover..."
+
+---
+
+## 3. Structural Standards
+
+### 3.1 Paragraph Rules
+
+- **Maximum 4 sentences per paragraph**
+- **One main idea per paragraph**
+- **Break long paragraphs into bullets**
+
+### 3.2 Sentence Rules
+
+- **Prefer shorter sentences** (under 25 words)
+- **Vary sentence length** for rhythm
+- **Lead with the point**, not the setup
+
+**Example:**
+
+❌ **Bad:** "When you're thinking about how to approach this situation, and you want to make sure you're considering all the different factors that might be relevant, it's important to keep in mind that..."
+
+✅ **Good:** "Start by identifying the key factors. Then evaluate each against your criteria."
+
+### 3.3 List Rules
+
+- **Use bullets for 3+ items**
+- **Keep parallel structure**
+- **Start with action verbs** when appropriate
+
+**Example:**
+
+❌ **Bad:**
+- You should consider the budget
+- Timeline is important
+- What about the team?
+
+✅ **Good:**
+- Consider the budget
+- Evaluate the timeline
+- Assess team capacity
+
+### 3.4 Heading Rules
+
+- **Clear and descriptive** (not clever)
+- **Front-load keywords**
+- **Match hierarchy to content depth**
+
+**Example:**
+
+❌ **Bad:** "The Big Picture"
+✅ **Good:** "Strategic Overview"
+
+❌ **Bad:** "Let's Talk About Money"
+✅ **Good:** "Pricing and Budget"
+
+---
+
+## 4. Numeric Communication
+
+### 4.1 Ranges vs Single Numbers
+
+**Use ranges for estimates/projections:**
+- "Typically takes 2-4 weeks"
+- "Budget range: $5,000 - $8,000"
+- "Expected improvement: 15-25%"
+
+**Use single numbers for verified data:**
+- "The project took 3 weeks"
+- "Final cost: $6,500"
+- "Achieved 22% improvement"
+
+### 4.2 Uncertainty Markers
+
+**For estimates:**
+- "Approximately", "Typically", "Generally"
+- "Based on available data", "Estimates suggest"
+- "In the range of", "Roughly"
+
+**For verified data:**
+- No qualifier needed
+- State source if relevant
+- Be precise when you can
+
+### 4.3 Number Formatting
+
+- **Use numerals for 10+** (except at sentence start)
+- **Include units** where relevant
+- **Round appropriately** (don't false-precision)
+
+**Examples:**
+
+✅ **Good:** "About 2-3 hours" (estimate)
+✅ **Good:** "2 hours, 47 minutes" (verified)
+❌ **Bad:** "Approximately 2.73 hours" (false precision)
+
+---
+
+## 5. Tone Adjustments by Context
+
+### 5.1 Educational Content
+
+**Tone:** Patient, thorough, encouraging
+**Approach:** Explain concepts clearly, acknowledge learning curves
+**Example:** "This might seem complex at first, but it breaks down into three simple steps..."
+
+### 5.2 Professional/Advisory Content
+
+**Tone:** Confident, grounded, direct
+**Approach:** Lead with insight, support with evidence
+**Example:** "Based on what you've shared, there are two approaches worth considering..."
+
+### 5.3 Personal/Reflective Content
+
+**Tone:** Authentic, vulnerable but not self-indulgent
+**Approach:** Share insights from experience, make it relevant to others
+**Example:** "I learned this the hard way, and here's what I'd do differently..."
+
+### 5.4 Client Communication
+
+**Tone:** Professional, warm, clear
+**Approach:** Respect their time, be specific about next steps
+**Example:** "Here's what we discussed, what's happening next, and when to expect updates."
+
+---
+
+## 6. What to Avoid
+
+### 6.1 Prohibited Phrases
+
+| Instead of | Use |
+|------------|-----|
+| "Leverage" | "Use" |
+| "Utilize" | "Use" |
+| "Synergy" | Be specific |
+| "Best practices" | "What works well" |
+| "Circle back" | "Follow up" |
+| "Touch base" | "Connect" or "Check in" |
+| "Disrupt" | Be specific about change |
+| "Game-changer" | Explain actual impact |
+
+### 6.2 Prohibited Patterns
+
+❌ **Fake urgency:** "Don't miss out!", "Limited time!", "Act now!"
+❌ **Empty superlatives:** "Best", "Ultimate", "Perfect", "Amazing"
+❌ **Manipulative framing:** "Everyone else is...", "You don't want to be..."
+❌ **Over-promising:** "Guaranteed results", "Will definitely work"
+
+### 6.3 Prohibited Structures
+
+❌ **Clickbait headlines:** "You won't believe what happened..."
+❌ **Excessive questions:** "Have you ever wondered...?"
+❌ **Teaser delays:** "But first, let me tell you about..."
+❌ **Unnecessary preamble:** "Before we dive in, I want to..."
+
+---
+
+## 7. Narrative Checklist
+
+Before publishing any content, verify:
+
+### Truth & Accuracy
+- [ ] All claims are factually accurate
+- [ ] Sources cited where appropriate
+- [ ] Uncertainty clearly marked
+- [ ] No invented data or quotes
+
+### Clarity & Structure
+- [ ] Main point is clear within first paragraph
+- [ ] Paragraphs are under 4 sentences
+- [ ] Lists are used for 3+ items
+- [ ] Headings guide the reader
+
+### Tone & Voice
+- [ ] Advisory, not authoritative
+- [ ] Calm, not hype
+- [ ] Zero filler words
+- [ ] Professional-casual register
+
+### Reader Value
+- [ ] Clear takeaway or action
+- [ ] Trade-offs acknowledged
+- [ ] Respects reader's time
+- [ ] Would Isaac sign this?
+
+---
+
+## 8. Examples: Before & After
+
+### Example 1: Service Description
+
+❌ **Before:**
+"We offer cutting-edge solutions that will revolutionize the way you think about your business. Our team of experts leverages best-in-class methodologies to deliver synergistic outcomes that drive unprecedented growth. Don't miss out on this amazing opportunity to transform your organization!"
+
+✅ **After:**
+"We help small businesses simplify their operations. This typically means fewer manual tasks, clearer processes, and more time for the work that matters. Here's how we approach it..."
+
+### Example 2: Educational Content
+
+❌ **Before:**
+"Have you ever wondered why some people seem to have it all figured out while others struggle? In today's post, I'm going to share some game-changing insights that will literally transform your life. Trust me, you won't want to miss this!"
+
+✅ **After:**
+"Progress often feels slower than we'd like. Here are three patterns I've noticed in people who make consistent headway—and one common trap to avoid."
+
+### Example 3: Client Email
+
+❌ **Before:**
+"Just wanted to circle back and touch base about the project. Let me know when you have a moment to sync up so we can align on next steps and ensure we're all on the same page moving forward."
+
+✅ **After:**
+"Following up on the project. Two quick items:
+1. Design mockups are ready for review (link attached)
+2. I need your feedback by Friday to keep us on schedule
+
+Let me know if you have questions."
+
+---
+
+## 9. Integration with NeverSmall OS
+
+### Alignment with Core Principles
+
+These narrative standards directly implement:
+- **Truth First** → Accurate claims, no fabrication
+- **Clarity Over Complexity** → Zero filler, clear structure
+- **Taste Is Strategy** → Refined voice, quality prose
+- **Self-Respect Is a Boundary** → No desperate sales tactics
+- **Compassion With Teeth** → Honest, helpful, not soft
+
+### Priority When Conflicts Arise
+
+If narrative goals conflict:
+1. **Truth** takes precedence over persuasion
+2. **Clarity** takes precedence over cleverness
+3. **Helpfulness** takes precedence over brevity
+
+---
+
+## 10. Change Log
+
+- **v1.0.0 (2025-12-30):** Initial MDC creation aligned with NeversmallOS communication style

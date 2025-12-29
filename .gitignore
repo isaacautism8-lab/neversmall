@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+site/out/
+site/.next/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+

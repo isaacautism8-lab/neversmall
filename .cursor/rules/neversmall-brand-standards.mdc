@@ -1,0 +1,504 @@
+---
+description: NeverSmall Brand Standards - Brand identity, visual guidelines, and positioning
+alwaysApply: false
+globs:
+  - "**/styles/**/*"
+  - "**/*.css"
+  - "**/*.scss"
+  - "**/components/**/*"
+  - "**/pages/**/*"
+  - "**/public/**/*"
+version: 1.0.0
+lastUpdated: 2025-12-30
+owner: neversmall
+---
+
+# NeverSmall Brand Standards
+
+**Purpose:** Define NeverSmall's brand identity, visual language, and positioning to ensure consistency across all touchpoints.
+
+---
+
+## 1. Brand Identity
+
+### 1.1 Brand Essence
+
+**Core Promise:** Help others grow, think clearly, and escape stuckness—without dogma.
+
+**Brand Character:**
+- Calm confidence
+- Refined clarity
+- Quiet premium
+- Service-oriented
+
+**Brand Feel:** Like a trusted advisor who makes complex things simple and treats you with respect.
+
+### 1.2 Brand Positioning
+
+**Who We Serve:**
+- Thoughtful professionals seeking clarity
+- Builders and operators who value substance
+- People ready to do the work, not just talk about it
+
+**What We Offer:**
+- Strategic advisory and creative services
+- Systems that simplify, stories that clarify
+- High-quality thinking and execution
+
+**How We're Different:**
+- No hype, no gimmicks, no desperation
+- Truth before persuasion
+- Quality over quantity
+
+---
+
+## 2. Brand Architecture
+
+### 2.1 Primary Brand: NeverSmall
+
+**Position:** Strategic advisor and creator
+**Audience:** Thoughtful professionals, builders, operators
+**Voice:** Calm confidence, refined clarity
+
+**Use When:**
+- Primary professional identity
+- Advisory and strategic work
+- General content and communications
+
+### 2.2 Sub-Brand: NeverSmall Studios
+
+**Position:** Creative and content arm
+**Services:** Video production, editing, content strategy
+**Voice:** Creative but grounded, professional but personable
+
+**Use When:**
+- Client creative work
+- Video/content production services
+- Portfolio showcasing
+
+### 2.3 Future Brand: Cherie
+
+**Position:** Feminine-coded lifestyle adjacent
+**Audience:** Women in their 20s-30s navigating identity and growth
+**Voice:** Warm, supportive, aspirational but grounded
+
+**Use When:**
+- Lifestyle content (if/when launched)
+- Wellness-adjacent offerings
+- Community building
+
+### 2.4 Future Brand: Quarter Life Society
+
+**Position:** Community for 25-35 demographic
+**Focus:** Career, identity, life design
+**Voice:** Peer-to-peer, educational, supportive
+
+**Use When:**
+- Community content
+- Educational resources for quarter-life transitions
+- Peer networking
+
+---
+
+## 3. Visual Identity
+
+### 3.1 Design Principles
+
+1. **Clean Over Cluttered**
+   - Generous whitespace
+   - Minimal decorative elements
+   - Let content breathe
+
+2. **Confident, Not Loud**
+   - Strong typography
+   - Restrained color palette
+   - No flashy effects
+
+3. **Quietly Premium**
+   - High-quality imagery
+   - Thoughtful details
+   - Refined finishes
+
+4. **Functional Aesthetics**
+   - Design serves purpose
+   - Beauty through utility
+   - No decoration for its own sake
+
+### 3.2 Color Palette
+
+**Primary Colors:**
+
+```css
+/* Core */
+--ns-black: #0a0a0a;
+--ns-white: #fafafa;
+--ns-gray-900: #1a1a1a;
+--ns-gray-700: #404040;
+--ns-gray-500: #737373;
+--ns-gray-300: #d4d4d4;
+--ns-gray-100: #f5f5f5;
+
+/* Accent */
+--ns-accent: #2563eb;      /* Refined blue */
+--ns-accent-light: #3b82f6;
+--ns-accent-dark: #1d4ed8;
+
+/* Semantic */
+--ns-success: #059669;
+--ns-warning: #d97706;
+--ns-error: #dc2626;
+```
+
+**Usage Guidelines:**
+- **Primary text:** `--ns-black` on light, `--ns-white` on dark
+- **Secondary text:** `--ns-gray-500` 
+- **Accent:** Sparingly, for emphasis and CTAs
+- **Background:** `--ns-white` or `--ns-gray-100`
+
+### 3.3 Typography
+
+**Font Stack:**
+
+```css
+/* Headings */
+--ns-font-heading: 'Inter', system-ui, -apple-system, sans-serif;
+
+/* Body */
+--ns-font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+/* Mono (code/data) */
+--ns-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+```
+
+**Type Scale:**
+
+```css
+--ns-text-xs: 0.75rem;     /* 12px */
+--ns-text-sm: 0.875rem;    /* 14px */
+--ns-text-base: 1rem;      /* 16px */
+--ns-text-lg: 1.125rem;    /* 18px */
+--ns-text-xl: 1.25rem;     /* 20px */
+--ns-text-2xl: 1.5rem;     /* 24px */
+--ns-text-3xl: 1.875rem;   /* 30px */
+--ns-text-4xl: 2.25rem;    /* 36px */
+--ns-text-5xl: 3rem;       /* 48px */
+```
+
+**Typography Rules:**
+- **Body text:** 16-18px, 1.6-1.75 line height
+- **Headings:** Tighter line height (1.2-1.4)
+- **Max line length:** 65-75 characters
+- **Weight:** Regular (400) for body, Medium (500) or Semibold (600) for emphasis
+
+### 3.4 Spacing System
+
+```css
+--ns-space-1: 0.25rem;   /* 4px */
+--ns-space-2: 0.5rem;    /* 8px */
+--ns-space-3: 0.75rem;   /* 12px */
+--ns-space-4: 1rem;      /* 16px */
+--ns-space-5: 1.25rem;   /* 20px */
+--ns-space-6: 1.5rem;    /* 24px */
+--ns-space-8: 2rem;      /* 32px */
+--ns-space-10: 2.5rem;   /* 40px */
+--ns-space-12: 3rem;     /* 48px */
+--ns-space-16: 4rem;     /* 64px */
+--ns-space-20: 5rem;     /* 80px */
+--ns-space-24: 6rem;     /* 96px */
+```
+
+**Spacing Rules:**
+- Consistent vertical rhythm
+- Generous section padding (space-16 to space-24)
+- Component spacing follows 4px base
+
+### 3.5 Border Radius
+
+```css
+--ns-radius-sm: 0.25rem;    /* 4px - inputs, small elements */
+--ns-radius-md: 0.5rem;     /* 8px - cards, buttons */
+--ns-radius-lg: 0.75rem;    /* 12px - larger containers */
+--ns-radius-xl: 1rem;       /* 16px - modals, featured cards */
+--ns-radius-full: 9999px;   /* Pills, avatars */
+```
+
+---
+
+## 4. Component Standards
+
+### 4.1 Buttons
+
+**Primary Button:**
+```css
+.btn-primary {
+  background: var(--ns-accent);
+  color: var(--ns-white);
+  padding: var(--ns-space-3) var(--ns-space-6);
+  border-radius: var(--ns-radius-md);
+  font-weight: 500;
+}
+```
+
+**Secondary Button:**
+```css
+.btn-secondary {
+  background: transparent;
+  color: var(--ns-accent);
+  border: 1px solid var(--ns-accent);
+  padding: var(--ns-space-3) var(--ns-space-6);
+  border-radius: var(--ns-radius-md);
+  font-weight: 500;
+}
+```
+
+**Button Rules:**
+- Clear, action-oriented labels
+- Adequate touch target (44px minimum on mobile)
+- Consistent styling across site
+- No more than 2 button styles per page
+
+### 4.2 Cards
+
+```css
+.card {
+  background: var(--ns-white);
+  border: 1px solid var(--ns-gray-300);
+  border-radius: var(--ns-radius-lg);
+  padding: var(--ns-space-6);
+}
+
+.card-elevated {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  border: none;
+}
+```
+
+**Card Rules:**
+- Consistent padding
+- Clear visual hierarchy within cards
+- Don't overload with information
+- Use elevation sparingly
+
+### 4.3 Forms
+
+```css
+.input {
+  background: var(--ns-white);
+  border: 1px solid var(--ns-gray-300);
+  border-radius: var(--ns-radius-md);
+  padding: var(--ns-space-3) var(--ns-space-4);
+  font-size: var(--ns-text-base);
+}
+
+.input:focus {
+  border-color: var(--ns-accent);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--ns-accent / 0.1);
+}
+```
+
+**Form Rules:**
+- Clear labels above inputs
+- Helpful placeholder text (not as labels)
+- Visible focus states
+- Inline validation where appropriate
+
+---
+
+## 5. Imagery Guidelines
+
+### 5.1 Photography Style
+
+**Characteristics:**
+- Natural lighting preferred
+- Authentic moments, not staged
+- Clean compositions
+- Muted, sophisticated color grading
+
+**Avoid:**
+- Stock photography clichés
+- Overly filtered images
+- Cluttered compositions
+- Artificial-looking setups
+
+### 5.2 Illustrations & Graphics
+
+**Style:**
+- Clean, minimal line work
+- Geometric where appropriate
+- Functional, not decorative
+- Consistent stroke weights
+
+**Avoid:**
+- Overly playful or cartoonish styles
+- Complex illustrations that distract
+- Trendy styles that will date quickly
+
+### 5.3 Icons
+
+**Guidelines:**
+- Consistent stroke width (1.5-2px)
+- Rounded line caps
+- Clear at small sizes
+- Match overall design language
+
+**Recommended Sets:**
+- Lucide Icons
+- Heroicons
+- Feather Icons
+
+---
+
+## 6. Voice & Tone in Design
+
+### 6.1 Microcopy
+
+**Buttons:**
+- "Get Started" not "Submit"
+- "Send Message" not "Submit Form"
+- "Create Account" not "Sign Up Now!"
+
+**Forms:**
+- Clear, helpful labels
+- Specific error messages
+- Progress indicators where needed
+
+**Empty States:**
+- Helpful, not condescending
+- Clear next action
+- Brief explanation
+
+### 6.2 Error Messages
+
+**Do:**
+- Be specific about what went wrong
+- Suggest how to fix it
+- Maintain calm, helpful tone
+
+**Don't:**
+- Blame the user
+- Use technical jargon
+- Be vague
+
+**Examples:**
+
+❌ "Invalid input"
+✅ "Please enter a valid email address"
+
+❌ "Error 500: Server failure"
+✅ "Something went wrong on our end. Please try again in a moment."
+
+---
+
+## 7. Responsive Design
+
+### 7.1 Breakpoints
+
+```css
+/* Mobile first */
+--ns-bp-sm: 640px;   /* Small screens */
+--ns-bp-md: 768px;   /* Tablets */
+--ns-bp-lg: 1024px;  /* Laptops */
+--ns-bp-xl: 1280px;  /* Desktops */
+--ns-bp-2xl: 1536px; /* Large screens */
+```
+
+### 7.2 Mobile Guidelines
+
+- Touch targets: 44px minimum
+- Readable text without zooming (16px minimum)
+- Single column layouts where appropriate
+- Thumb-friendly navigation placement
+
+### 7.3 Desktop Guidelines
+
+- Max content width: 1200px (prose: 65-75ch)
+- Utilize space without feeling empty
+- Consider multi-column layouts
+- Maintain visual hierarchy at larger sizes
+
+---
+
+## 8. Accessibility Standards
+
+### 8.1 Color Contrast
+
+- **Body text:** Minimum 4.5:1 ratio
+- **Large text (18px+):** Minimum 3:1 ratio
+- **Interactive elements:** Minimum 3:1 ratio
+
+### 8.2 Focus States
+
+- All interactive elements must have visible focus states
+- Focus order follows logical reading order
+- Skip links for keyboard navigation
+
+### 8.3 Content Accessibility
+
+- Alt text for all meaningful images
+- Proper heading hierarchy (h1 → h2 → h3)
+- Descriptive link text (not "click here")
+- Form labels associated with inputs
+
+---
+
+## 9. Brand Don'ts
+
+### 9.1 Visual Don'ts
+
+❌ Gradients (unless very subtle)
+❌ Multiple fonts in one composition
+❌ Busy backgrounds
+❌ Stock photography clichés
+❌ Rainbow/excessive color variation
+❌ Decorative elements without purpose
+
+### 9.2 Communication Don'ts
+
+❌ Hype language ("Amazing!", "Game-changer!")
+❌ Pressure tactics ("Limited time!", "Don't miss out!")
+❌ Empty superlatives ("Best", "Ultimate", "Perfect")
+❌ Corporate jargon ("Leverage", "Synergy", "Disrupt")
+
+### 9.3 Positioning Don'ts
+
+❌ Comparing to competitors negatively
+❌ Making promises we can't keep
+❌ Overstating capabilities
+❌ Appealing to status or envy
+
+---
+
+## 10. Brand Application Checklist
+
+Before publishing any branded material, verify:
+
+### Visual
+- [ ] Uses approved color palette only
+- [ ] Typography follows standards
+- [ ] Proper spacing and layout
+- [ ] Images meet quality standards
+- [ ] Consistent component styling
+
+### Voice
+- [ ] Follows narrative standards
+- [ ] Advisory, not authoritative tone
+- [ ] Calm, not hype
+- [ ] Zero prohibited phrases
+
+### Technical
+- [ ] Meets accessibility standards
+- [ ] Responsive across devices
+- [ ] Loads quickly
+- [ ] Works without JavaScript (core content)
+
+### Brand Alignment
+- [ ] Reflects NeverSmall character
+- [ ] Would Isaac be proud to share this?
+- [ ] Serves the audience, not just promotes
+
+---
+
+## 11. Change Log
+
+- **v1.0.0 (2025-12-30):** Initial MDC creation aligned with NeversmallOS brand identity
