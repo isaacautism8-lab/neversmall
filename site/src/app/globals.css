@@ -13,9 +13,17 @@
   --ns-off-black: #0a0a0a;
   --ns-charcoal: #141414;
   --ns-white: #fafafa;
-  --ns-cream: #f0ebe3;
-  --ns-warm: #d4c4a8;
-  --ns-gold: #b8a47c;
+  --ns-cream: #f5f0e6;
+  --ns-cream-light: #faf8f4;
+  --ns-warm: #e8d5b5;
+  --ns-gold: #c9a96e;
+  
+  /* Vibrant Accents */
+  --ns-coral: #e07860;
+  --ns-lavender: #9b8ec4;
+  --ns-sage: #8fa88a;
+  --ns-sky: #7ba3c9;
+  --ns-peach: #e8b89d;
   
   /* Grays - refined scale */
   --ns-gray-950: #0d0d0d;
@@ -99,6 +107,10 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--ns-cream);
 }
 
+.slogan-dark {
+  color: var(--ns-charcoal);
+}
+
 .slogan-large {
   font-size: clamp(1.5rem, 4vw, 2.5rem);
   line-height: 1.3;
@@ -112,6 +124,63 @@ h1, h2, h3, h4, h5, h6 {
 .slogan-small {
   font-size: clamp(0.875rem, 1.5vw, 1rem);
   line-height: 1.5;
+}
+
+/* ========================================
+   LIGHT SECTION STYLES
+   ======================================== */
+.section-light {
+  background: var(--ns-cream-light);
+  color: var(--ns-charcoal);
+}
+
+.section-light h1,
+.section-light h2,
+.section-light h3 {
+  color: var(--ns-black);
+}
+
+.section-light p {
+  color: var(--ns-gray-600);
+}
+
+.section-light .section-label {
+  color: var(--ns-gray-500);
+}
+
+.section-light .section-label::before {
+  background: var(--ns-gray-300);
+}
+
+.section-light .btn-primary {
+  background: var(--ns-black);
+  color: var(--ns-cream);
+}
+
+.section-light .btn-primary:hover {
+  box-shadow: 
+    0 10px 30px -10px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.section-light .btn-secondary {
+  border-color: var(--ns-gray-300);
+  color: var(--ns-gray-700);
+}
+
+.section-light .btn-secondary:hover {
+  border-color: var(--ns-black);
+  color: var(--ns-black);
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.section-light .divider {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--ns-gray-300),
+    transparent
+  );
 }
 
 /* ========================================
