@@ -13,6 +13,11 @@ export const metadata: Metadata = {
     maximumScale: 5,
     userScalable: true,
   },
+  icons: {
+    icon: '/assets/NSS Logo.jpg',
+    shortcut: '/assets/NSS Logo.jpg',
+    apple: '/assets/NSS Logo.jpg',
+  },
   openGraph: {
     title: 'NeverSmall Studios',
     description: 'Full-service creative support: content, production, and strategy. All in one place.',
@@ -20,11 +25,20 @@ export const metadata: Metadata = {
     locale: 'en_AU',
     siteName: 'NeverSmall Studios',
     url: 'https://neversmall.com.au',
+    images: [
+      {
+        url: '/assets/NSS Logo.jpg',
+        width: 800,
+        height: 800,
+        alt: 'NeverSmall Studios',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'NeverSmall Studios',
     description: 'Full-service creative support: content, production, and strategy. All in one place.',
+    images: ['/assets/NSS Logo.jpg'],
   },
   robots: {
     index: true,
