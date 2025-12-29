@@ -318,18 +318,27 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.625rem;
+  gap: 0.5rem;
   background: var(--ns-cream);
   color: var(--ns-black);
-  padding: 1rem 2rem;
+  padding: 0.875rem 1.5rem;
   border-radius: 8px;
   font-weight: 500;
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   border: none;
   text-decoration: none;
   overflow: hidden;
   transition: all var(--duration-normal) var(--ease-out-expo);
   cursor: pointer;
+  min-height: 44px; /* Touch target */
+}
+
+@media (min-width: 640px) {
+  .btn-primary {
+    gap: 0.625rem;
+    padding: 1rem 2rem;
+    font-size: 0.9375rem;
+  }
 }
 
 .btn-primary::before {
@@ -360,17 +369,26 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.625rem;
+  gap: 0.5rem;
   background: transparent;
   color: var(--ns-gray-300);
-  padding: 1rem 2rem;
+  padding: 0.875rem 1.5rem;
   border-radius: 8px;
   font-weight: 500;
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   border: 1px solid var(--ns-gray-800);
   text-decoration: none;
   transition: all var(--duration-normal) var(--ease-out-expo);
   cursor: pointer;
+  min-height: 44px; /* Touch target */
+}
+
+@media (min-width: 640px) {
+  .btn-secondary {
+    gap: 0.625rem;
+    padding: 1rem 2rem;
+    font-size: 0.9375rem;
+  }
 }
 
 .btn-secondary:hover {
@@ -540,7 +558,10 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.875rem;
   font-weight: 500;
   transition: color var(--duration-fast);
-  padding: 0.25rem 0;
+  padding: 0.5rem 0;
+  min-height: 44px; /* Touch target */
+  display: inline-flex;
+  align-items: center;
 }
 
 .nav-link::after {
@@ -629,20 +650,33 @@ h1, h2, h3, h4, h5, h6 {
 .section-label {
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  font-size: 0.75rem;
+  gap: 0.5rem;
+  font-size: 0.6875rem;
   font-weight: 600;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ns-gray-500);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .section-label::before {
   content: '';
-  width: 24px;
+  width: 16px;
   height: 1px;
   background: var(--ns-gray-700);
+}
+
+@media (min-width: 640px) {
+  .section-label {
+    gap: 0.75rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    margin-bottom: 1.5rem;
+  }
+  
+  .section-label::before {
+    width: 24px;
+  }
 }
 
 /* ========================================
@@ -670,8 +704,22 @@ h1, h2, h3, h4, h5, h6 {
 .marquee-item {
   display: inline-flex;
   align-items: center;
-  gap: 3rem;
-  padding: 0 1.5rem;
+  gap: 1.5rem;
+  padding: 0 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .marquee-item {
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .marquee-item {
+    gap: 3rem;
+    padding: 0 1.5rem;
+  }
 }
 
 .marquee-divider {

@@ -7,6 +7,12 @@ export const metadata: Metadata = {
   keywords: ['video production', 'content strategy', 'social media management', 'photography', 'Melbourne', 'events', 'hospitality', 'lifestyle brands', 'meta ads'],
   authors: [{ name: 'NeverSmall Studios' }],
   metadataBase: new URL('https://neversmall.com.au'),
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+  },
   openGraph: {
     title: 'NeverSmall Studios',
     description: 'Full-service creative support: content, production, and strategy. All in one place.',
@@ -23,6 +29,11 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+  },
+  formatDetection: {
+    telephone: true,
+    email: true,
+    address: true,
   },
 }
 
