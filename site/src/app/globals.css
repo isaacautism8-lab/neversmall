@@ -847,6 +847,14 @@ h1, h2, h3, h4, h5, h6 {
   background-clip: text;
 }
 
+/* Vibrant gradient for headlines */
+.text-gradient-vibrant {
+  background: linear-gradient(135deg, var(--ns-coral) 0%, var(--ns-lavender) 50%, var(--ns-sky) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* ========================================
    DIVIDERS
    ======================================== */
