@@ -165,7 +165,7 @@ export default function Home() {
           <a href="#" className="flex items-center gap-3 group">
             <div className={`w-10 h-10 sm:w-11 sm:h-11 transition-all duration-700 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
               <Image 
-                src="/assets/NSS Logo.ico" 
+                src="/assets/NSS Logo.png" 
                 alt="neversmall studios" 
                 width={44} 
                 height={44}
@@ -229,7 +229,7 @@ export default function Home() {
             <div>
               <div className={`flex items-center gap-4 mb-8 transition-all duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
                 <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden logo-glow">
-                  <Image src="/assets/NSS Logo.ico" alt="neversmall studios" width={64} height={64} className="w-full h-full object-cover" priority />
+                  <Image src="/assets/NSS Logo.png" alt="neversmall studios" width={64} height={64} className="w-full h-full object-cover" priority />
                 </div>
                 <div>
                   <p className="text-white font-semibold text-lg">neversmall studios</p>
@@ -455,7 +455,7 @@ export default function Home() {
             <div className={`relative transition-all duration-1000 delay-300 ${aboutSection.isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
               <div className="relative bg-gradient-to-br from-gray-900 to-gray-950 rounded-3xl p-8 sm:p-12 text-center border border-gray-800/50">
                 <div className="w-28 h-28 sm:w-36 sm:h-36 mx-auto rounded-full overflow-hidden logo-glow-strong mb-8 animate-float">
-                  <Image src="/assets/NSS Logo.ico" alt="neversmall studios" width={144} height={144} className="w-full h-full object-cover" />
+                  <Image src="/assets/NSS Logo.png" alt="neversmall studios" width={144} height={144} className="w-full h-full object-cover" />
                 </div>
                 <p className="font-display text-2xl sm:text-3xl font-bold text-white">neversmall.</p>
                 <p className="text-gray-500 text-sm mt-2">creative agency • melbourne</p>
@@ -531,7 +531,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-4">
               <div className="w-10 h-10 rounded-full overflow-hidden">
-                <Image src="/assets/NSS Logo.ico" alt="neversmall studios" width={40} height={40} className="w-full h-full object-cover" />
+                <Image src="/assets/NSS Logo.png" alt="neversmall studios" width={40} height={40} className="w-full h-full object-cover" />
               </div>
               <div>
                 <span className="text-white font-semibold">neversmall.</span>

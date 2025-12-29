@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     url: 'https://neversmall.com.au',
     images: [
       {
-        url: '/assets/NSS Logo.ico',
+        url: '/assets/NSS Logo.png',
         width: 800,
         height: 800,
         alt: 'neversmall studios',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'neversmall studios',
     description: 'full-service creative support: content, production, and strategy. all in one place.',
-    images: ['/assets/NSS Logo.ico'],
+    images: ['/assets/NSS Logo.png'],
   },
   robots: {
     index: true,
