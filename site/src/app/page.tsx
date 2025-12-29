@@ -18,6 +18,8 @@ interface WorkItem {
   category: string
   year: string
   gradient: string
+  image: string
+  description: string
 }
 
 /* ========================================
@@ -71,37 +73,41 @@ const workItems: WorkItem[] = [
     title: 'tang events',
     category: 'event coverage',
     year: '2024',
-    gradient: 'from-violet-900/40 to-violet-700/20',
+    gradient: 'from-violet-900/60 to-violet-700/30',
+    image: '/assets/work-tang-events.jpg',
+    description: 'melbourne club nights and festivals. big moments captured and amplified for socials.',
+  },
+  {
+    title: 'intelliprop',
+    category: 'brand content',
+    year: '2024',
+    gradient: 'from-slate-800/60 to-slate-600/30',
+    image: '/assets/work-intelliprop.jpg',
+    description: 'professional interview series. compelling narratives that connect.',
   },
   {
     title: 'pretty privilege club',
     category: 'lifestyle',
     year: '2024',
-    gradient: 'from-rose-900/40 to-rose-700/20',
+    gradient: 'from-rose-900/60 to-rose-700/30',
+    image: '/assets/work-pretty-privilege.jpg',
+    description: 'rooftop events and golden hour moments. lifestyle content that stands out.',
   },
   {
     title: 'golden wok',
     category: 'food & beverage',
     year: '2023',
-    gradient: 'from-amber-900/40 to-amber-700/20',
+    gradient: 'from-amber-900/60 to-amber-700/30',
+    image: '/assets/work-golden-wok.jpg',
+    description: 'strategy, styling, shoot. visuals as punchy as the products.',
   },
   {
     title: 'naught gin',
     category: 'brand content',
     year: '2024',
-    gradient: 'from-purple-900/40 to-indigo-700/20',
-  },
-  {
-    title: 'mix & matcha',
-    category: 'food & beverage',
-    year: '2023',
-    gradient: 'from-emerald-900/40 to-emerald-700/20',
-  },
-  {
-    title: 'australian fashion week',
-    category: 'event coverage',
-    year: '2023',
-    gradient: 'from-sky-900/40 to-sky-700/20',
+    gradient: 'from-teal-900/60 to-teal-700/30',
+    image: '/assets/work-naught-gin.jpg',
+    description: 'bar culture and brand storytelling. authentic moments.',
   },
 ]
 
@@ -466,16 +472,24 @@ export default function Home() {
             aria-hidden="true"
           >
             <div className="relative">
-              <div className="glass rounded-3xl p-8 relative overflow-hidden">
+              <div className="glass rounded-3xl p-6 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-violet-500/10 to-rose-500/10" />
                 <div className="relative z-10">
-                  <div className="grid grid-cols-2 gap-4">
-                    {['tang events', 'naught gin', 'golden wok', 'pretty privilege club'].map((client, i) => (
+                  <div className="grid grid-cols-2 gap-3">
+                    {workItems.slice(0, 4).map((item) => (
                       <div 
-                        key={client}
-                        className={`aspect-square rounded-2xl bg-gradient-to-br ${workItems[i].gradient} flex items-end p-4 transition-all duration-500 hover:scale-105 cursor-pointer`}
+                        key={item.title}
+                        className="aspect-square rounded-xl overflow-hidden relative group transition-all duration-500 hover:scale-105 cursor-pointer"
                       >
-                        <span className="text-sm font-display font-semibold text-white/90">{client}</span>
+                        <Image
+                          src={item.image}
+                          alt={item.title}
+                          fill
+                          sizes="200px"
+                          className="object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                        <span className="absolute bottom-3 left-3 text-sm font-display font-semibold text-white/90">{item.title}</span>
                       </div>
                     ))}
                   </div>
@@ -548,31 +562,46 @@ export default function Home() {
                 style={{ transitionDelay: `${300 + index * 100}ms` }}
               >
                 <div className={`aspect-[4/5] relative overflow-hidden rounded-2xl bg-gradient-to-br ${item.gradient}`}>
+                  {/* Background Image */}
+                  <Image
+                    src={item.image}
+                    alt={`${item.title} - ${item.category}`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  
+                  {/* Overlay gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                  
                   <div className="card-glow" />
                   
                   {/* Center play button */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
+                  <div className="absolute inset-0 flex items-center justify-center z-10">
+                    <div className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
                       <Play size={20} className="ml-1 text-white" aria-hidden="true" />
                     </div>
                   </div>
                   
                   {/* Content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+                  <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 z-10">
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xs font-semibold text-gray-400 tracking-wide uppercase">
+                      <span className="text-xs font-semibold text-gray-300 tracking-wide uppercase">
                         {item.category}
                       </span>
-                      <span className="text-gray-600" aria-hidden="true">·</span>
-                      <span className="text-xs text-gray-500">{item.year}</span>
+                      <span className="text-gray-500" aria-hidden="true">·</span>
+                      <span className="text-xs text-gray-400">{item.year}</span>
                     </div>
                     <h3 className="font-display text-xl sm:text-2xl font-semibold text-white group-hover:text-violet-300 transition-colors duration-300">
                       {item.title}
                     </h3>
+                    <p className="text-gray-400 text-xs sm:text-sm mt-2 line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      {item.description}
+                    </p>
                   </div>
                   
                   {/* Hover arrow */}
-                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0 z-10">
                     <ArrowUpRight size={20} className="text-white" aria-hidden="true" />
                   </div>
                 </div>
