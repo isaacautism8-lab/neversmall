@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { ArrowRight, Mail, ArrowUpRight, Play, Camera, Film, Palette, Users, ChevronDown } from 'lucide-react'
+import { ArrowRight, Mail, ArrowUpRight, Play, Camera, Film, Share2, Target } from 'lucide-react'
 import Image from 'next/image'
 
 /* ========================================
@@ -16,26 +16,46 @@ const clients = [
   'Australian Fashion Week',
 ]
 
-const services = [
+const serviceCategories = [
   {
+    title: 'Videography',
     icon: Film,
-    title: 'Video Production',
-    description: 'From concept through final delivery. Event coverage, brand films, and content that resonates with your audience.',
+    items: [
+      'Event coverage (recaps, BTS, highlights)',
+      'Brand campaigns & hero videos',
+      'Short-form social content',
+      'Interviews & storytelling',
+    ],
   },
   {
+    title: 'Social Media Management',
+    icon: Share2,
+    items: [
+      'Content calendar & posting schedule',
+      'Caption writing & copy support',
+      'Analytics & reporting',
+      'Strategy consulting',
+    ],
+  },
+  {
+    title: 'Photography',
     icon: Camera,
-    title: 'Content Creation',
-    description: 'Photography and video tailored for social platforms. Authentic moments captured with intention and craft.',
+    items: [
+      'Product photography',
+      'Lifestyle & campaign shoots',
+      'Event photography',
+      'Creative & Art direction + Production',
+    ],
   },
   {
-    icon: Palette,
-    title: 'Post-Production',
-    description: 'Color grading, editing, and motion graphics. The refinement that elevates good footage into exceptional content.',
-  },
-  {
-    icon: Users,
-    title: 'Creative Direction',
-    description: 'Strategic thinking that shapes every project. We help you find and tell the story worth sharing.',
+    title: 'Meta Ads',
+    icon: Target,
+    items: [
+      'Campaign strategy & setup',
+      'Retargeting & audience segmentation',
+      'A/B testing (ad copy, visuals, formats)',
+      'Performance tracking & optimisation',
+    ],
   },
 ]
 
@@ -102,27 +122,6 @@ function useScrollPosition() {
 }
 
 /* ========================================
-   COMPONENTS
-   ======================================== */
-function AnimatedText({ children, delay = 0, className = '' }: { children: React.ReactNode, delay?: number, className?: string }) {
-  const { ref, isVisible } = useIntersectionObserver()
-  
-  return (
-    <div 
-      ref={ref}
-      className={`transition-all duration-700 ${className}`}
-      style={{
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
-        transitionDelay: `${delay}ms`,
-      }}
-    >
-      {children}
-    </div>
-  )
-}
-
-/* ========================================
    MAIN COMPONENT
    ======================================== */
 export default function Home() {
@@ -136,7 +135,6 @@ export default function Home() {
   const contactSection = useIntersectionObserver()
 
   useEffect(() => {
-    // Slight delay for smoother initial load
     const timer = setTimeout(() => setIsLoaded(true), 100)
     return () => clearTimeout(timer)
   }, [])
@@ -215,17 +213,24 @@ export default function Home() {
             </div>
           </div>
           
+          {/* Tagline */}
+          <p 
+            className={`text-sm md:text-base font-semibold tracking-[0.2em] uppercase text-gray-500 mb-6 transition-all duration-700 delay-200 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+          >
+            Don't sell yourself short.
+          </p>
+          
           {/* Headline with staggered reveal */}
           <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] font-bold tracking-tight">
             <span 
               className={`block text-white transition-all duration-700 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
             >
-              Creative production
+              Full-service creative
             </span>
             <span 
               className={`block text-gradient-warm mt-2 transition-all duration-700 delay-450 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
             >
-              for thoughtful brands
+              all in one place
             </span>
           </h1>
           
@@ -233,7 +238,7 @@ export default function Home() {
           <p 
             className={`text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mt-8 mb-12 leading-relaxed transition-all duration-700 delay-600 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
           >
-            Video production, content strategy, and post-production for events, hospitality, and lifestyle brands in Melbourne.
+            We're a team of creatives, storytellers, and marketers delivering full-service support: content, production, and strategy.
           </p>
           
           {/* CTAs */}
@@ -341,7 +346,7 @@ export default function Home() {
             className={`mt-16 text-center transition-all duration-700 delay-700 ${workSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
           >
             <a 
-              href="https://instagram.com/neversmallstudios" 
+              href="https://instagram.com/neversmall.studios" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-all duration-300 group text-sm font-medium"
@@ -353,42 +358,54 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* Services Section - Menu Style */}
       <section id="services" ref={servicesSection.ref} className="section-padding bg-[#0a0a0a]">
         <div className="container-wide px-6">
-          <div className="max-w-2xl mx-auto text-center mb-20">
-            <div 
-              className={`section-label justify-center transition-all duration-700 ${servicesSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-            >
-              What We Do
-            </div>
+          {/* Menu Header */}
+          <div className="max-w-4xl mx-auto text-center mb-20">
             <h2 
-              className={`font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white transition-all duration-700 delay-100 ${servicesSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+              className={`font-display text-7xl md:text-8xl lg:text-9xl font-bold text-white tracking-tight transition-all duration-700 ${servicesSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
             >
-              Full-service creative
+              MENU
             </h2>
             <p 
-              className={`text-gray-400 text-lg mt-5 leading-relaxed transition-all duration-700 delay-200 ${servicesSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+              className={`text-sm md:text-base font-semibold tracking-[0.15em] uppercase text-gray-500 mt-8 mb-4 transition-all duration-700 delay-100 ${servicesSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
             >
-              From initial concept through final delivery. We handle the creative work so you can focus on what matters.
+              Don't sell yourself short.
+            </p>
+            <p 
+              className={`text-gray-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed transition-all duration-700 delay-200 ${servicesSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+            >
+              We're a team of creatives, storytellers, and marketers delivering full-service support: content, production, and strategy. All in one place.
             </p>
           </div>
           
-          {/* Services Grid */}
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {services.map((service, index) => {
-              const Icon = service.icon
+          {/* Services Grid - Menu Style */}
+          <div className="grid md:grid-cols-2 gap-x-16 gap-y-16 max-w-5xl mx-auto">
+            {serviceCategories.map((category, index) => {
+              const Icon = category.icon
               return (
                 <div 
                   key={index} 
-                  className={`service-card transition-all duration-700 ${servicesSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                  className={`transition-all duration-700 ${servicesSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                   style={{ transitionDelay: `${300 + index * 100}ms` }}
                 >
-                  <div className="service-icon">
-                    <Icon size={22} className="text-gray-400" strokeWidth={1.5} />
+                  <div className="flex items-center gap-3 mb-6">
+                    <Icon size={18} className="text-gray-500" strokeWidth={1.5} />
+                    <h3 className="font-display text-lg font-bold text-white tracking-wide uppercase">
+                      {category.title}
+                    </h3>
                   </div>
-                  <h3 className="font-display text-xl font-semibold text-white mb-3">{service.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">{service.description}</p>
+                  <ul className="space-y-3">
+                    {category.items.map((item, itemIndex) => (
+                      <li 
+                        key={itemIndex} 
+                        className="text-gray-400 text-sm leading-relaxed pl-7"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               )
             })}
@@ -492,20 +509,20 @@ export default function Home() {
           </p>
           
           <a 
-            href="mailto:hello@neversmall.com" 
+            href="mailto:hello@neversmall.com.au" 
             className={`inline-flex items-center gap-4 text-2xl md:text-3xl font-display font-semibold text-warm hover:text-white transition-all duration-500 group ${contactSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
             style={{ transitionDelay: '300ms' }}
           >
             <div className="btn-icon group-hover:scale-110 group-hover:bg-gray-800 transition-all duration-300">
               <Mail size={20} />
             </div>
-            <span>hello@neversmall.com</span>
+            <span>hello@neversmall.com.au</span>
           </a>
           
           <div className="divider my-14" />
           
           <a 
-            href="https://instagram.com/neversmallstudios" 
+            href="https://instagram.com/neversmall.studios" 
             target="_blank" 
             rel="noopener noreferrer" 
             className={`inline-flex items-center gap-2 text-gray-500 hover:text-white transition-all duration-300 text-sm font-medium ${contactSection.isVisible ? 'opacity-100' : 'opacity-0'}`}
@@ -531,6 +548,23 @@ export default function Home() {
               />
             </div>
             <span className="text-sm text-gray-500 font-medium">NeverSmall Studios</span>
+          </div>
+          
+          <div className="flex items-center gap-6 text-sm text-gray-600">
+            <a 
+              href="https://instagram.com/neversmall.studios" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              Instagram
+            </a>
+            <a 
+              href="mailto:hello@neversmall.com.au"
+              className="hover:text-white transition-colors"
+            >
+              Email
+            </a>
           </div>
           
           <p className="text-gray-600 text-sm">

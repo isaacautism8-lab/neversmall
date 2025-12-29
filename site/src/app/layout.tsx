@@ -3,20 +3,22 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'NeverSmall Studios | Creative Production Melbourne',
-  description: 'Video production, content strategy, and post-production for events, hospitality, and lifestyle brands. Based in Melbourne, Australia.',
-  keywords: ['video production', 'content strategy', 'creative studio', 'Melbourne', 'events', 'hospitality', 'lifestyle brands'],
+  description: 'Video production, content strategy, social media management, and photography for events, hospitality, and lifestyle brands. Based in Melbourne, Australia.',
+  keywords: ['video production', 'content strategy', 'social media management', 'photography', 'Melbourne', 'events', 'hospitality', 'lifestyle brands', 'meta ads'],
   authors: [{ name: 'NeverSmall Studios' }],
+  metadataBase: new URL('https://neversmall.com.au'),
   openGraph: {
     title: 'NeverSmall Studios',
-    description: 'Creative production for thoughtful brands.',
+    description: 'Full-service creative support: content, production, and strategy. All in one place.',
     type: 'website',
     locale: 'en_AU',
     siteName: 'NeverSmall Studios',
+    url: 'https://neversmall.com.au',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'NeverSmall Studios',
-    description: 'Creative production for thoughtful brands.',
+    description: 'Full-service creative support: content, production, and strategy. All in one place.',
   },
   robots: {
     index: true,
