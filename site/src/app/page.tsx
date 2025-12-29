@@ -1,8 +1,9 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { ArrowRight, Mail, ArrowUpRight, Play, Camera, Film, Share2, Target, Menu, X, Instagram, Sun, Moon } from 'lucide-react'
+import { ArrowRight, Mail, ArrowUpRight, Play, Camera, Film, Share2, Target, Menu, X, Instagram, Sun, Moon, ChevronDown } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 /* ========================================
    TYPE DEFINITIONS
@@ -53,7 +54,7 @@ const serviceCategories: ServiceCategory[] = [
       'product photography',
       'lifestyle & campaign shoots',
       'event photography',
-      'creative & art direction + production',
+      'creative direction & production',
     ],
   },
   {
@@ -75,7 +76,7 @@ const workItems: WorkItem[] = [
     year: '2024',
     gradient: 'from-violet-900/60 to-violet-700/30',
     image: '/assets/tang.png',
-    description: 'melbourne club nights and festivals. big moments captured and amplified for socials.',
+    description: 'club nights and festivals across melbourne. energy captured, amplified for socials.',
   },
   {
     title: 'intelliprop',
@@ -83,7 +84,7 @@ const workItems: WorkItem[] = [
     year: '2024',
     gradient: 'from-slate-800/60 to-slate-600/30',
     image: '/assets/intelliprop.png',
-    description: 'professional interview series. compelling narratives that connect.',
+    description: 'interview series for property professionals. story-led content that builds trust.',
   },
   {
     title: 'pretty privilege club',
@@ -91,7 +92,7 @@ const workItems: WorkItem[] = [
     year: '2024',
     gradient: 'from-rose-900/60 to-rose-700/30',
     image: '/assets/pretty_privilege.png',
-    description: 'rooftop events and golden hour moments. lifestyle content that stands out.',
+    description: 'rooftop events, golden hour moments. content that matches the vibe.',
   },
   {
     title: 'golden wok',
@@ -99,7 +100,7 @@ const workItems: WorkItem[] = [
     year: '2023',
     gradient: 'from-amber-900/60 to-amber-700/30',
     image: '/assets/golden_wok.png',
-    description: 'strategy, styling, shoot. visuals as punchy as the products.',
+    description: 'food photography and styling. making dumplings look as good as they taste.',
   },
   {
     title: 'naught gin',
@@ -107,7 +108,7 @@ const workItems: WorkItem[] = [
     year: '2024',
     gradient: 'from-teal-900/60 to-teal-700/30',
     image: '/assets/naught_gin.png',
-    description: 'bar culture and brand storytelling. authentic moments.',
+    description: 'bar culture, real people. brand storytelling that feels genuine.',
   },
 ]
 
@@ -146,10 +147,7 @@ function useScrollPosition() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50)
     }
-    
-    // Check on mount
     handleScroll()
-    
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -161,11 +159,8 @@ function useTheme() {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark')
 
   useEffect(() => {
-    // Check for saved preference or system preference
     const saved = localStorage.getItem('theme') as 'dark' | 'light' | null
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    
-    const initialTheme = saved || (prefersDark ? 'dark' : 'dark') // Default to dark
+    const initialTheme = saved || 'dark'
     setTheme(initialTheme)
     document.documentElement.setAttribute('data-theme', initialTheme)
   }, [])
@@ -186,23 +181,21 @@ function useTheme() {
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false)
   const scrolled = useScrollPosition()
   const { theme, toggleTheme } = useTheme()
   
-  // Section visibility observers
   const heroSection = useIntersectionObserver()
   const workSection = useIntersectionObserver()
   const servicesSection = useIntersectionObserver()
   const aboutSection = useIntersectionObserver()
   const contactSection = useIntersectionObserver()
 
-  // Initial load animation
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100)
     return () => clearTimeout(timer)
   }, [])
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden'
@@ -217,29 +210,29 @@ export default function Home() {
     }
   }, [mobileMenuOpen])
 
-  // Close mobile menu on escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && mobileMenuOpen) {
+      if (e.key === 'Escape') {
         setMobileMenuOpen(false)
+        setServicesDropdownOpen(false)
       }
     }
     document.addEventListener('keydown', handleEscape)
     return () => document.removeEventListener('keydown', handleEscape)
-  }, [mobileMenuOpen])
+  }, [])
 
   const closeMobileMenu = useCallback(() => setMobileMenuOpen(false), [])
 
   return (
     <main className="min-h-screen overflow-x-hidden">
-      {/* Animated Gradient Orbs - Performance optimized */}
+      {/* Animated Gradient Orbs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
         <div className="gradient-orb gradient-orb-1" />
         <div className="gradient-orb gradient-orb-2" />
         <div className="gradient-orb gradient-orb-3" />
       </div>
 
-      {/* Skip Link for Accessibility */}
+      {/* Skip Link */}
       <a href="#main-content" className="skip-link">
         Skip to main content
       </a>
@@ -252,10 +245,10 @@ export default function Home() {
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
           {/* Logo */}
-          <a 
-            href="#" 
+          <Link 
+            href="/" 
             className="flex items-center gap-2 sm:gap-3 group"
-            aria-label="neversmall studios - Home"
+            aria-label="neversmall studios"
           >
             <div 
               className={`w-10 h-10 sm:w-11 sm:h-11 rounded-full overflow-hidden logo-glow transition-all duration-700 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}
@@ -274,24 +267,55 @@ export default function Home() {
             >
               neversmall.
             </span>
-          </a>
+          </Link>
           
           {/* Desktop Navigation */}
           <div 
             className={`hidden md:flex items-center gap-8 lg:gap-10 transition-all duration-700 delay-150 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
           >
             <a href="#work" className="nav-link">work</a>
-            <a href="#services" className="nav-link">services</a>
+            
+            {/* Services Dropdown */}
+            <div className="relative">
+              <button 
+                onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
+                className="nav-link flex items-center gap-1"
+                aria-expanded={servicesDropdownOpen}
+                aria-haspopup="true"
+              >
+                menu
+                <ChevronDown size={14} className={`transition-transform duration-200 ${servicesDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+              
+              {servicesDropdownOpen && (
+                <div 
+                  className="absolute top-full left-0 mt-2 w-56 glass rounded-xl p-2 shadow-xl"
+                  onMouseLeave={() => setServicesDropdownOpen(false)}
+                >
+                  <Link 
+                    href="/menu" 
+                    className="block px-4 py-3 text-sm hover:bg-white/10 rounded-lg transition-colors"
+                    onClick={() => setServicesDropdownOpen(false)}
+                  >
+                    view full menu
+                  </Link>
+                  <div className="border-t border-white/10 my-1" />
+                  {serviceCategories.map((cat) => (
+                    <a 
+                      key={cat.title}
+                      href={`#services`} 
+                      className="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                      onClick={() => setServicesDropdownOpen(false)}
+                    >
+                      {cat.title}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+            
             <a href="#about" className="nav-link">about</a>
-            <a 
-              href="https://instagram.com/neversmall.studios" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="nav-link"
-              aria-label="Follow us on Instagram"
-            >
-              <Instagram size={18} aria-hidden="true" />
-            </a>
+            <a href="#contact" className="nav-link">contact</a>
           </div>
           
           {/* Desktop Actions */}
@@ -303,8 +327,14 @@ export default function Home() {
             >
               {theme === 'dark' ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
             </button>
-            <a href="#contact" className="btn-primary text-sm py-2.5 px-5">
-              let's talk
+            <a 
+              href="https://instagram.com/neversmall.studios" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="nav-link"
+              aria-label="Instagram"
+            >
+              <Instagram size={18} aria-hidden="true" />
             </a>
           </div>
 
@@ -324,11 +354,7 @@ export default function Home() {
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
             >
-              {mobileMenuOpen ? (
-                <X size={22} aria-hidden="true" />
-              ) : (
-                <Menu size={22} aria-hidden="true" />
-              )}
+              {mobileMenuOpen ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
             </button>
           </div>
         </div>
@@ -351,14 +377,14 @@ export default function Home() {
             >
               work
             </a>
-            <a 
-              href="#services" 
+            <Link 
+              href="/menu" 
               onClick={closeMobileMenu}
               className="text-2xl font-display font-semibold hover:text-violet-400 transition-colors"
               tabIndex={mobileMenuOpen ? 0 : -1}
             >
-              services
-            </a>
+              menu
+            </Link>
             <a 
               href="#about" 
               onClick={closeMobileMenu}
@@ -370,10 +396,10 @@ export default function Home() {
             <a 
               href="#contact" 
               onClick={closeMobileMenu}
-              className="btn-primary mt-4"
+              className="text-2xl font-display font-semibold hover:text-violet-400 transition-colors"
               tabIndex={mobileMenuOpen ? 0 : -1}
             >
-              let's talk
+              contact
             </a>
             <div className="absolute bottom-12 text-center">
               <p className="slogan slogan-medium mb-4">Don't sell yourself short.</p>
@@ -419,7 +445,7 @@ export default function Home() {
             <p 
               className={`section-label justify-center lg:justify-start mt-8 transition-all duration-700 delay-200 ${heroSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
             >
-              creative agency • melbourne
+              melbourne creative studio
             </p>
             
             <h1 
@@ -453,15 +479,12 @@ export default function Home() {
             </p>
             
             <div 
-              className={`flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 transition-all duration-700 ${heroSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+              className={`transition-all duration-700 ${heroSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
               style={{ transitionDelay: '900ms' }}
             >
-              <a href="#work" className="btn-primary w-full sm:w-auto">
-                view our work
+              <a href="#work" className="btn-primary">
+                see the work
                 <ArrowRight size={16} aria-hidden="true" />
-              </a>
-              <a href="#contact" className="btn-secondary w-full sm:w-auto">
-                let's chat
               </a>
             </div>
           </div>
@@ -538,18 +561,18 @@ export default function Home() {
             <span 
               className={`section-label transition-all duration-700 ${workSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
             >
-              selected work
+              recent projects
             </span>
             <h2 
               id="work-heading"
               className={`font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold uppercase transition-all duration-700 delay-100 ${workSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
             >
-              client wins
+              the work
             </h2>
             <p 
               className={`text-base sm:text-lg mt-4 sm:mt-5 leading-relaxed transition-all duration-700 delay-200 ${workSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
             >
-              every project is different because every client is different. we craft unique stories that clarify and visuals that resonate.
+              A few things we've made recently. Each one different, each one made to fit.
             </p>
           </div>
           
@@ -562,7 +585,6 @@ export default function Home() {
                 style={{ transitionDelay: `${300 + index * 100}ms` }}
               >
                 <div className={`aspect-[4/5] relative overflow-hidden rounded-2xl bg-gradient-to-br ${item.gradient}`}>
-                  {/* Background Image */}
                   <Image
                     src={item.image}
                     alt={`${item.title} - ${item.category}`}
@@ -571,19 +593,15 @@ export default function Home() {
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   
-                  {/* Overlay gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-                  
                   <div className="card-glow" />
                   
-                  {/* Center play button */}
                   <div className="absolute inset-0 flex items-center justify-center z-10">
                     <div className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
                       <Play size={20} className="ml-1 text-white" aria-hidden="true" />
                     </div>
                   </div>
                   
-                  {/* Content */}
                   <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 z-10">
                     <div className="flex items-center gap-2 mb-2">
                       <span className="text-xs font-semibold text-gray-300 tracking-wide uppercase">
@@ -600,7 +618,6 @@ export default function Home() {
                     </p>
                   </div>
                   
-                  {/* Hover arrow */}
                   <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0 z-10">
                     <ArrowUpRight size={20} className="text-white" aria-hidden="true" />
                   </div>
@@ -623,7 +640,7 @@ export default function Home() {
             <span 
               className={`section-label justify-center transition-all duration-700 ${servicesSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
             >
-              what we offer
+              services
             </span>
             <h2 
               id="services-heading"
@@ -639,7 +656,7 @@ export default function Home() {
             <p 
               className={`text-sm sm:text-base md:text-lg max-w-xl sm:max-w-2xl mx-auto leading-relaxed transition-all duration-700 delay-200 ${servicesSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
             >
-              we're a team of creatives, storytellers, and marketers delivering full-service support: content, production, and strategy. all in one place.
+              Video, photo, socials, ads. We handle it all so you don't have to juggle five different freelancers.
             </p>
           </div>
           
@@ -675,6 +692,13 @@ export default function Home() {
               )
             })}
           </div>
+          
+          <div className={`text-center mt-12 transition-all duration-700 delay-700 ${servicesSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+            <Link href="/menu" className="btn-secondary inline-flex items-center gap-2 text-gray-900 border-gray-300 hover:border-violet-500">
+              view full menu
+              <ArrowRight size={16} />
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -691,27 +715,26 @@ export default function Home() {
               <span 
                 className={`section-label transition-all duration-700 ${aboutSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
               >
-                about us
+                about
               </span>
               <h2 
                 id="about-heading"
                 className={`font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold uppercase transition-all duration-700 delay-100 ${aboutSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
               >
-                what it's like <br className="hidden sm:block" />
-                working with us
+                who we are
               </h2>
               
               <div 
                 className={`space-y-4 sm:space-y-5 text-sm sm:text-base leading-relaxed mt-6 sm:mt-8 transition-all duration-700 delay-200 ${aboutSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
               >
                 <p>
-                  neversmall studios is a creative production team based in melbourne. we work with brands in events, food & beverage, music, and lifestyle—people who give a damn about how their story is told.
+                  We're a small team in Melbourne making content for events, hospitality, and lifestyle brands. Mostly video and photo, but we do socials and ads too.
                 </p>
                 <p>
-                  we're not the cheapest option, and we're not trying to be. our focus is on work that's considered, well-crafted, and effective. every project receives the same level of attention.
+                  We work with people who care about how their brand looks and sounds. The kind who notice when something's off. If that's you, we'll probably get along.
                 </p>
                 <p>
-                  if you're looking for a creative partner who takes the work seriously, we should talk.
+                  We're selective about who we work with because we want to do good work, not just more work. If the fit's right, we go all in.
                 </p>
               </div>
               
@@ -719,7 +742,7 @@ export default function Home() {
                 href="#contact" 
                 className={`inline-flex items-center gap-2 mt-8 sm:mt-10 font-medium group min-h-[44px] hover:text-violet-400 transition-all duration-700 delay-300 ${aboutSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
               >
-                start a conversation
+                get in touch
                 <ArrowRight size={16} className="group-hover:translate-x-1.5 transition-transform duration-300" aria-hidden="true" />
               </a>
             </div>
@@ -729,10 +752,8 @@ export default function Home() {
               className={`relative flex items-center justify-center transition-all duration-1000 delay-300 ${aboutSection.isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
             >
               <div className="relative w-full max-w-sm sm:max-w-md mx-auto">
-                {/* Ambient glow */}
                 <div className="absolute inset-0 bg-gradient-to-br from-violet-500/20 to-rose-500/10 rounded-3xl blur-3xl scale-110" aria-hidden="true" />
                 
-                {/* Card */}
                 <div className="relative glass rounded-3xl p-8 sm:p-12 text-center">
                   <div className="w-28 h-28 sm:w-32 sm:h-32 mx-auto rounded-full overflow-hidden logo-glow-strong mb-6 animate-glow">
                     <Image 
@@ -756,14 +777,14 @@ export default function Home() {
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-violet-500/20 hover:scale-110 transition-all duration-300"
-                      aria-label="Follow us on Instagram"
+                      aria-label="Instagram"
                     >
                       <Instagram size={16} aria-hidden="true" />
                     </a>
                     <a 
                       href="mailto:hello@neversmall.com.au"
                       className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-violet-500/20 hover:scale-110 transition-all duration-300"
-                      aria-label="Email us"
+                      aria-label="Email"
                     >
                       <Mail size={16} aria-hidden="true" />
                     </a>
@@ -775,33 +796,31 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Contact Section */}
       <section 
         id="contact" 
         ref={contactSection.ref} 
         className="section-padding section-light relative z-10 overflow-hidden"
         aria-labelledby="contact-heading"
       >
-        {/* Gradient accent */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-b from-violet-500/10 to-transparent rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
         
         <div className="max-w-3xl mx-auto text-center px-4 sm:px-6 relative z-10">
           <span 
             className={`section-label justify-center transition-all duration-700 ${contactSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
           >
-            get in touch
+            contact
           </span>
           <h2 
             id="contact-heading"
             className={`font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold uppercase transition-all duration-700 delay-100 ${contactSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
           >
-            let's make <br />
-            something.
+            say hello
           </h2>
           <p 
             className={`text-base sm:text-lg mt-4 sm:mt-6 mb-8 sm:mb-12 max-w-xl mx-auto leading-relaxed transition-all duration-700 delay-200 ${contactSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
           >
-            we'd like to hear about it. reach out and let's discuss how we can help bring your vision to life.
+            Got a project in mind? Tell us about it. No forms, just email.
           </p>
           
           <a 
@@ -845,25 +864,15 @@ export default function Home() {
             <span className="text-sm text-gray-500 font-medium">neversmall.</span>
           </div>
           
-          <nav className="flex items-center gap-6 sm:gap-8 text-sm text-gray-600" aria-label="Footer navigation">
-            <a 
-              href="https://instagram.com/neversmall.studios" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="hover:text-violet-400 transition-colors min-h-[44px] flex items-center"
-            >
-              instagram
-            </a>
-            <a 
-              href="mailto:hello@neversmall.com.au"
-              className="hover:text-violet-400 transition-colors min-h-[44px] flex items-center"
-            >
-              email
-            </a>
+          <nav className="flex items-center gap-6 sm:gap-8 text-sm text-gray-600" aria-label="Footer">
+            <a href="#work" className="hover:text-violet-400 transition-colors min-h-[44px] flex items-center">work</a>
+            <Link href="/menu" className="hover:text-violet-400 transition-colors min-h-[44px] flex items-center">menu</Link>
+            <a href="#about" className="hover:text-violet-400 transition-colors min-h-[44px] flex items-center">about</a>
+            <a href="#contact" className="hover:text-violet-400 transition-colors min-h-[44px] flex items-center">contact</a>
           </nav>
           
           <p className="text-gray-600 text-xs sm:text-sm text-center md:text-right">
-            © {new Date().getFullYear()} neversmall studios. melbourne.
+            © {new Date().getFullYear()} neversmall studios
           </p>
         </div>
       </footer>
