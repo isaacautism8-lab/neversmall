@@ -152,7 +152,7 @@ export default function Home() {
             <div className={`logo-container w-9 h-9 sm:w-10 sm:h-10 transition-all duration-700 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
               <Image 
                 src="/assets/NSS Logo.jpg" 
-                alt="NeverSmall Studios" 
+                alt="neversmall studios" 
                 width={40} 
                 height={40}
                 className="w-full h-full object-cover rounded-full"
@@ -160,7 +160,7 @@ export default function Home() {
               />
             </div>
             <div className={`hidden sm:block transition-all duration-700 delay-75 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-              <span className="text-[10px] font-semibold tracking-[0.2em] text-gray-500 uppercase">NeverSmall</span>
+              <span className="text-[10px] font-semibold tracking-[0.2em] text-gray-500">neversmall</span>
               <span className="block text-sm font-semibold text-white -mt-0.5 tracking-tight">Studios</span>
             </div>
           </a>
@@ -210,7 +210,7 @@ export default function Home() {
           
           {/* Human intro */}
           <p className={`text-gray-400 text-sm sm:text-base mb-4 transition-all duration-700 delay-200 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-            Hey, we're NeverSmall Studios.
+            hey, we're neversmall studios.
           </p>
           
           {/* Headline */}
@@ -512,7 +512,7 @@ export default function Home() {
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-between pt-6 border-t border-gray-900/30">
             <p className="slogan slogan-small opacity-50">don't sell yourself short.</p>
             <p className="text-gray-600 text-xs sm:text-sm text-center">
-              © {new Date().getFullYear()} NeverSmall Studios. Melbourne.
+              © {new Date().getFullYear()} neversmall studios. melbourne.
             </p>
           </div>
         </div>

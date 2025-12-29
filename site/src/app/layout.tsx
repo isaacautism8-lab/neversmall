@@ -2,10 +2,10 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'NeverSmall Studios | Creative Production Melbourne',
+  title: 'neversmall studios | creative production melbourne',
   description: 'Video production, content strategy, social media management, and photography for events, hospitality, and lifestyle brands. Based in Melbourne, Australia.',
   keywords: ['video production', 'content strategy', 'social media management', 'photography', 'Melbourne', 'events', 'hospitality', 'lifestyle brands', 'meta ads'],
-  authors: [{ name: 'NeverSmall Studios' }],
+  authors: [{ name: 'neversmall studios' }],
   metadataBase: new URL('https://neversmall.com.au'),
   viewport: {
     width: 'device-width',
@@ -19,25 +19,25 @@ export const metadata: Metadata = {
     apple: '/assets/NSS Logo.jpg',
   },
   openGraph: {
-    title: 'NeverSmall Studios',
-    description: 'Full-service creative support: content, production, and strategy. All in one place.',
+    title: 'neversmall studios',
+    description: 'full-service creative support: content, production, and strategy. all in one place.',
     type: 'website',
     locale: 'en_AU',
-    siteName: 'NeverSmall Studios',
+    siteName: 'neversmall studios',
     url: 'https://neversmall.com.au',
     images: [
       {
         url: '/assets/NSS Logo.jpg',
         width: 800,
         height: 800,
-        alt: 'NeverSmall Studios',
+        alt: 'neversmall studios',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'NeverSmall Studios',
-    description: 'Full-service creative support: content, production, and strategy. All in one place.',
+    title: 'neversmall studios',
+    description: 'full-service creative support: content, production, and strategy. all in one place.',
     images: ['/assets/NSS Logo.jpg'],
   },
   robots: {
