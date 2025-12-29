@@ -34,7 +34,7 @@ const services = [
   {
     title: 'social media',
     icon: Share2,
-    description: 'We can run your socials or just support what you're already doing. Flexible.',
+    description: "We can run your socials or just support what you're already doing. Flexible.",
     items: [
       { name: 'content calendar', detail: 'planning and scheduling' },
       { name: 'copywriting', detail: 'captions, hooks, CTAs' },
