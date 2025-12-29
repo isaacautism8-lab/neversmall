@@ -1,18 +1,6 @@
 ---
-description: NeverSmall Narrative Standards - Voice, tone, and content guidelines
-alwaysApply: false
-globs:
-  - "**/*content*"
-  - "**/*copy*"
-  - "**/*narrative*"
-  - "**/*.md"
-  - "**/pages/**/*"
-  - "**/components/**/*"
-version: 1.0.0
-lastUpdated: 2025-12-30
-owner: neversmall
+alwaysApply: true
 ---
-
 # NeverSmall Narrative Standards
 
 **Purpose:** Define the exact voice, tone, and narrative approach for all NeverSmall communications. This is a core defensibility asset—the NeverSmall "feel" is hard to replicate.

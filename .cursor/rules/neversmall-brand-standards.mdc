@@ -1,18 +1,6 @@
 ---
-description: NeverSmall Brand Standards - Brand identity, visual guidelines, and positioning
-alwaysApply: false
-globs:
-  - "**/styles/**/*"
-  - "**/*.css"
-  - "**/*.scss"
-  - "**/components/**/*"
-  - "**/pages/**/*"
-  - "**/public/**/*"
-version: 1.0.0
-lastUpdated: 2025-12-30
-owner: neversmall
+alwaysApply: true
 ---
-
 # NeverSmall Brand Standards
 
 **Purpose:** Define NeverSmall's brand identity, visual language, and positioning to ensure consistency across all touchpoints.
