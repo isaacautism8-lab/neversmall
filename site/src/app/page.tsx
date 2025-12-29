@@ -165,7 +165,7 @@ export default function Home() {
           <a href="#" className="flex items-center gap-3 group">
             <div className={`w-10 h-10 sm:w-11 sm:h-11 transition-all duration-700 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
               <Image 
-                src="/assets/NSS Logo.jpg" 
+                src="/assets/NSS Logo.ico" 
                 alt="neversmall studios" 
                 width={44} 
                 height={44}
@@ -210,7 +210,7 @@ export default function Home() {
               <Instagram size={28} /> instagram
             </a>
             <a href="#contact" onClick={closeMobileMenu} className="btn-primary mt-6 text-lg px-8 py-4">Let's Talk</a>
-            <p className="slogan text-lg text-center mt-8 opacity-60">don't sell yourself short.</p>
+            <p className="slogan text-lg text-center mt-8 opacity-60">Don't sell yourself short.</p>
           </div>
         </div>
       </nav>
@@ -229,7 +229,7 @@ export default function Home() {
             <div>
               <div className={`flex items-center gap-4 mb-8 transition-all duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
                 <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden logo-glow">
-                  <Image src="/assets/NSS Logo.jpg" alt="neversmall studios" width={64} height={64} className="w-full h-full object-cover" priority />
+                  <Image src="/assets/NSS Logo.ico" alt="neversmall studios" width={64} height={64} className="w-full h-full object-cover" priority />
                 </div>
                 <div>
                   <p className="text-white font-semibold text-lg">neversmall studios</p>
@@ -244,7 +244,7 @@ export default function Home() {
               </h1>
               
               <p className={`slogan slogan-large mt-8 transition-all duration-700 delay-400 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-                don't sell yourself short.
+                Don't sell yourself short.
               </p>
               
               <p className={`text-gray-400 text-lg max-w-md mt-6 leading-relaxed transition-all duration-700 delay-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
@@ -381,7 +381,7 @@ export default function Home() {
               MENU
             </h2>
             <p className={`slogan slogan-dark slogan-large mt-6 transition-all duration-700 delay-100 ${servicesSection.isVisible ? 'opacity-100' : 'opacity-0'}`}>
-              don't sell yourself short.
+              Don't sell yourself short.
             </p>
             <p className={`text-gray-600 text-lg max-w-2xl mx-auto mt-4 leading-relaxed transition-all duration-700 delay-200 ${servicesSection.isVisible ? 'opacity-100' : 'opacity-0'}`}>
               we're a team of creatives, storytellers, and marketers delivering full-service support: content, production, and strategy. all in one place.
@@ -455,11 +455,11 @@ export default function Home() {
             <div className={`relative transition-all duration-1000 delay-300 ${aboutSection.isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
               <div className="relative bg-gradient-to-br from-gray-900 to-gray-950 rounded-3xl p-8 sm:p-12 text-center border border-gray-800/50">
                 <div className="w-28 h-28 sm:w-36 sm:h-36 mx-auto rounded-full overflow-hidden logo-glow-strong mb-8 animate-float">
-                  <Image src="/assets/NSS Logo.jpg" alt="neversmall studios" width={144} height={144} className="w-full h-full object-cover" />
+                  <Image src="/assets/NSS Logo.ico" alt="neversmall studios" width={144} height={144} className="w-full h-full object-cover" />
                 </div>
                 <p className="font-display text-2xl sm:text-3xl font-bold text-white">neversmall.</p>
                 <p className="text-gray-500 text-sm mt-2">creative agency • melbourne</p>
-                <p className="slogan slogan-medium mt-6">don't sell yourself short.</p>
+                <p className="slogan slogan-medium mt-6">Don't sell yourself short.</p>
                 
                 <div className="flex justify-center gap-4 mt-8">
                   <a 
@@ -492,7 +492,7 @@ export default function Home() {
           </h2>
           
           <p className={`slogan slogan-dark slogan-large mt-8 transition-all duration-700 delay-100 ${contactSection.isVisible ? 'opacity-100' : 'opacity-0'}`}>
-            don't sell yourself short.
+            Don't sell yourself short.
           </p>
           
           <p className={`text-gray-600 text-lg mt-6 mb-12 max-w-xl mx-auto leading-relaxed transition-all duration-700 delay-200 ${contactSection.isVisible ? 'opacity-100' : 'opacity-0'}`}>
@@ -531,7 +531,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-4">
               <div className="w-10 h-10 rounded-full overflow-hidden">
-                <Image src="/assets/NSS Logo.jpg" alt="neversmall studios" width={40} height={40} className="w-full h-full object-cover" />
+                <Image src="/assets/NSS Logo.ico" alt="neversmall studios" width={40} height={40} className="w-full h-full object-cover" />
               </div>
               <div>
                 <span className="text-white font-semibold">neversmall.</span>
@@ -539,7 +539,7 @@ export default function Home() {
               </div>
             </div>
             
-            <p className="slogan slogan-small opacity-50">don't sell yourself short.</p>
+            <p className="slogan slogan-small opacity-50">Don't sell yourself short.</p>
             
             <div className="flex items-center gap-6 text-sm text-gray-500">
               <a href="https://instagram.com/neversmall.studios" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-2">

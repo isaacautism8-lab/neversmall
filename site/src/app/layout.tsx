@@ -14,9 +14,9 @@ export const metadata: Metadata = {
     userScalable: true,
   },
   icons: {
-    icon: '/assets/NSS Logo.jpg',
-    shortcut: '/assets/NSS Logo.jpg',
-    apple: '/assets/NSS Logo.jpg',
+    icon: '/assets/NSS Logo.ico',
+    shortcut: '/assets/NSS Logo.ico',
+    apple: '/assets/NSS Logo.ico',
   },
   openGraph: {
     title: 'neversmall studios',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     url: 'https://neversmall.com.au',
     images: [
       {
-        url: '/assets/NSS Logo.jpg',
+        url: '/assets/NSS Logo.ico',
         width: 800,
         height: 800,
         alt: 'neversmall studios',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'neversmall studios',
     description: 'full-service creative support: content, production, and strategy. all in one place.',
-    images: ['/assets/NSS Logo.jpg'],
+    images: ['/assets/NSS Logo.ico'],
   },
   robots: {
     index: true,
