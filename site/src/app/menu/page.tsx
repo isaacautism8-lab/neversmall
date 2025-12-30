@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { ArrowLeft, Camera, Film, Share2, Target, Menu, X, Instagram, Sun, Moon, Mail } from 'lucide-react'
+import { ArrowLeft, Camera, Film, Share2, Target, Menu, X, Instagram, Sun, Moon, Mail, Calendar, ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -291,22 +291,68 @@ export default function MenuPage() {
 
       {/* CTA */}
       <section className="section-padding section-light relative z-10">
-        <div className="max-w-3xl mx-auto text-center px-4 sm:px-6">
-          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold uppercase">
-            ready to start?
-          </h2>
-          <p className="text-gray-600 text-base sm:text-lg mt-4 mb-8 max-w-xl mx-auto">
-            Tell us what you need. We'll figure out the best way to make it happen.
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-10">
+            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold uppercase">
+              ready to start?
+            </h2>
+            <p className="text-gray-600 text-base sm:text-lg mt-4 max-w-xl mx-auto">
+              Book a 15-minute intro call or drop us a line. Let's figure out the best way to work together.
+            </p>
+          </div>
+          
+          {/* CTA Cards */}
+          <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 max-w-2xl mx-auto">
+            {/* Book a Call - Primary */}
+            <a 
+              href="https://calendar.app.google/cvpH89EUwaVGJiWP6"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-violet-600 to-rose-500 p-6 sm:p-8 text-center transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-violet-500/30"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative z-10">
+                <div className="w-14 h-14 mx-auto rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <Calendar size={24} className="text-white" aria-hidden="true" />
+                </div>
+                <h3 className="font-display text-lg sm:text-xl font-bold text-white mb-2">
+                  Book a Call
+                </h3>
+                <p className="text-white/80 text-sm mb-4">
+                  15 min intro chat – no obligation
+                </p>
+                <span className="inline-flex items-center gap-2 text-white/90 text-sm font-medium">
+                  Schedule now
+                  <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true" />
+                </span>
+              </div>
+            </a>
+            
+            {/* Email */}
+            <a 
+              href="mailto:hello@neversmall.com.au"
+              className="group relative overflow-hidden rounded-2xl bg-white border border-gray-200 p-6 sm:p-8 text-center transition-all duration-500 hover:scale-[1.02] hover:shadow-xl hover:border-violet-200"
+            >
+              <div className="w-14 h-14 mx-auto rounded-full bg-gradient-to-br from-violet-100 to-rose-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                <Mail size={24} className="text-violet-600" aria-hidden="true" />
+              </div>
+              <h3 className="font-display text-lg sm:text-xl font-bold text-gray-900 mb-2">
+                Email Us
+              </h3>
+              <p className="text-gray-500 text-sm mb-4 break-all">
+                hello@neversmall.com.au
+              </p>
+              <span className="inline-flex items-center gap-2 text-violet-600 text-sm font-medium">
+                Send email
+                <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true" />
+              </span>
+            </a>
+          </div>
+          
+          {/* Slogan */}
+          <p className="text-center slogan slogan-medium slogan-dark mt-10">
+            Don't sell yourself short.
           </p>
-          <a 
-            href="mailto:hello@neversmall.com.au" 
-            className="inline-flex items-center gap-3 text-xl sm:text-2xl font-display font-semibold text-gray-900 hover:text-violet-600 transition-colors group"
-          >
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 to-rose-500 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-violet-500/30">
-              <Mail size={20} className="text-white" />
-            </div>
-            hello@neversmall.com.au
-          </a>
         </div>
       </section>
 

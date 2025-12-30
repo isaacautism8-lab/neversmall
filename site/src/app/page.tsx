@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { ArrowRight, Mail, ArrowUpRight, Play, Camera, Film, Share2, Target, Menu, X, Instagram, Sun, Moon, ChevronDown } from 'lucide-react'
+import { ArrowRight, Mail, ArrowUpRight, Play, Camera, Film, Share2, Target, Menu, X, Instagram, Sun, Moon, ChevronDown, Calendar } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -772,7 +772,16 @@ export default function Home() {
                   
                   <p className="slogan slogan-small">Don't sell yourself short.</p>
                   
-                  <div className="mt-6 flex items-center justify-center gap-4">
+                  <div className="mt-6 flex items-center justify-center gap-3">
+                    <a 
+                      href="https://calendar.app.google/cvpH89EUwaVGJiWP6" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-500 to-rose-500 flex items-center justify-center hover:scale-110 transition-all duration-300 shadow-lg shadow-violet-500/20"
+                      aria-label="Book a call"
+                    >
+                      <Calendar size={16} className="text-white" aria-hidden="true" />
+                    </a>
                     <a 
                       href="https://instagram.com/neversmall.studios" 
                       target="_blank" 
@@ -806,46 +815,106 @@ export default function Home() {
       >
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-b from-violet-500/10 to-transparent rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
         
-        <div className="max-w-3xl mx-auto text-center px-4 sm:px-6 relative z-10">
-          <span 
-            className={`section-label justify-center transition-all duration-700 ${contactSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-          >
-            contact
-          </span>
-          <h2 
-            id="contact-heading"
-            className={`font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold uppercase transition-all duration-700 delay-100 ${contactSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
-          >
-            say hello
-          </h2>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
+          <div className="text-center mb-12 sm:mb-16">
+            <span 
+              className={`section-label justify-center transition-all duration-700 ${contactSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+            >
+              contact
+            </span>
+            <h2 
+              id="contact-heading"
+              className={`font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold uppercase transition-all duration-700 delay-100 ${contactSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+            >
+              let's talk
+            </h2>
+            <p 
+              className={`text-base sm:text-lg mt-4 sm:mt-6 max-w-xl mx-auto leading-relaxed transition-all duration-700 delay-200 ${contactSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+            >
+              Got a project in mind? Book a call or drop us a line.
+            </p>
+          </div>
+          
+          {/* Contact Cards */}
+          <div className="grid sm:grid-cols-3 gap-4 sm:gap-6 mb-12">
+            {/* Book a Call - Primary CTA */}
+            <a 
+              href="https://calendar.app.google/cvpH89EUwaVGJiWP6"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br from-violet-600 to-rose-500 p-6 sm:p-8 text-center transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-violet-500/30 ${contactSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              style={{ transitionDelay: '300ms' }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative z-10">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <Calendar size={24} className="text-white" aria-hidden="true" />
+                </div>
+                <h3 className="font-display text-lg sm:text-xl font-bold text-white mb-2">
+                  Book a Call
+                </h3>
+                <p className="text-white/80 text-sm">
+                  15 min intro chat
+                </p>
+                <div className="mt-4 inline-flex items-center gap-2 text-white/90 text-sm font-medium">
+                  Schedule now
+                  <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true" />
+                </div>
+              </div>
+            </a>
+            
+            {/* Email */}
+            <a 
+              href="mailto:hello@neversmall.com.au"
+              className={`group relative overflow-hidden rounded-2xl bg-white border border-gray-200 p-6 sm:p-8 text-center transition-all duration-500 hover:scale-[1.02] hover:shadow-xl hover:border-violet-200 ${contactSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              style={{ transitionDelay: '400ms' }}
+            >
+              <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto rounded-full bg-gradient-to-br from-violet-100 to-rose-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                <Mail size={24} className="text-violet-600" aria-hidden="true" />
+              </div>
+              <h3 className="font-display text-lg sm:text-xl font-bold text-gray-900 mb-2">
+                Email Us
+              </h3>
+              <p className="text-gray-500 text-sm break-all">
+                hello@neversmall.com.au
+              </p>
+              <div className="mt-4 inline-flex items-center gap-2 text-violet-600 text-sm font-medium">
+                Send email
+                <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true" />
+              </div>
+            </a>
+            
+            {/* Instagram */}
+            <a 
+              href="https://instagram.com/neversmall.studios"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`group relative overflow-hidden rounded-2xl bg-white border border-gray-200 p-6 sm:p-8 text-center transition-all duration-500 hover:scale-[1.02] hover:shadow-xl hover:border-violet-200 ${contactSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              style={{ transitionDelay: '500ms' }}
+            >
+              <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto rounded-full bg-gradient-to-br from-violet-100 to-rose-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                <Instagram size={24} className="text-violet-600" aria-hidden="true" />
+              </div>
+              <h3 className="font-display text-lg sm:text-xl font-bold text-gray-900 mb-2">
+                Instagram
+              </h3>
+              <p className="text-gray-500 text-sm">
+                @neversmall.studios
+              </p>
+              <div className="mt-4 inline-flex items-center gap-2 text-violet-600 text-sm font-medium">
+                View profile
+                <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true" />
+              </div>
+            </a>
+          </div>
+          
+          {/* Slogan */}
           <p 
-            className={`text-base sm:text-lg mt-4 sm:mt-6 mb-8 sm:mb-12 max-w-xl mx-auto leading-relaxed transition-all duration-700 delay-200 ${contactSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+            className={`text-center slogan slogan-medium slogan-dark transition-all duration-700 ${contactSection.isVisible ? 'opacity-100' : 'opacity-0'}`}
+            style={{ transitionDelay: '600ms' }}
           >
-            Got a project in mind? Tell us about it. No forms, just email.
+            Don't sell yourself short.
           </p>
-          
-          <a 
-            href="mailto:hello@neversmall.com.au" 
-            className={`inline-flex items-center gap-3 sm:gap-4 text-lg sm:text-xl md:text-2xl lg:text-3xl font-display font-semibold text-gray-900 hover:text-violet-600 transition-all duration-500 group ${contactSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-            style={{ transitionDelay: '300ms' }}
-          >
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-violet-500 to-rose-500 flex items-center justify-center group-hover:scale-110 transition-all duration-300 shadow-lg shadow-violet-500/30 flex-shrink-0">
-              <Mail size={20} className="text-white" aria-hidden="true" />
-            </div>
-            <span className="break-all sm:break-normal">hello@neversmall.com.au</span>
-          </a>
-          
-          <div className="divider my-10 sm:my-14" />
-          
-          <a 
-            href="https://instagram.com/neversmall.studios" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className={`inline-flex items-center gap-2 text-gray-600 hover:text-violet-600 transition-all duration-300 text-sm font-medium min-h-[44px] px-4 ${contactSection.isVisible ? 'opacity-100' : 'opacity-0'}`}
-            style={{ transitionDelay: '400ms' }}
-          >
-            <Instagram size={16} aria-hidden="true" /> @neversmall.studios
-          </a>
         </div>
       </section>
 
