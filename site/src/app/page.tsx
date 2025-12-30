@@ -359,63 +359,64 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
-        <div 
-          id="mobile-menu"
-          className="mobile-menu md:hidden"
-          aria-hidden={!mobileMenuOpen}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Navigation menu"
-        >
-          <div className="flex flex-col items-center justify-center h-full gap-8 px-6">
-            <a 
-              href="#work" 
-              onClick={closeMobileMenu}
-              className="text-2xl font-display font-semibold hover:text-violet-400 transition-colors"
-              tabIndex={mobileMenuOpen ? 0 : -1}
-            >
-              work
-            </a>
-            <Link 
-              href="/menu" 
-              onClick={closeMobileMenu}
-              className="text-2xl font-display font-semibold hover:text-violet-400 transition-colors"
-              tabIndex={mobileMenuOpen ? 0 : -1}
-            >
-              menu
-            </Link>
-            <a 
-              href="#about" 
-              onClick={closeMobileMenu}
-              className="text-2xl font-display font-semibold hover:text-violet-400 transition-colors"
-              tabIndex={mobileMenuOpen ? 0 : -1}
-            >
-              about
-            </a>
-            <a 
-              href="#contact" 
-              onClick={closeMobileMenu}
-              className="text-2xl font-display font-semibold hover:text-violet-400 transition-colors"
-              tabIndex={mobileMenuOpen ? 0 : -1}
-            >
-              contact
-            </a>
-            <div className="absolute bottom-12 text-center">
-              <p className="slogan slogan-medium mb-4">Don't sell yourself short.</p>
-              <a 
-                href="https://instagram.com/neversmall.studios" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-gray-500 hover:text-violet-400 transition-colors text-sm flex items-center justify-center gap-2"
-                tabIndex={mobileMenuOpen ? 0 : -1}
-              >
-                <Instagram size={16} aria-hidden="true" /> @neversmall.studios
-              </a>
-            </div>
-          </div>
-        </div>
       </nav>
+
+      {/* Mobile Menu - Outside nav for proper stacking */}
+      <div 
+        id="mobile-menu"
+        className="mobile-menu md:hidden"
+        aria-hidden={!mobileMenuOpen}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navigation menu"
+      >
+        <div className="flex flex-col items-center justify-center flex-1 gap-8 px-6">
+          <a 
+            href="#work" 
+            onClick={closeMobileMenu}
+            className="text-2xl font-display font-semibold hover:text-violet-400 transition-colors"
+            tabIndex={mobileMenuOpen ? 0 : -1}
+          >
+            work
+          </a>
+          <Link 
+            href="/menu" 
+            onClick={closeMobileMenu}
+            className="text-2xl font-display font-semibold hover:text-violet-400 transition-colors"
+            tabIndex={mobileMenuOpen ? 0 : -1}
+          >
+            menu
+          </Link>
+          <a 
+            href="#about" 
+            onClick={closeMobileMenu}
+            className="text-2xl font-display font-semibold hover:text-violet-400 transition-colors"
+            tabIndex={mobileMenuOpen ? 0 : -1}
+          >
+            about
+          </a>
+          <a 
+            href="#contact" 
+            onClick={closeMobileMenu}
+            className="text-2xl font-display font-semibold hover:text-violet-400 transition-colors"
+            tabIndex={mobileMenuOpen ? 0 : -1}
+          >
+            contact
+          </a>
+        </div>
+        <div className="pb-8 text-center">
+          <p className="slogan slogan-medium mb-4">Don't sell yourself short.</p>
+          <a 
+            href="https://instagram.com/neversmall.studios" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-gray-500 hover:text-violet-400 transition-colors text-sm inline-flex items-center justify-center gap-2"
+            tabIndex={mobileMenuOpen ? 0 : -1}
+          >
+            <Instagram size={16} aria-hidden="true" /> @neversmall.studios
+          </a>
+        </div>
+      </div>
 
       {/* Hero Section */}
       <section 

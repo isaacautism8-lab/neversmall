@@ -108,10 +108,25 @@ export default function MenuPage() {
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden'
+      document.body.style.touchAction = 'none'
     } else {
       document.body.style.overflow = ''
+      document.body.style.touchAction = ''
     }
-    return () => { document.body.style.overflow = '' }
+    return () => { 
+      document.body.style.overflow = '' 
+      document.body.style.touchAction = ''
+    }
+  }, [mobileMenuOpen])
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false)
+      }
+    }
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
   }, [mobileMenuOpen])
 
   const closeMobileMenu = useCallback(() => setMobileMenuOpen(false), [])
@@ -128,6 +143,8 @@ export default function MenuPage() {
       {/* Navigation */}
       <nav 
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'nav-scrolled py-3' : 'py-4 md:py-5'}`}
+        role="navigation"
+        aria-label="Main navigation"
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 sm:gap-3 group">
@@ -159,22 +176,48 @@ export default function MenuPage() {
             <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle theme">
               {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
             </button>
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className={`menu-btn ${mobileMenuOpen ? 'active' : ''}`} aria-label="Menu">
-              {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+            <button 
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
+              className={`menu-btn ${mobileMenuOpen ? 'active' : ''}`} 
+              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu"
+            >
+              {mobileMenuOpen ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
-        <div className={`mobile-menu md:hidden ${mobileMenuOpen ? '' : ''}`} aria-hidden={!mobileMenuOpen}>
-          <div className="flex flex-col items-center justify-center h-full gap-8 px-6">
-            <Link href="/#work" onClick={closeMobileMenu} className="text-2xl font-display font-semibold">work</Link>
-            <Link href="/menu" onClick={closeMobileMenu} className="text-2xl font-display font-semibold text-violet-400">menu</Link>
-            <Link href="/#about" onClick={closeMobileMenu} className="text-2xl font-display font-semibold">about</Link>
-            <Link href="/#contact" onClick={closeMobileMenu} className="text-2xl font-display font-semibold">contact</Link>
-          </div>
-        </div>
       </nav>
+
+      {/* Mobile Menu - Outside nav for proper stacking */}
+      <div 
+        id="mobile-menu"
+        className="mobile-menu md:hidden" 
+        aria-hidden={!mobileMenuOpen}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navigation menu"
+      >
+        <div className="flex flex-col items-center justify-center flex-1 gap-8 px-6">
+          <Link href="/#work" onClick={closeMobileMenu} className="text-2xl font-display font-semibold hover:text-violet-400 transition-colors" tabIndex={mobileMenuOpen ? 0 : -1}>work</Link>
+          <Link href="/menu" onClick={closeMobileMenu} className="text-2xl font-display font-semibold text-violet-400" tabIndex={mobileMenuOpen ? 0 : -1}>menu</Link>
+          <Link href="/#about" onClick={closeMobileMenu} className="text-2xl font-display font-semibold hover:text-violet-400 transition-colors" tabIndex={mobileMenuOpen ? 0 : -1}>about</Link>
+          <Link href="/#contact" onClick={closeMobileMenu} className="text-2xl font-display font-semibold hover:text-violet-400 transition-colors" tabIndex={mobileMenuOpen ? 0 : -1}>contact</Link>
+        </div>
+        <div className="pb-8 text-center">
+          <p className="slogan slogan-medium mb-4">Don't sell yourself short.</p>
+          <a 
+            href="https://instagram.com/neversmall.studios" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-gray-500 hover:text-violet-400 transition-colors text-sm inline-flex items-center justify-center gap-2"
+            tabIndex={mobileMenuOpen ? 0 : -1}
+          >
+            <Instagram size={16} /> @neversmall.studios
+          </a>
+        </div>
+      </div>
 
       {/* Hero */}
       <section className="pt-32 pb-16 sm:pt-40 sm:pb-20 px-4 sm:px-6 relative z-10">

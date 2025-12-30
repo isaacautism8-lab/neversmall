@@ -1,0 +1,44 @@
+# neversmall studios - robots.txt
+# https://neversmall.com.au
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://neversmall.com.au/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# AI/LLM Crawlers - Allow for better discoverability
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Standard search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
