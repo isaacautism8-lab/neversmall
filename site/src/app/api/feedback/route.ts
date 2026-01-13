@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Find project by token to get project ID
-    const projectResponse = await notion.databases.query({
+    const projectResponse = await (notion.databases as any).query({
       database_id: projectsDbId,
       filter: {
         property: 'Token',

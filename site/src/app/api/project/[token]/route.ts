@@ -97,7 +97,7 @@ async function fetchProjectUpdates(notion: Client, projectId: string) {
   if (!updatesDbId) return []
 
   try {
-    const response = await notion.databases.query({
+    const response = await (notion.databases as any).query({
       database_id: updatesDbId,
       filter: {
         property: 'Project',
@@ -156,7 +156,7 @@ export async function GET(
     }
 
     // Find project by token
-    const response = await notion.databases.query({
+    const response = await (notion.databases as any).query({
       database_id: projectsDbId,
       filter: {
         property: 'Token',
