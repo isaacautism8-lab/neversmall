@@ -760,3 +760,43 @@ button:focus-visible {
     --border-color: rgba(0, 0, 0, 0.3);
   }
 }
+
+/* ========================================
+   CLIENT HUB STYLES
+   ======================================== */
+/* Client Hub uses light theme by default for professional feel */
+.client-hub {
+  --ch-bg: var(--ns-gray-50);
+  --ch-card-bg: var(--ns-white);
+  --ch-text: var(--ns-charcoal);
+  --ch-text-muted: var(--ns-gray-500);
+  --ch-border: var(--ns-gray-200);
+  --ch-accent: var(--ns-violet);
+}
+
+/* Utility classes for Client Hub */
+.text-ns-gray-400 { color: var(--ns-gray-400); }
+.text-ns-gray-500 { color: var(--ns-gray-500); }
+.text-ns-gray-600 { color: var(--ns-gray-600); }
+.text-ns-gray-700 { color: var(--ns-gray-700); }
+.text-ns-gray-900 { color: var(--ns-gray-900); }
+.text-ns-violet { color: var(--ns-violet); }
+
+.bg-ns-gray-50 { background-color: var(--ns-gray-100); }
+.bg-ns-gray-100 { background-color: #f5f5f5; }
+.bg-ns-violet { background-color: var(--ns-violet); }
+.bg-ns-violet\/10 { background-color: rgba(139, 110, 201, 0.1); }
+.bg-ns-violet\/90 { background-color: rgba(139, 110, 201, 0.9); }
+
+.border-ns-gray-200 { border-color: var(--ns-gray-200); }
+.border-ns-gray-300 { border-color: var(--ns-gray-300); }
+.border-ns-violet { border-color: var(--ns-violet); }
+
+.ring-ns-violet\/20 { --tw-ring-color: rgba(139, 110, 201, 0.2); }
+
+/* Ensure light mode for client hub pages */
+[data-route^="/client/"],
+[data-route="/admin"] {
+  background: var(--ns-gray-100) !important;
+  color: var(--ns-charcoal) !important;
+}

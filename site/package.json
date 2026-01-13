@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@notionhq/client": "^5.6.0",
     "lucide-react": "^0.303.0",
     "next": "^14.2.0",
     "react": "^18.2.0",

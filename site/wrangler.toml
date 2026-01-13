@@ -1,3 +1,10 @@
 name = "neversmall"
 compatibility_date = "2024-09-23"
-pages_build_output_dir = "out"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+# Add environment variables in Cloudflare dashboard for:
+# NOTION_API_KEY
+# NOTION_PROJECTS_DB_ID
+# NOTION_UPDATES_DB_ID
+# ADMIN_PASSPHRASE
