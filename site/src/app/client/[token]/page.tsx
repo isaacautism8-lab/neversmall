@@ -92,7 +92,7 @@ export default async function ClientProjectPage({ params }: PageProps) {
               />
             </div>
             <span className="text-xs font-semibold tracking-widest text-ns-gray-500 uppercase">
-              NeverSmall Studios
+              Neversmall Studios
             </span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-display font-bold text-ns-gray-900">
@@ -155,7 +155,7 @@ export default async function ClientProjectPage({ params }: PageProps) {
       <footer className="border-t border-ns-gray-200 bg-white py-6 mt-8">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
           <p className="text-ns-gray-500 text-sm">
-            NeverSmall Studios
+            Neversmall Studios
           </p>
           <p className="text-ns-gray-400 text-xs mt-1">
             Questions? Email{' '}
