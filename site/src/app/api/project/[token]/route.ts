@@ -100,8 +100,8 @@ async function fetchProjectUpdates(notion: Client, projectId: string) {
     const response = await (notion.databases as any).query({
       database_id: updatesDbId,
       filter: {
-        property: 'Project',
-        relation: { contains: projectId },
+        property: 'ProjectId',
+        rich_text: { equals: projectId },
       },
       sorts: [{ property: 'Date', direction: 'descending' }],
     })

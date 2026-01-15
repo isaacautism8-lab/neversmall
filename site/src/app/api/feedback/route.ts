@@ -81,8 +81,8 @@ export async function POST(request: NextRequest) {
         Title: {
           title: [{ text: { content: 'Client Feedback' } }],
         },
-        Project: {
-          relation: [{ id: projectId }],
+        ProjectId: {
+          rich_text: [{ text: { content: projectId } }],
         },
         Message: {
           rich_text: [{ text: { content: message.trim() } }],
