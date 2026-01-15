@@ -4,13 +4,63 @@ import { useState, useEffect } from 'react'
 import { 
   LogOut, Users, RefreshCw, Copy, Check, 
   Edit3, Calendar, Activity, ExternalLink,
-  Search, ChevronDown, Eye,
-  TrendingUp, BarChart3, Zap
+  Search, ChevronDown, Eye, X,
+  TrendingUp, BarChart3, Zap, Clock, Target, CheckCircle
 } from 'lucide-react'
 import Image from 'next/image'
 
 import { Modal } from '@/components/hub/Modal'
 import { ClientEditModal } from '@/components/hub/ClientEditModal'
+
+// Preview Modal - shows client portal inline
+function PreviewModal({ client, isOpen, onClose }: { client: Client | null; isOpen: boolean; onClose: () => void }) {
+  if (!isOpen || !client) return null
+  
+  // Generate preview token
+  const token = typeof window !== 'undefined' ? btoa(JSON.stringify({
+    clientId: client.id,
+    username: 'team-preview',
+    exp: Date.now() + (60 * 60 * 1000),
+  })) : ''
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+      <div className="relative w-full max-w-6xl h-[90vh] bg-ns-black border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
+        {/* Header */}
+        <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-4 py-3 bg-ns-black/90 backdrop-blur-sm border-b border-white/10">
+          <div className="flex items-center gap-3">
+            <Eye className="w-5 h-5 text-ns-violet" />
+            <span className="font-medium text-white">Preview: {client.name}</span>
+            <span className="text-xs px-2 py-0.5 bg-ns-violet/20 text-ns-violet rounded">Team View</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <a
+              href={`/portal/dashboard/?token=${token}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-ns-gray-300 hover:text-white transition-colors"
+            >
+              <ExternalLink size={14} />
+              Open in new tab
+            </a>
+            <button
+              onClick={onClose}
+              className="p-2 text-ns-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+            >
+              <X size={20} />
+            </button>
+          </div>
+        </div>
+        {/* Iframe */}
+        <iframe
+          src={`/portal/dashboard/?token=${token}`}
+          className="w-full h-full pt-14 border-0"
+          allow="fullscreen"
+        />
+      </div>
+    </div>
+  )
+}
 
 // Simple fallback components (3D libs crash on edge)
 function ProjectOrbFallback({ activeProjects, totalProjects, className = '' }: { activeProjects: number; totalProjects: number; className?: string }) {
@@ -88,11 +138,11 @@ export default function HubDashboard() {
   const [clients, setClients] = useState<Client[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [editingClient, setEditingClient] = useState<Client | null>(null)
+  const [previewingClient, setPreviewingClient] = useState<Client | null>(null)
   const [copiedId, setCopiedId] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
   const [statusFilter, setStatusFilter] = useState<string>('all')
   const [mounted, setMounted] = useState(false)
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('list')
 
   useEffect(() => {
     setMounted(true)
@@ -155,13 +205,7 @@ export default function HubDashboard() {
   }
 
   const previewPortal = (client: Client) => {
-    // Generate a preview token (same format as portal auth)
-    const token = btoa(JSON.stringify({
-      clientId: client.id,
-      username: 'team-preview',
-      exp: Date.now() + (60 * 60 * 1000), // 1 hour
-    }))
-    window.open(`/portal/dashboard/?token=${token}`, '_blank')
+    setPreviewingClient(client)
   }
 
   // Filter clients
@@ -172,13 +216,27 @@ export default function HubDashboard() {
     return matchesSearch && matchesStatus
   })
 
-  // Stats
+  // Real Statistics from Notion data
   const stats = {
     total: clients.length,
     discovery: clients.filter(c => c.status === 'Discovery').length,
     active: clients.filter(c => c.status === 'In Progress').length,
     review: clients.filter(c => c.status === 'Review').length,
     complete: clients.filter(c => c.status === 'Complete').length,
+    readyForPortal: clients.filter(c => c.hasPassword && c.username).length,
+    needsSetup: clients.filter(c => !c.hasPassword || !c.username).length,
+    // Calculate overdue (target date passed but not complete)
+    overdue: clients.filter(c => {
+      if (c.status === 'Complete') return false
+      if (!c.targetCompletion) return false
+      return new Date(c.targetCompletion) < new Date()
+    }).length,
+    // Recently updated (last 7 days)
+    recentlyActive: clients.filter(c => {
+      if (!c.lastEdited) return false
+      const diff = Date.now() - new Date(c.lastEdited).getTime()
+      return diff < 7 * 24 * 60 * 60 * 1000
+    }).length,
   }
 
   const chartData = [
@@ -187,6 +245,9 @@ export default function HubDashboard() {
     { label: 'Review', value: stats.review, color: '#8b6ec9' },
     { label: 'Complete', value: stats.complete, color: '#34d399' },
   ]
+
+  // Completion rate
+  const completionRate = stats.total > 0 ? Math.round((stats.complete / stats.total) * 100) : 0
 
   if (isLoading) {
     return (
@@ -266,43 +327,51 @@ export default function HubDashboard() {
           </div>
         </div>
 
-        {/* Quick Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        {/* Real Statistics */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           <div className="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-5 hover:bg-white/[0.05] transition-colors">
-            <div className="flex items-center gap-3 mb-2">
+            <div className="flex items-center justify-between mb-2">
               <div className="w-10 h-10 rounded-xl bg-ns-violet/30 flex items-center justify-center">
                 <Users className="w-5 h-5 text-ns-violet" />
               </div>
+              <span className="text-xs text-ns-gray-500">{stats.recentlyActive} active this week</span>
             </div>
             <p className="text-3xl font-display font-bold text-white">{stats.total}</p>
             <p className="text-ns-gray-500 text-sm">Total Clients</p>
           </div>
           <div className="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-5 hover:bg-white/[0.05] transition-colors">
-            <div className="flex items-center gap-3 mb-2">
+            <div className="flex items-center justify-between mb-2">
               <div className="w-10 h-10 rounded-xl bg-amber-500/30 flex items-center justify-center">
                 <Activity className="w-5 h-5 text-amber-400" />
               </div>
+              {stats.overdue > 0 && (
+                <span className="text-xs text-red-400">{stats.overdue} overdue</span>
+              )}
             </div>
-            <p className="text-3xl font-display font-bold text-white">{stats.active}</p>
-            <p className="text-ns-gray-500 text-sm">In Progress</p>
+            <p className="text-3xl font-display font-bold text-white">{stats.active + stats.review}</p>
+            <p className="text-ns-gray-500 text-sm">Active Projects</p>
           </div>
           <div className="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-5 hover:bg-white/[0.05] transition-colors">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-10 h-10 rounded-xl bg-violet-500/30 flex items-center justify-center">
-                <Eye className="w-5 h-5 text-violet-400" />
-              </div>
-            </div>
-            <p className="text-3xl font-display font-bold text-white">{stats.review}</p>
-            <p className="text-ns-gray-500 text-sm">In Review</p>
-          </div>
-          <div className="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-5 hover:bg-white/[0.05] transition-colors">
-            <div className="flex items-center gap-3 mb-2">
+            <div className="flex items-center justify-between mb-2">
               <div className="w-10 h-10 rounded-xl bg-emerald-500/30 flex items-center justify-center">
-                <TrendingUp className="w-5 h-5 text-emerald-400" />
+                <CheckCircle className="w-5 h-5 text-emerald-400" />
               </div>
+              <span className="text-xs text-emerald-400">{completionRate}% rate</span>
             </div>
             <p className="text-3xl font-display font-bold text-white">{stats.complete}</p>
             <p className="text-ns-gray-500 text-sm">Completed</p>
+          </div>
+          <div className="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-5 hover:bg-white/[0.05] transition-colors">
+            <div className="flex items-center justify-between mb-2">
+              <div className="w-10 h-10 rounded-xl bg-sky-500/30 flex items-center justify-center">
+                <Target className="w-5 h-5 text-sky-400" />
+              </div>
+              {stats.needsSetup > 0 && (
+                <span className="text-xs text-amber-400">{stats.needsSetup} need setup</span>
+              )}
+            </div>
+            <p className="text-3xl font-display font-bold text-white">{stats.readyForPortal}</p>
+            <p className="text-ns-gray-500 text-sm">Portal Ready</p>
           </div>
         </div>
 
@@ -428,6 +497,13 @@ export default function HubDashboard() {
         isOpen={!!editingClient}
         onClose={() => setEditingClient(null)}
         onSave={handleSaveClient}
+      />
+
+      {/* Preview Modal */}
+      <PreviewModal
+        client={previewingClient}
+        isOpen={!!previewingClient}
+        onClose={() => setPreviewingClient(null)}
       />
     </main>
   )
