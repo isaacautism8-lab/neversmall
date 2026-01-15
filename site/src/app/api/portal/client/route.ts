@@ -17,6 +17,20 @@ async function notionGetPage(pageId: string, apiKey: string) {
   return response.json()
 }
 
+async function notionGetBlocks(blockId: string, apiKey: string) {
+  const response = await fetch(`https://api.notion.com/v1/blocks/${blockId}/children?page_size=100`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Notion-Version': '2022-06-28',
+    },
+  })
+  if (!response.ok) {
+    return { results: [] } // Return empty if can't fetch blocks
+  }
+  return response.json()
+}
+
 async function notionQuery(databaseId: string, apiKey: string, body: object = {}) {
   const response = await fetch(`https://api.notion.com/v1/databases/${databaseId}/query`, {
     method: 'POST',
@@ -32,6 +46,80 @@ async function notionQuery(databaseId: string, apiKey: string, body: object = {}
     throw new Error(`Notion API error: ${response.status} - ${error}`)
   }
   return response.json()
+}
+
+// Extract text from rich text array
+function extractText(richText: any[]): string {
+  if (!richText || !Array.isArray(richText)) return ''
+  return richText.map(t => t.plain_text || '').join('')
+}
+
+// Parse Notion blocks into a simpler format
+function parseBlocks(blocks: any[]): any[] {
+  return blocks.map(block => {
+    const type = block.type
+    const content = block[type]
+    
+    const parsed: any = {
+      id: block.id,
+      type,
+      hasChildren: block.has_children,
+    }
+
+    switch (type) {
+      case 'paragraph':
+      case 'heading_1':
+      case 'heading_2':
+      case 'heading_3':
+      case 'bulleted_list_item':
+      case 'numbered_list_item':
+      case 'quote':
+      case 'callout':
+        parsed.text = extractText(content?.rich_text)
+        if (content?.icon) parsed.icon = content.icon.emoji || content.icon.external?.url
+        if (content?.color) parsed.color = content.color
+        break
+      case 'to_do':
+        parsed.text = extractText(content?.rich_text)
+        parsed.checked = content?.checked || false
+        break
+      case 'code':
+        parsed.text = extractText(content?.rich_text)
+        parsed.language = content?.language
+        break
+      case 'image':
+        parsed.url = content?.file?.url || content?.external?.url
+        parsed.caption = extractText(content?.caption)
+        break
+      case 'video':
+        parsed.url = content?.file?.url || content?.external?.url
+        break
+      case 'file':
+        parsed.url = content?.file?.url || content?.external?.url
+        parsed.name = content?.name || 'File'
+        break
+      case 'bookmark':
+      case 'embed':
+        parsed.url = content?.url
+        parsed.caption = extractText(content?.caption)
+        break
+      case 'divider':
+        break
+      case 'child_page':
+        parsed.title = content?.title
+        break
+      case 'child_database':
+        parsed.title = content?.title
+        break
+      case 'toggle':
+        parsed.text = extractText(content?.rich_text)
+        break
+      default:
+        parsed.raw = content
+    }
+
+    return parsed
+  })
 }
 
 function verifyToken(token: string): { clientId: string; username: string } | null {
@@ -82,9 +170,35 @@ export async function GET(request: NextRequest) {
       targetCompletion: props['Target Completion']?.date?.start || null,
       deliverablesLink: props['Deliverables Link']?.url || null,
       lastEdited: page.last_edited_time,
+      notionUrl: page.url, // Direct link to Notion page
     }
 
-    // Fetch updates
+    // Fetch page content (blocks)
+    let content: any[] = []
+    let childPages: any[] = []
+    
+    try {
+      const blocksResponse = await notionGetBlocks(session.clientId, apiKey)
+      const parsedBlocks = parseBlocks(blocksResponse.results || [])
+      
+      // Separate child pages from content
+      childPages = parsedBlocks.filter(b => b.type === 'child_page' || b.type === 'child_database')
+      content = parsedBlocks.filter(b => b.type !== 'child_page' && b.type !== 'child_database')
+      
+      // Fetch content for child pages (first level only)
+      for (const childPage of childPages) {
+        try {
+          const childBlocks = await notionGetBlocks(childPage.id, apiKey)
+          childPage.content = parseBlocks(childBlocks.results || [])
+        } catch (e) {
+          childPage.content = []
+        }
+      }
+    } catch (e) {
+      console.error('Error fetching page content:', e)
+    }
+
+    // Fetch updates from Updates database
     const updatesDbId = process.env.NOTION_UPDATES_DB_ID
     let updates: any[] = []
     
@@ -111,7 +225,12 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    return NextResponse.json({ project: projectData, updates })
+    return NextResponse.json({ 
+      project: projectData, 
+      content,
+      childPages,
+      updates 
+    })
   } catch (error) {
     console.error('Error fetching client data:', error)
     return NextResponse.json({ error: 'Failed to fetch client data' }, { status: 500 })

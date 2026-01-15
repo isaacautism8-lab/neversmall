@@ -1,19 +1,13 @@
 'use client'
 
-import { useState, useEffect, Suspense } from 'react'
-import dynamic from 'next/dynamic'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { 
   LogOut, Calendar, ExternalLink, Send, Clock, 
   CheckCircle2, MessageCircle, Package, ArrowRight,
-  FileText, Sparkles, ChevronRight, Loader2, Check
+  FileText, Sparkles, Loader2, Check, ChevronDown, ChevronRight,
+  Image as ImageIcon, Code, Link2, File, Square, CheckSquare
 } from 'lucide-react'
-
-// Dynamic import for 3D orb (client-only)
-const ProjectOrb = dynamic(
-  () => import('@/components/hub/ProjectOrb').then(mod => mod.ProjectOrb),
-  { ssr: false, loading: () => <div className="h-48" /> }
-)
 
 interface ProjectData {
   id: string
@@ -24,6 +18,22 @@ interface ProjectData {
   targetCompletion: string | null
   deliverablesLink: string | null
   lastEdited: string
+  notionUrl?: string
+}
+
+interface NotionBlock {
+  id: string
+  type: string
+  text?: string
+  url?: string
+  caption?: string
+  language?: string
+  checked?: boolean
+  hasChildren?: boolean
+  icon?: string
+  color?: string
+  title?: string
+  content?: NotionBlock[]
 }
 
 interface Update {
@@ -76,8 +86,164 @@ function formatRelative(dateString: string | null): string {
   return formatDate(dateString)
 }
 
+// Render a single Notion block
+function NotionBlockRenderer({ block }: { block: NotionBlock }) {
+  switch (block.type) {
+    case 'paragraph':
+      if (!block.text) return null
+      return <p className="text-ns-gray-300 mb-3">{block.text}</p>
+    case 'heading_1':
+      return <h2 className="text-2xl font-bold text-white mt-6 mb-3">{block.text}</h2>
+    case 'heading_2':
+      return <h3 className="text-xl font-semibold text-white mt-5 mb-2">{block.text}</h3>
+    case 'heading_3':
+      return <h4 className="text-lg font-medium text-white mt-4 mb-2">{block.text}</h4>
+    case 'bulleted_list_item':
+      return (
+        <div className="flex gap-2 mb-1">
+          <span className="text-ns-violet">•</span>
+          <span className="text-ns-gray-300">{block.text}</span>
+        </div>
+      )
+    case 'numbered_list_item':
+      return (
+        <div className="flex gap-2 mb-1">
+          <span className="text-ns-violet min-w-[1.5rem]">→</span>
+          <span className="text-ns-gray-300">{block.text}</span>
+        </div>
+      )
+    case 'to_do':
+      return (
+        <div className="flex gap-2 mb-1 items-start">
+          {block.checked ? (
+            <CheckSquare size={18} className="text-emerald-400 mt-0.5" />
+          ) : (
+            <Square size={18} className="text-ns-gray-500 mt-0.5" />
+          )}
+          <span className={block.checked ? 'text-ns-gray-500 line-through' : 'text-ns-gray-300'}>
+            {block.text}
+          </span>
+        </div>
+      )
+    case 'quote':
+      return (
+        <blockquote className="border-l-4 border-ns-violet pl-4 py-2 my-3 italic text-ns-gray-400">
+          {block.text}
+        </blockquote>
+      )
+    case 'callout':
+      return (
+        <div className="bg-white/5 border border-white/10 rounded-xl p-4 my-3 flex gap-3">
+          {block.icon && <span className="text-xl">{block.icon}</span>}
+          <span className="text-ns-gray-300">{block.text}</span>
+        </div>
+      )
+    case 'code':
+      return (
+        <div className="my-3">
+          <div className="bg-ns-gray-900 rounded-xl p-4 overflow-x-auto">
+            <pre className="text-sm text-ns-gray-300 font-mono">{block.text}</pre>
+          </div>
+          {block.language && (
+            <span className="text-xs text-ns-gray-500">{block.language}</span>
+          )}
+        </div>
+      )
+    case 'image':
+      return block.url ? (
+        <div className="my-4">
+          <img 
+            src={block.url} 
+            alt={block.caption || ''} 
+            className="rounded-xl max-w-full h-auto"
+          />
+          {block.caption && (
+            <p className="text-sm text-ns-gray-500 mt-2 text-center">{block.caption}</p>
+          )}
+        </div>
+      ) : null
+    case 'video':
+      return block.url ? (
+        <div className="my-4">
+          <video src={block.url} controls className="rounded-xl max-w-full" />
+        </div>
+      ) : null
+    case 'file':
+      return block.url ? (
+        <a 
+          href={block.url} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 bg-white/5 hover:bg-white/10 rounded-xl p-3 my-2 transition-colors"
+        >
+          <File size={18} className="text-ns-violet" />
+          <span className="text-ns-gray-300">{block.title || 'Download File'}</span>
+          <ExternalLink size={14} className="text-ns-gray-500 ml-auto" />
+        </a>
+      ) : null
+    case 'bookmark':
+    case 'embed':
+      return block.url ? (
+        <a 
+          href={block.url} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 bg-white/5 hover:bg-white/10 rounded-xl p-3 my-2 transition-colors"
+        >
+          <Link2 size={18} className="text-ns-violet" />
+          <span className="text-ns-gray-300 truncate">{block.caption || block.url}</span>
+          <ExternalLink size={14} className="text-ns-gray-500 ml-auto flex-shrink-0" />
+        </a>
+      ) : null
+    case 'divider':
+      return <hr className="border-white/10 my-6" />
+    default:
+      return null
+  }
+}
+
+// Collapsible section for child pages
+function ChildPageSection({ page }: { page: NotionBlock }) {
+  const [isOpen, setIsOpen] = useState(false)
+  
+  return (
+    <div className="bg-white/[0.03] border border-white/[0.08] rounded-2xl overflow-hidden my-3">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between p-4 hover:bg-white/[0.02] transition-colors"
+      >
+        <div className="flex items-center gap-3">
+          <FileText size={18} className="text-ns-violet" />
+          <span className="font-medium text-white">{page.title || 'Untitled'}</span>
+        </div>
+        {isOpen ? (
+          <ChevronDown size={18} className="text-ns-gray-400" />
+        ) : (
+          <ChevronRight size={18} className="text-ns-gray-400" />
+        )}
+      </button>
+      {isOpen && page.content && page.content.length > 0 && (
+        <div className="px-4 pb-4 border-t border-white/[0.06]">
+          <div className="pt-4">
+            {page.content.map((block) => (
+              <NotionBlockRenderer key={block.id} block={block} />
+            ))}
+          </div>
+        </div>
+      )}
+      {isOpen && (!page.content || page.content.length === 0) && (
+        <div className="px-4 pb-4 border-t border-white/[0.06]">
+          <p className="text-ns-gray-500 text-sm pt-4">No content in this section</p>
+        </div>
+      )}
+    </div>
+  )
+}
+
 export default function PortalDashboard() {
   const [project, setProject] = useState<ProjectData | null>(null)
+  const [content, setContent] = useState<NotionBlock[]>([])
+  const [childPages, setChildPages] = useState<NotionBlock[]>([])
   const [updates, setUpdates] = useState<Update[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [feedbackMessage, setFeedbackMessage] = useState('')
@@ -87,6 +253,18 @@ export default function PortalDashboard() {
 
   useEffect(() => {
     setMounted(true)
+    // Check for token in URL (team preview) or session
+    const urlParams = new URLSearchParams(window.location.search)
+    const urlToken = urlParams.get('token')
+    
+    if (urlToken) {
+      // Team preview mode
+      sessionStorage.setItem('portal_token', urlToken)
+      sessionStorage.setItem('portal_auth', 'true')
+      // Clean URL
+      window.history.replaceState({}, '', '/portal/dashboard/')
+    }
+    
     const auth = sessionStorage.getItem('portal_auth')
     if (auth !== 'true') {
       window.location.href = '/portal/'
@@ -102,6 +280,8 @@ export default function PortalDashboard() {
       if (res.ok) {
         const data = await res.json()
         setProject(data.project)
+        setContent(data.content || [])
+        setChildPages(data.childPages || [])
         setUpdates(data.updates || [])
       } else {
         handleLogout()
@@ -278,6 +458,54 @@ export default function PortalDashboard() {
             </a>
           )}
         </div>
+
+        {/* Project Content from Notion */}
+        {(content.length > 0 || childPages.length > 0) && (
+          <div className="mb-8">
+            <div className="flex items-center gap-2 mb-4">
+              <FileText className="w-5 h-5 text-ns-violet" />
+              <h3 className="text-lg font-semibold text-white">Project Details</h3>
+            </div>
+            
+            <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6">
+              {/* Main content blocks */}
+              {content.length > 0 && (
+                <div className="mb-4">
+                  {content.map((block) => (
+                    <NotionBlockRenderer key={block.id} block={block} />
+                  ))}
+                </div>
+              )}
+              
+              {/* Child pages / sections */}
+              {childPages.length > 0 && (
+                <div className="mt-6">
+                  <p className="text-sm text-ns-gray-500 mb-3 uppercase tracking-wider">Sections</p>
+                  {childPages.map((page) => (
+                    <ChildPageSection key={page.id} page={page} />
+                  ))}
+                </div>
+              )}
+              
+              {content.length === 0 && childPages.length === 0 && (
+                <p className="text-ns-gray-500">No additional content available</p>
+              )}
+            </div>
+            
+            {/* Link to full Notion page */}
+            {project.notionUrl && (
+              <a
+                href={project.notionUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 mt-4 text-sm text-ns-gray-400 hover:text-white transition-colors"
+              >
+                <ExternalLink size={14} />
+                View full page in Notion
+              </a>
+            )}
+          </div>
+        )}
 
         {/* Updates */}
         <div className="mb-8">
