@@ -1,17 +1,42 @@
-import { Client } from '@notionhq/client'
 import { NextRequest, NextResponse } from 'next/server'
 
 export const runtime = 'edge'
 
-const getNotionClient = () => {
-  const apiKey = process.env.NOTION_API_KEY
-  if (!apiKey) throw new Error('NOTION_API_KEY not configured')
-  return new Client({ auth: apiKey })
+async function notionGetPage(pageId: string, apiKey: string) {
+  const response = await fetch(`https://api.notion.com/v1/pages/${pageId}`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Notion-Version': '2022-06-28',
+    },
+  })
+  if (!response.ok) {
+    const error = await response.text()
+    throw new Error(`Notion API error: ${response.status} - ${error}`)
+  }
+  return response.json()
+}
+
+async function notionQuery(databaseId: string, apiKey: string, body: object = {}) {
+  const response = await fetch(`https://api.notion.com/v1/databases/${databaseId}/query`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Notion-Version': '2022-06-28',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  })
+  if (!response.ok) {
+    const error = await response.text()
+    throw new Error(`Notion API error: ${response.status} - ${error}`)
+  }
+  return response.json()
 }
 
 function verifyToken(token: string): { clientId: string; username: string } | null {
   try {
-    const decoded = JSON.parse(Buffer.from(token, 'base64').toString())
+    const decoded = JSON.parse(atob(token))
     if (decoded.exp < Date.now()) return null
     return { clientId: decoded.clientId, username: decoded.username }
   } catch {
@@ -40,8 +65,12 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const notion = getNotionClient()
-    const page = await notion.pages.retrieve({ page_id: session.clientId }) as any
+    const apiKey = process.env.NOTION_API_KEY
+    if (!apiKey) {
+      return NextResponse.json({ error: 'API key not configured' }, { status: 500 })
+    }
+
+    const page = await notionGetPage(session.clientId, apiKey) as any
     const props = page.properties
 
     const projectData = {
@@ -61,8 +90,7 @@ export async function GET(request: NextRequest) {
     
     if (updatesDbId) {
       try {
-        const updatesResponse = await (notion.databases as any).query({
-          database_id: updatesDbId,
+        const updatesResponse = await notionQuery(updatesDbId, apiKey, {
           filter: {
             property: 'ProjectId',
             rich_text: { equals: session.clientId },

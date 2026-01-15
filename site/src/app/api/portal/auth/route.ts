@@ -1,12 +1,22 @@
-import { Client } from '@notionhq/client'
 import { NextRequest, NextResponse } from 'next/server'
 
 export const runtime = 'edge'
 
-const getNotionClient = () => {
-  const apiKey = process.env.NOTION_API_KEY
-  if (!apiKey) throw new Error('NOTION_API_KEY not configured')
-  return new Client({ auth: apiKey })
+async function notionQuery(databaseId: string, apiKey: string, body: object = {}) {
+  const response = await fetch(`https://api.notion.com/v1/databases/${databaseId}/query`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Notion-Version': '2022-06-28',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  })
+  if (!response.ok) {
+    const error = await response.text()
+    throw new Error(`Notion API error: ${response.status} - ${error}`)
+  }
+  return response.json()
 }
 
 export async function POST(request: NextRequest) {
@@ -17,16 +27,18 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Username and password required' }, { status: 400 })
     }
 
-    const notion = getNotionClient()
+    const apiKey = process.env.NOTION_API_KEY
     const projectsDbId = process.env.NOTION_PROJECTS_DB_ID
 
+    if (!apiKey) {
+      return NextResponse.json({ error: 'API key not configured' }, { status: 500 })
+    }
     if (!projectsDbId) {
       return NextResponse.json({ error: 'Database not configured' }, { status: 500 })
     }
 
     // Find client by username
-    const response = await (notion.databases as any).query({
-      database_id: projectsDbId,
+    const response = await notionQuery(projectsDbId, apiKey, {
       filter: {
         property: 'Username',
         rich_text: { equals: username },
@@ -45,11 +57,11 @@ export async function POST(request: NextRequest) {
     }
 
     // Create session token (simple base64 encoded JSON with expiry)
-    const token = Buffer.from(JSON.stringify({
+    const token = btoa(JSON.stringify({
       clientId: client.id,
       username,
       exp: Date.now() + (7 * 24 * 60 * 60 * 1000), // 7 days
-    })).toString('base64')
+    }))
 
     return NextResponse.json({ 
       token,
