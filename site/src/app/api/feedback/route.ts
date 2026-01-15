@@ -11,6 +11,17 @@ const getNotionClient = () => {
   return new Client({ auth: apiKey })
 }
 
+// Decode portal session token
+function decodePortalToken(token: string): { clientId: string } | null {
+  try {
+    const decoded = JSON.parse(Buffer.from(token, 'base64').toString())
+    if (decoded.exp < Date.now()) return null
+    return { clientId: decoded.clientId }
+  } catch {
+    return null
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
@@ -46,33 +57,49 @@ export async function POST(request: NextRequest) {
     }
 
     const notion = getNotionClient()
-    const projectsDbId = process.env.NOTION_PROJECTS_DB_ID
     const updatesDbId = process.env.NOTION_UPDATES_DB_ID
 
-    if (!projectsDbId || !updatesDbId) {
+    if (!updatesDbId) {
       return NextResponse.json(
         { error: 'Database not configured' },
         { status: 500 }
       )
     }
 
-    // Find project by token to get project ID
-    const projectResponse = await (notion.databases as any).query({
-      database_id: projectsDbId,
-      filter: {
-        property: 'Token',
-        rich_text: { equals: token },
-      },
-    })
+    // Try to decode as portal token first
+    const portalSession = decodePortalToken(token)
+    let projectId: string
 
-    if (projectResponse.results.length === 0) {
-      return NextResponse.json(
-        { error: 'Invalid token' },
-        { status: 404 }
-      )
+    if (portalSession) {
+      // Portal token - use clientId directly
+      projectId = portalSession.clientId
+    } else {
+      // Legacy: Try as direct project token
+      const projectsDbId = process.env.NOTION_PROJECTS_DB_ID
+      if (!projectsDbId) {
+        return NextResponse.json(
+          { error: 'Database not configured' },
+          { status: 500 }
+        )
+      }
+
+      const projectResponse = await (notion.databases as any).query({
+        database_id: projectsDbId,
+        filter: {
+          property: 'Token',
+          rich_text: { equals: token },
+        },
+      })
+
+      if (projectResponse.results.length === 0) {
+        return NextResponse.json(
+          { error: 'Invalid token' },
+          { status: 404 }
+        )
+      }
+
+      projectId = projectResponse.results[0].id
     }
-
-    const projectId = projectResponse.results[0].id
 
     // Create feedback entry in Updates database
     await notion.pages.create({

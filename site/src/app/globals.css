@@ -800,3 +800,67 @@ button:focus-visible {
   background: var(--ns-gray-100) !important;
   color: var(--ns-charcoal) !important;
 }
+
+/* ========================================
+   ANIMATE IN UTILITIES
+   ======================================== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes zoomIn95 {
+  from { 
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to { 
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation-fill-mode: both;
+}
+
+.fade-in {
+  animation-name: fadeIn;
+}
+
+.zoom-in-95 {
+  animation-name: zoomIn95;
+}
+
+.slide-up {
+  animation-name: slideUp;
+}
+
+.duration-200 { animation-duration: 200ms; }
+.duration-300 { animation-duration: 300ms; }
+.duration-500 { animation-duration: 500ms; }
+.duration-700 { animation-duration: 700ms; }
+
+/* Additional ns color utilities */
+.bg-ns-black { background-color: var(--ns-black); }
+.bg-ns-charcoal { background-color: var(--ns-charcoal); }
+.bg-ns-white { background-color: var(--ns-white); }
+.bg-ns-coral { background-color: var(--ns-coral); }
+.text-ns-coral { color: var(--ns-coral); }
+.text-white { color: white; }
+.from-ns-violet { --tw-gradient-from: var(--ns-violet); }
+.to-ns-coral { --tw-gradient-to: var(--ns-coral); }
+.from-ns-coral { --tw-gradient-from: var(--ns-coral); }
+.to-ns-mint { --tw-gradient-to: var(--ns-mint); }
+.text-ns-gold { color: var(--ns-gold); }

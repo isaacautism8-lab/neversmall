@@ -1,17 +1,19 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Shield, ArrowRight, Loader2 } from 'lucide-react'
 import Image from 'next/image'
+import { Shield, Loader2, Eye, EyeOff, AlertCircle, ChevronRight, Zap } from 'lucide-react'
 
 export default function HubLogin() {
   const [passphrase, setPassphrase] = useState('')
-  const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [showPassphrase, setShowPassphrase] = useState(false)
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     setMounted(true)
+    // Check if already authenticated
     const auth = sessionStorage.getItem('hub_auth')
     if (auth === 'true') {
       window.location.href = '/hub/dashboard/'
@@ -20,8 +22,8 @@ export default function HubLogin() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsLoading(true)
     setError('')
+    setIsLoading(true)
 
     try {
       const res = await fetch('/api/admin/auth/', {
@@ -30,78 +32,88 @@ export default function HubLogin() {
         body: JSON.stringify({ passphrase }),
       })
 
-      if (res.ok) {
+      const data = await res.json()
+
+      if (res.ok && data.authenticated) {
         sessionStorage.setItem('hub_auth', 'true')
         sessionStorage.setItem('hub_passphrase', passphrase)
         window.location.href = '/hub/dashboard/'
       } else {
-        setError('Invalid passphrase')
+        setError(data.error || 'Invalid passphrase')
       }
     } catch {
-      setError('Authentication failed')
+      setError('Connection error. Please try again.')
     } finally {
       setIsLoading(false)
     }
   }
 
   return (
-    <main className="min-h-screen bg-ns-black relative overflow-hidden">
-      {/* Premium gradient background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-[800px] h-[800px] bg-gradient-to-br from-ns-violet/30 via-ns-coral/20 to-transparent rounded-full blur-[150px] animate-pulse" style={{ animationDuration: '10s' }} />
-        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-gradient-to-tl from-ns-mint/20 to-transparent rounded-full blur-[120px] animate-pulse" style={{ animationDuration: '12s', animationDelay: '3s' }} />
+    <main className={`min-h-screen bg-ns-black flex flex-col transition-opacity duration-700 ${mounted ? 'opacity-100' : 'opacity-0'}`}>
+      {/* Background */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 right-1/4 w-[900px] h-[900px] bg-gradient-to-bl from-ns-coral/15 via-ns-gold/10 to-transparent rounded-full blur-[200px]" />
+        <div className="absolute bottom-1/4 left-0 w-[700px] h-[700px] bg-gradient-to-tr from-ns-violet/20 to-transparent rounded-full blur-[150px]" />
       </div>
 
-      {/* Mesh gradient overlay */}
-      <div className="absolute inset-0 opacity-30" style={{
-        background: `radial-gradient(at 40% 20%, rgba(139, 110, 201, 0.15) 0px, transparent 50%),
-                     radial-gradient(at 80% 0%, rgba(224, 120, 96, 0.1) 0px, transparent 50%),
-                     radial-gradient(at 0% 50%, rgba(110, 207, 154, 0.1) 0px, transparent 50%)`
-      }} />
-
-      {/* Content */}
-      <div className={`relative z-10 min-h-screen flex flex-col items-center justify-center px-4 transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-        <div className="mb-12 text-center">
-          <div className="w-24 h-24 mx-auto rounded-2xl overflow-hidden mb-6 ring-4 ring-white/10 shadow-2xl shadow-ns-violet/30 rotate-3 hover:rotate-0 transition-transform duration-500">
-            <Image
-              src="/assets/nss-logo.png"
-              alt="Neversmall Studios"
-              width={96}
-              height={96}
-              className="w-full h-full object-cover"
-              priority
-            />
+      {/* Header */}
+      <header className="relative z-10 px-6 py-6">
+        <a href="/" className="inline-flex items-center gap-3 group">
+          <div className="w-10 h-10 rounded-xl overflow-hidden ring-2 ring-white/10 group-hover:ring-ns-coral/30 transition-all">
+            <Image src="/assets/nss-logo.png" alt="Neversmall Studios" width={40} height={40} className="w-full h-full object-cover" />
           </div>
-          <h1 className="text-3xl font-display font-bold text-white mb-2">
-            Internal Hub
-          </h1>
-          <p className="text-ns-gray-400 text-sm flex items-center justify-center gap-2">
-            <Shield size={14} />
-            Team Access Only
-          </p>
-        </div>
+          <span className="text-white font-semibold text-sm opacity-70 group-hover:opacity-100 transition-opacity">
+            Neversmall Studios
+          </span>
+        </a>
+      </header>
 
+      {/* Login Form */}
+      <div className="flex-1 flex items-center justify-center px-4 pb-16">
         <div className="w-full max-w-md">
-          <div className="bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/[0.1] rounded-3xl p-8 shadow-2xl">
-            <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Card */}
+          <div className="bg-gradient-to-br from-white/[0.06] to-white/[0.02] border border-white/[0.08] rounded-3xl p-8 backdrop-blur-sm shadow-2xl shadow-black/50">
+            <div className="text-center mb-8">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-ns-coral to-ns-gold flex items-center justify-center shadow-lg shadow-ns-coral/30">
+                <Zap className="w-7 h-7 text-white" />
+              </div>
+              <h1 className="text-2xl font-display font-bold text-white mb-2">
+                Command Center
+              </h1>
+              <p className="text-ns-gray-400 text-sm">
+                Internal hub for the Neversmall team
+              </p>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label htmlFor="passphrase" className="block text-sm font-medium text-ns-gray-300 mb-2">
-                  Team Passphrase
+                <label className="block text-ns-gray-400 text-sm mb-2 font-medium">
+                  Passphrase
                 </label>
-                <input
-                  id="passphrase"
-                  type="password"
-                  value={passphrase}
-                  onChange={(e) => setPassphrase(e.target.value)}
-                  className="w-full bg-black/30 border border-white/[0.1] rounded-xl px-4 py-4 text-white placeholder:text-ns-gray-500 focus:outline-none focus:border-ns-violet/50 focus:ring-2 focus:ring-ns-violet/20 transition-all text-center text-lg tracking-widest"
-                  placeholder="••••••••"
-                  autoComplete="off"
-                  disabled={isLoading}
-                />
+                <div className="relative">
+                  <input
+                    type={showPassphrase ? 'text' : 'password'}
+                    value={passphrase}
+                    onChange={(e) => setPassphrase(e.target.value)}
+                    className="w-full bg-white/[0.04] border border-white/[0.1] rounded-xl px-4 py-3.5 pr-12 text-white placeholder:text-ns-gray-600 focus:outline-none focus:border-ns-coral/50 focus:ring-2 focus:ring-ns-coral/20 transition-all font-mono"
+                    placeholder="Enter team passphrase"
+                    required
+                    autoComplete="current-password"
+                    autoFocus
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassphrase(!showPassphrase)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-ns-gray-500 hover:text-white transition-colors"
+                  >
+                    {showPassphrase ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                </div>
               </div>
 
               {error && (
-                <div className="bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3 text-red-400 text-sm text-center">
+                <div className="flex items-center gap-2 text-red-400 text-sm bg-red-500/10 px-4 py-3 rounded-xl">
+                  <AlertCircle size={16} />
                   {error}
                 </div>
               )}
@@ -109,7 +121,7 @@ export default function HubLogin() {
               <button
                 type="submit"
                 disabled={isLoading || !passphrase}
-                className="w-full bg-white text-ns-black font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-ns-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-xl"
+                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-ns-coral to-ns-gold text-white py-4 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-ns-coral/30 transition-all"
               >
                 {isLoading ? (
                   <>
@@ -118,19 +130,19 @@ export default function HubLogin() {
                   </>
                 ) : (
                   <>
+                    <Shield size={18} />
                     Enter Hub
-                    <ArrowRight size={18} />
                   </>
                 )}
               </button>
             </form>
           </div>
-        </div>
 
-        <div className="absolute bottom-8 text-center">
-          <p className="text-ns-gray-600 text-xs">
-            Neversmall Studios • Internal Operations
-          </p>
+          {/* Security note */}
+          <div className="flex items-center justify-center gap-2 text-ns-gray-600 text-xs mt-6">
+            <Shield size={12} />
+            Team access only. Session expires when you close the browser.
+          </div>
         </div>
       </div>
     </main>

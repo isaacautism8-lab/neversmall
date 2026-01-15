@@ -9,7 +9,7 @@ const getNotionClient = () => {
   return new Client({ auth: apiKey })
 }
 
-// Verify session token
+// Verify session token and return session data
 function verifyToken(token: string): { clientId: string; username: string } | null {
   try {
     const decoded = JSON.parse(Buffer.from(token, 'base64').toString())
@@ -21,12 +21,21 @@ function verifyToken(token: string): { clientId: string; username: string } | nu
 }
 
 export async function GET(request: NextRequest) {
-  const authHeader = request.headers.get('Authorization')
-  if (!authHeader?.startsWith('Bearer ')) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  // Support both query param and bearer token
+  const url = new URL(request.url)
+  let token = url.searchParams.get('token')
+  
+  if (!token) {
+    const authHeader = request.headers.get('Authorization')
+    if (authHeader?.startsWith('Bearer ')) {
+      token = authHeader.slice(7)
+    }
+  }
+  
+  if (!token) {
+    return NextResponse.json({ error: 'No token provided' }, { status: 401 })
   }
 
-  const token = authHeader.slice(7)
   const session = verifyToken(token)
   if (!session) {
     return NextResponse.json({ error: 'Invalid or expired session' }, { status: 401 })
@@ -39,41 +48,15 @@ export async function GET(request: NextRequest) {
     const page = await notion.pages.retrieve({ page_id: session.clientId }) as any
     const props = page.properties
 
-    const clientData = {
+    const projectData = {
       id: page.id,
-      name: props.Name?.title?.[0]?.plain_text || 'Client',
-      status: props.Status?.select?.name || 'Active',
+      name: props.Name?.title?.[0]?.plain_text || 'Your Project',
+      status: props.Status?.select?.name || 'In Progress',
+      clientName: props['Client Name']?.rich_text?.[0]?.plain_text || session.username,
       startDate: props['Start Date']?.date?.start || null,
       targetCompletion: props['Target Completion']?.date?.start || null,
       deliverablesLink: props['Deliverables Link']?.url || null,
-      clientName: props['Client Name']?.rich_text?.[0]?.plain_text || '',
-    }
-
-    // Fetch child blocks (portal content)
-    const blocks = await notion.blocks.children.list({ block_id: session.clientId })
-    
-    // Extract databases and pages from blocks
-    const childDatabases: any[] = []
-    const childPages: any[] = []
-
-    for (const block of blocks.results as any[]) {
-      if (block.type === 'child_database') {
-        try {
-          const db = await notion.databases.retrieve({ database_id: block.id })
-          const dbTitle = (db as any).title?.[0]?.plain_text || 'Database'
-          childDatabases.push({ id: block.id, title: dbTitle, type: 'database' })
-        } catch (e) {
-          // Skip if can't access
-        }
-      } else if (block.type === 'child_page') {
-        try {
-          const pg = await notion.pages.retrieve({ page_id: block.id }) as any
-          const pgTitle = pg.properties?.title?.title?.[0]?.plain_text || 'Page'
-          childPages.push({ id: block.id, title: pgTitle, type: 'page' })
-        } catch (e) {
-          // Skip if can't access
-        }
-      }
+      lastEdited: page.last_edited_time,
     }
 
     // Fetch updates for this client
@@ -93,7 +76,7 @@ export async function GET(request: NextRequest) {
 
         updates = updatesResponse.results.map((u: any) => ({
           id: u.id,
-          title: u.properties.Title?.title?.[0]?.plain_text || '',
+          title: u.properties.Title?.title?.[0]?.plain_text || 'Update',
           message: u.properties.Message?.rich_text?.[0]?.plain_text || '',
           type: u.properties.Type?.select?.name || 'FYI',
           from: u.properties.From?.select?.name || 'Studio',
@@ -101,15 +84,12 @@ export async function GET(request: NextRequest) {
         }))
       } catch (e) {
         console.error('Error fetching updates:', e)
+        // Continue without updates
       }
     }
 
     return NextResponse.json({
-      client: clientData,
-      content: {
-        databases: childDatabases,
-        pages: childPages,
-      },
+      project: projectData,
       updates,
     })
   } catch (error) {
