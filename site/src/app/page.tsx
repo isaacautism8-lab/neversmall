@@ -316,7 +316,7 @@ export default function Home() {
             
             <a href="#about" className="nav-link">about</a>
             <a href="#contact" className="nav-link">contact</a>
-            <Link href="/admin" className="nav-link">client portal</Link>
+            <Link href="/portal" className="nav-link">client portal</Link>
           </div>
           
           {/* Desktop Actions */}
@@ -405,7 +405,7 @@ export default function Home() {
             contact
           </a>
           <Link 
-            href="/admin" 
+            href="/portal" 
             onClick={closeMobileMenu}
             className="text-lg font-display font-medium text-gray-400 hover:text-violet-400 transition-colors"
             tabIndex={mobileMenuOpen ? 0 : -1}
