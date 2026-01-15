@@ -7,3 +7,4 @@ pages_build_output_dir = ".vercel/output/static"
 
 [vars]
 # Environment variables set via wrangler pages secret
+# NOTION_API_KEY, NOTION_PROJECTS_DB_ID, NOTION_UPDATES_DB_ID, ADMIN_PASSPHRASE# Trigger rebuild: 2026-01-16T01:33
