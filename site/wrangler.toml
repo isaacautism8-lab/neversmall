@@ -2,9 +2,8 @@ name = "neversmall"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 
-# For Cloudflare Pages with Next.js
-# @cloudflare/next-on-pages outputs to this directory
-pages_build_output_dir = ".vercel/output/static"
+# Static export goes to 'out' directory
+pages_build_output_dir = "out"
 
 [vars]
 # Environment variables are set via wrangler pages secret
@@ -13,6 +12,7 @@ pages_build_output_dir = ".vercel/output/static"
 # NOTION_UPDATES_DB_ID
 # ADMIN_PASSPHRASE
 
-# Note: In Cloudflare Dashboard (Pages > Settings > Builds & deployments):
+# In Cloudflare Dashboard (Pages > Settings > Builds & deployments):
 # - Build command: npm run build
-# - Build output directory: .vercel/output/static
+# - Build output directory: out
+# - Root directory: site
