@@ -51,9 +51,15 @@ export async function GET(request: NextRequest) {
 
     const validClients = clients.filter((c: any) => c.name && c.name.trim() !== '')
     return NextResponse.json({ clients: validClients })
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error fetching clients:', error)
-    return NextResponse.json({ error: 'Failed to fetch clients' }, { status: 500 })
+    const message = error?.message || 'Unknown error'
+    return NextResponse.json({ 
+      error: 'Failed to fetch clients', 
+      details: message,
+      hasApiKey: !!process.env.NOTION_API_KEY,
+      hasDbId: !!process.env.NOTION_PROJECTS_DB_ID
+    }, { status: 500 })
   }
 }
 
