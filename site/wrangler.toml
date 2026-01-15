@@ -3,6 +3,7 @@ compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 
 # For Cloudflare Pages with Next.js
+# @cloudflare/next-on-pages outputs to this directory
 pages_build_output_dir = ".vercel/output/static"
 
 [vars]
@@ -11,3 +12,7 @@ pages_build_output_dir = ".vercel/output/static"
 # NOTION_PROJECTS_DB_ID
 # NOTION_UPDATES_DB_ID
 # ADMIN_PASSPHRASE
+
+# Note: In Cloudflare Dashboard (Pages > Settings > Builds & deployments):
+# - Build command: npm run build
+# - Build output directory: .vercel/output/static
