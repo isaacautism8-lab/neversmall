@@ -1,28 +1,60 @@
 'use client'
 
-import { useState, useEffect, Suspense } from 'react'
-import dynamic from 'next/dynamic'
+import { useState, useEffect } from 'react'
 import { 
   LogOut, Users, RefreshCw, Copy, Check, 
-  Edit3, Calendar, Activity, Sparkles,
-  Search, ChevronDown, ExternalLink, Eye,
+  Edit3, Calendar, Activity,
+  Search, ChevronDown, Eye,
   TrendingUp, BarChart3, Zap
 } from 'lucide-react'
 import Image from 'next/image'
 
-// Dynamic imports for 3D components (client-side only)
-const ProjectOrb = dynamic(
-  () => import('@/components/hub/ProjectOrb').then(mod => mod.ProjectOrb),
-  { ssr: false, loading: () => <div className="h-64 flex items-center justify-center"><Activity className="w-8 h-8 text-ns-violet animate-pulse" /></div> }
-)
-
-const AnalyticsChart = dynamic(
-  () => import('@/components/hub/AnalyticsChart').then(mod => mod.AnalyticsChart),
-  { ssr: false, loading: () => <div className="h-64 flex items-center justify-center"><Activity className="w-8 h-8 text-ns-violet animate-pulse" /></div> }
-)
-
 import { Modal } from '@/components/hub/Modal'
 import { ClientEditModal } from '@/components/hub/ClientEditModal'
+
+// Simple fallback components (3D libs crash on edge)
+function ProjectOrbFallback({ activeProjects, totalProjects, className = '' }: { activeProjects: number; totalProjects: number; className?: string }) {
+  const progress = totalProjects > 0 ? (activeProjects / totalProjects) * 100 : 0
+  return (
+    <div className={`relative flex items-center justify-center ${className}`}>
+      <div className="relative w-32 h-32">
+        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-ns-violet/30 to-ns-coral/30 animate-pulse" />
+        <div className="absolute inset-2 rounded-full bg-gradient-to-br from-ns-violet to-ns-coral opacity-60" 
+             style={{ clipPath: `polygon(0 ${100-progress}%, 100% ${100-progress}%, 100% 100%, 0 100%)` }} />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center">
+            <p className="text-4xl font-display font-bold text-white">{activeProjects}</p>
+            <p className="text-xs text-white/70">Active</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function AnalyticsChartFallback({ data, className = '' }: { data: { label: string; value: number; color: string }[]; className?: string }) {
+  const maxValue = Math.max(...data.map(d => d.value), 1)
+  return (
+    <div className={`flex items-end justify-center gap-6 ${className}`}>
+      {data.map((item) => (
+        <div key={item.label} className="flex flex-col items-center gap-2">
+          <div 
+            className="w-12 rounded-t-lg transition-all duration-500"
+            style={{ 
+              height: `${Math.max((item.value / maxValue) * 150, 8)}px`,
+              backgroundColor: item.color,
+              boxShadow: `0 0 20px ${item.color}40`
+            }}
+          />
+          <div className="text-center">
+            <p className="text-sm font-semibold text-white">{item.value}</p>
+            <p className="text-xs text-ns-gray-400">{item.label}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
 
 interface Client {
   id: string
@@ -202,29 +234,25 @@ export default function HubDashboard() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-8">
         {/* Analytics Row */}
         <div className="grid lg:grid-cols-3 gap-6 mb-8">
-          {/* 3D Project Orb */}
+          {/* Project Orb */}
           <div className="bg-gradient-to-br from-white/[0.05] to-transparent border border-white/[0.08] rounded-3xl overflow-hidden">
-            <Suspense fallback={<div className="h-64 flex items-center justify-center"><Activity className="w-8 h-8 text-ns-violet animate-pulse" /></div>}>
-              <ProjectOrb 
-                activeProjects={stats.active + stats.review} 
-                totalProjects={stats.total}
-                className="h-64"
-              />
-            </Suspense>
+            <ProjectOrbFallback 
+              activeProjects={stats.active + stats.review} 
+              totalProjects={stats.total}
+              className="h-64"
+            />
             <div className="px-6 pb-5 -mt-4">
               <p className="text-ns-gray-400 text-sm">Active workload</p>
             </div>
           </div>
 
-          {/* 3D Analytics Chart */}
+          {/* Analytics Chart */}
           <div className="lg:col-span-2 bg-gradient-to-br from-white/[0.05] to-transparent border border-white/[0.08] rounded-3xl p-6">
             <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
               <BarChart3 size={18} className="text-ns-violet" />
               Project Pipeline
             </h3>
-            <Suspense fallback={<div className="h-64 flex items-center justify-center"><Activity className="w-8 h-8 text-ns-violet animate-pulse" /></div>}>
-              <AnalyticsChart data={chartData} className="h-64" />
-            </Suspense>
+            <AnalyticsChartFallback data={chartData} className="h-64" />
           </div>
         </div>
 
