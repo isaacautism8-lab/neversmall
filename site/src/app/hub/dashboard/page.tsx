@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { 
   LogOut, Users, RefreshCw, Copy, Check, 
-  Edit3, Calendar, Activity,
+  Edit3, Calendar, Activity, ExternalLink,
   Search, ChevronDown, Eye,
   TrendingUp, BarChart3, Zap
 } from 'lucide-react'
@@ -152,6 +152,16 @@ export default function HubDashboard() {
     navigator.clipboard.writeText(text)
     setCopiedId(client.id)
     setTimeout(() => setCopiedId(null), 2000)
+  }
+
+  const previewPortal = (client: Client) => {
+    // Generate a preview token (same format as portal auth)
+    const token = btoa(JSON.stringify({
+      clientId: client.id,
+      username: 'team-preview',
+      exp: Date.now() + (60 * 60 * 1000), // 1 hour
+    }))
+    window.open(`/portal/dashboard/?token=${token}`, '_blank')
   }
 
   // Filter clients
@@ -369,20 +379,29 @@ export default function HubDashboard() {
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => previewPortal(client)}
+                        className="flex items-center gap-1.5 px-3 py-2.5 text-sm bg-white/5 text-ns-gray-300 rounded-xl hover:bg-white/10 transition-colors"
+                        title="Preview client portal"
+                      >
+                        <ExternalLink size={14} />
+                        <span className="hidden sm:inline">Preview</span>
+                      </button>
                       {client.username && client.hasPassword && (
                         <button
                           onClick={() => copyCredentials(client)}
-                          className="flex items-center gap-1.5 px-4 py-2.5 text-sm bg-white/5 text-ns-gray-300 rounded-xl hover:bg-white/10 transition-colors"
+                          className="flex items-center gap-1.5 px-3 py-2.5 text-sm bg-white/5 text-ns-gray-300 rounded-xl hover:bg-white/10 transition-colors"
+                          title="Copy credentials"
                         >
                           {copiedId === client.id ? (
                             <>
                               <Check size={14} className="text-emerald-400" />
-                              Copied
+                              <span className="hidden sm:inline">Copied</span>
                             </>
                           ) : (
                             <>
                               <Copy size={14} />
-                              Copy
+                              <span className="hidden sm:inline">Copy</span>
                             </>
                           )}
                         </button>
